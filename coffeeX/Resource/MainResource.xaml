@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       
+                    xmlns:local="clr-namespace:coffeeX">
+    <Style x:Key="RobotoRegular">
+        <Setter Property="TextElement.FontFamily" Value="/Resource/Fonts/Roboto-Regular.tff"/>
+    </Style>
+    <Color x:Key="DustyGray">#9B9B9B</Color>
+    <Color x:Key="PrimaryColor">#EA8025</Color>
+    <SolidColorBrush x:Key="DustyGrayBrush" 
+                 Color="#9B9B9B"/>
+    <SolidColorBrush x:Key="PrimaryBrush" 
+                 Color="#EA8025"/>
+</ResourceDictionary>
