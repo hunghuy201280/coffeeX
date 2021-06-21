@@ -1,13 +1,13 @@
 ﻿<Window
-    x:Class="coffeeX.View.LoginWindow"
+    x:Class="coffeeX.View.RegisterWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:coffeeX.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="LoginWindow"
-    Width="750"
+    Title="RegisterWindow"
+     Width="750"
     Height="500"
     ResizeMode="NoResize"
     mc:Ignorable="d">
@@ -30,22 +30,47 @@
             VerticalAlignment="Center"
             Orientation="Vertical">
             <TextBlock
-                Margin="0,0,0,40"
+                Margin="0,0,0,30"
                 HorizontalAlignment="Center"
-                FontSize="44"
-                FontWeight="Medium"
                 FontFamily="Roboto"
-                >
-                Welcome!
+                FontSize="40"
+                FontWeight="Medium">
+                Đăng ký
             </TextBlock>
             <TextBox
                 Width="281"
-                Margin="0,0,0,30"
+                Margin="0,0,0,10"
+                VerticalAlignment="Center"
+                materialDesign:HintAssist.Foreground="{StaticResource PrimaryBrush}"
+                materialDesign:HintAssist.Hint="Tên"
+                materialDesign:TextFieldAssist.HasTrailingIcon="True"
+                materialDesign:TextFieldAssist.TrailingIcon="TextAccount"
+                materialDesign:TextFieldAssist.TrailingIconSize="30"
+                materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource PrimaryBrush}"
+                CaretBrush="{StaticResource PrimaryBrush}"
+                FontSize="16"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox
+                Width="281"
+                Margin="0,0,0,10"
                 VerticalAlignment="Center"
                 materialDesign:HintAssist.Foreground="{StaticResource PrimaryBrush}"
                 materialDesign:HintAssist.Hint="Tài khoản"
                 materialDesign:TextFieldAssist.HasTrailingIcon="True"
                 materialDesign:TextFieldAssist.TrailingIcon="AccountOutline"
+                materialDesign:TextFieldAssist.TrailingIconSize="30"
+                materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource PrimaryBrush}"
+                CaretBrush="{StaticResource PrimaryBrush}"
+                FontSize="16"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox
+                Width="281"
+                Margin="0,0,0,10"
+                VerticalAlignment="Center"
+                materialDesign:HintAssist.Foreground="{StaticResource PrimaryBrush}"
+                materialDesign:HintAssist.Hint="Số điện thoại"
+                materialDesign:TextFieldAssist.HasTrailingIcon="True"
+                materialDesign:TextFieldAssist.TrailingIcon="Phone"
                 materialDesign:TextFieldAssist.TrailingIconSize="30"
                 materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource PrimaryBrush}"
                 CaretBrush="{StaticResource PrimaryBrush}"
@@ -64,21 +89,21 @@
                 FontSize="16"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             <TextBlock
-                HorizontalAlignment="Center"
                 Margin="0,16,0,0"
+                HorizontalAlignment="Center"
                 FontSize="16">
-                <Span Foreground="{StaticResource DustyGrayBrush}">Bạn chưa có tài khoản?</Span> 
-                <Hyperlink Foreground="{StaticResource PrimaryBrush}">Đăng ký</Hyperlink>
+                <Span Foreground="{StaticResource DustyGrayBrush}">Bạn đã có tài khoản?</Span>
+                <Hyperlink Foreground="{StaticResource PrimaryBrush}">Đăng nhập</Hyperlink>
             </TextBlock>
-            <Button Height="51"
-                    Margin="0,18,0,0"
-                    materialDesign:ButtonAssist.CornerRadius="16"
-                    Background="{StaticResource PrimaryBrush}"
-                    BorderThickness="0"
-                    FontFamily="Roboto"
-                    FontSize="24"
-                    FontWeight="Medium"
-                    >
+            <Button
+                Height="51"
+                Margin="0,18,0,0"
+                materialDesign:ButtonAssist.CornerRadius="16"
+                Background="{StaticResource PrimaryBrush}"
+                BorderThickness="0"
+                FontFamily="Roboto"
+                FontSize="24"
+                FontWeight="Medium">
                 ĐĂNG NHẬP
             </Button>
 
