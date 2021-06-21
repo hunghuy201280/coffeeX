@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="65850cf389d8431a81d6ea37c7edb9f5" Name="Diagram1">
+        <EntityTypeShape EntityType="CoffeeXModel.Beverage" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeXModel.BeverageType" Width="1.5" PointX="10.875" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeXModel.Customer" Width="1.5" PointX="11.125" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeXModel.Ingredient" Width="1.5" PointX="3.625" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeXModel.PaymentDetail" Width="1.5" PointX="3.625" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeXModel.PaymentVoucher" Width="1.5" PointX="1.375" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeXModel.Receipt" Width="1.5" PointX="7.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeXModel.ReceiptDetail" Width="1.5" PointX="5.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeXModel.Role" Width="1.5" PointX="11.125" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeXModel.sysdiagram" Width="1.5" PointX="12.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeXModel.Unit" Width="1.5" PointX="2.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeXModel.UserInfo" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoffeeXModel.Voucher" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="CoffeeXModel.FK__Beverage__typeID__07C12930" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeXModel.FK__ReceiptDe__bever__18EBB532" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeXModel.FK__Receipt__custome__1332DBDC" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeXModel.FK__Ingredien__unitI__1F98B2C1" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeXModel.FK__PaymentDe__ingre__2645B050" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeXModel.FK__PaymentDe__payme__25518C17" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeXModel.FK__PaymentVo__userI__22751F6C" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeXModel.FK__Receipt__userID__14270015" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeXModel.FK__Receipt__voucher__151B244E" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeXModel.FK__ReceiptDe__recei__17F790F9" ManuallyRouted="false" />
+        <AssociationConnector Association="CoffeeXModel.FK__UserInfo__roleID__787EE5A0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
