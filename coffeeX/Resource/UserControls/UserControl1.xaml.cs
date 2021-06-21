@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace coffeeX.Resource.UserControl
+namespace coffeeX.Resource.UserControls
 {
     /// <summary>
     /// Interaction logic for UserControl1.xaml
