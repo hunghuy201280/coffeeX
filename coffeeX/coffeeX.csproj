@@ -127,16 +127,10 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\CoffeeXRepo.cs" />
-    <Compile Include="Resource\UserControls\BeverageNameUC.xaml.cs">
-      <DependentUpon>BeverageNameUC.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Resource\UserControls\UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\UserViewModel.cs" />
-    <Compile Include="View\AddBeverageWindow.xaml.cs">
-      <DependentUpon>AddBeverageWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -164,10 +158,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resource\UserControls\UserControl1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AddBeverageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
