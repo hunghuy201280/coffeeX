@@ -28,36 +28,61 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <StackPanel
-                        Orientation="Horizontal">
-                        <ComboBox Width="230" Height="63" Margin="50,0,50,0" >
-                            <ComboBoxItem>ComboBox Item #1</ComboBoxItem>
-                            <ComboBoxItem IsSelected="True">ComboBox Item #2</ComboBoxItem>
-                            <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox
+                            Name="cmbDay"
+                            Width="230"
+                            Height="63"
+                            Margin="50,0,50,0">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <TextBlock Text="{Binding}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <ComboBox Width="230" Height="63" Margin="0,0,50,0">
-                            <ComboBoxItem>ComboBox Item #1</ComboBoxItem>
-                            <ComboBoxItem IsSelected="True">ComboBox Item #2</ComboBoxItem>
-                            <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        <ComboBox
+                            Name="cmbMonth"
+                            Width="230"
+                            Height="63"
+                            Margin="0,0,50,0">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <TextBlock Text="{Binding}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <ComboBox Width="230" Height="63" SelectionChanged="ComboBox_SelectionChanged">
-                            <ComboBoxItem>ComboBox Item #1</ComboBoxItem>
-                            <ComboBoxItem IsSelected="True">ComboBox Item #2</ComboBoxItem>
-                            <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        <ComboBox
+                            Name="cmbYear"
+                            Width="230"
+                            Height="63"
+                            Margin="0,0,50,0">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <TextBlock Text="{Binding}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
                         </ComboBox>
 
 
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Column="1"
-                      Margin="0,0,60,0">
+                <Grid Grid.Column="1" Margin="0,0,60,0">
                     <Button
-                        Width="300"
-                        Height="80"
+                        Width="250"
+                        Height="60"
                         materialDesign:ButtonAssist.CornerRadius="15"
                         materialDesign:ShadowAssist.ShadowDepth="Depth3"
                         Background="#EA8025"
@@ -71,8 +96,8 @@
                 </Grid>
                 <Grid Grid.Column="2" Margin="0,0,60,0">
                     <Button
-                        Width="300"
-                        Height="80"
+                        Width="250"
+                        Height="60"
                         HorizontalAlignment="Left"
                         materialDesign:ButtonAssist.CornerRadius="15"
                         materialDesign:ShadowAssist.ShadowDepth="Depth3"
@@ -273,11 +298,13 @@
                     <Grid>
                         <TextBlock
                             Name="tbRevenue"
-                            HorizontalAlignment="Center"
+                            Margin="0,0,40,0"
+                            HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             FontFamily="Roboto"
                             FontSize="32"
-                            FontWeight="Bold" />
+                            FontWeight="Bold"
+                            Text="Tổng thu : 0 VND" />
                     </Grid>
                 </Grid>
                 <Grid Grid.Column="1" Background="#EA8025" />
@@ -288,11 +315,13 @@
                     <Grid Background="#F1F1F1">
                         <TextBlock
                             Name="tbSpending"
-                            HorizontalAlignment="Center"
+                            Margin="0,0,40,0"
+                            HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             FontFamily="Roboto"
                             FontSize="32"
-                            FontWeight="Bold" />
+                            FontWeight="Bold"
+                            Text="Tổng chi : 0 VND" />
                     </Grid>
                 </Grid>
             </Grid>
@@ -304,7 +333,8 @@
                     VerticalAlignment="Center"
                     FontFamily="Roboto"
                     FontSize="32"
-                    FontWeight="Bold" />
+                    FontWeight="Bold"
+                    Text="Doanh thu : 0 VND" />
             </Grid>
         </Grid>
     </Grid>
