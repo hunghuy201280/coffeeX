@@ -12,7 +12,7 @@
     materialDesign:HintAssist.Foreground="#9B9B9B"
     Background="#F1F1F1"
     AcceptsReturn="False"
-    MinWidth="100"
+    MinWidth="200"
     materialDesign:HintAssist.Hint="{Binding Hint}"
     materialDesign:ShadowAssist.ShadowDepth="Depth0"
     materialDesign:TextFieldAssist.TextFieldCornerRadius="15"

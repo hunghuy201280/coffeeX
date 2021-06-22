@@ -10,23 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace coffeeX.Resource.UserControls
+namespace coffeeX.View
 {
     /// <summary>
-    /// Interaction logic for BeverageNameUC.xaml
+    /// Interaction logic for AddBeverage.xaml
     /// </summary>
-    public partial class BeverageNameUC : UserControl
+    public partial class AddBeverage : Window
     {
-        public BeverageNameUC()
+        public AddBeverage()
         {
             InitializeComponent();
-            this.DataContext = this;
         }
-        public String Hint { set; get; }
-
     }
-    
 }
