@@ -234,6 +234,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resource\Images\add_beverage_pick_image.png" />
+    <Resource Include="Resource\Images\camera.png" />
     <Resource Include="Resource\Images\app_logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
