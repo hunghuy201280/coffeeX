@@ -86,10 +86,12 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Orientation="Vertical">
-                <Image
-                    Width="268"
-                    Height="268"
-                    Source="/Resource/Images/add_beverage_pick_image.png" />
+                <Border Height="268" Width="268" CornerRadius="10">
+                    <Border.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="/Resource/Images/black_coffee.png"/>
+                    </Border.Background>
+                </Border>
+                
                 <Button
                     Grid.Row="2"
                     Width="53"
