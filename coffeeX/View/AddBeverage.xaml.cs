@@ -10,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace coffeeX
+namespace coffeeX.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddBeverage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddBeverage : Window
     {
-        public MainWindow()
+        public AddBeverage()
         {
             InitializeComponent();
-
         }
     }
 }

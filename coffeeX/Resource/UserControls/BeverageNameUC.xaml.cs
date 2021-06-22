@@ -13,17 +13,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace coffeeX
+namespace coffeeX.Resource.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for BeverageNameUC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BeverageNameUC : UserControl
     {
-        public MainWindow()
+        public BeverageNameUC()
         {
             InitializeComponent();
-
+            this.DataContext = this;
         }
+        public String Hint { set; get; }
+
     }
+    
 }
