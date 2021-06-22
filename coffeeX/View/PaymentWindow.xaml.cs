@@ -1,4 +1,5 @@
-﻿using System;
+﻿using coffeeX.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,26 @@ namespace coffeeX.View
     /// </summary>
     public partial class PaymentWindow : Window
     {
+
+        PaymentVoucher voucher;
         public PaymentWindow()
         {
             InitializeComponent();
+            voucher = new PaymentVoucher();
+            List<TestData> a = new List<TestData>();
+            a.Add(new TestData() { num = 2, ten = "Ten san pham", gia = 30000 });
+            a.Add(new TestData() { num = 2, ten = "Ten san pham", gia = 30000 });
+            a.Add(new TestData() { num = 2, ten = "Ten san pham", gia = 30000 });
+            paymentDataGrid.ItemsSource = a;
+            
+        }
+
+        public class TestData
+        {
+            public int num { get; set; }
+            public string ten { get; set; }
+            public float gia{ get; set; }
+
         }
     }
 }
