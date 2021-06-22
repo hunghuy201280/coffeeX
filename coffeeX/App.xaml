@@ -5,7 +5,7 @@
     xmlns:local="clr-namespace:coffeeX"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 
-    StartupUri="View\ChangePwdWindow.xaml"
+    StartupUri="View\NotifyPwdWindow.xaml"
     >
     <Application.Resources>
         <ResourceDictionary>

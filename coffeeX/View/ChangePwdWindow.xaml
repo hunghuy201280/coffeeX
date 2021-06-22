@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:coffeeX.View"
         mc:Ignorable="d"
-        Title="ChangePwdWindow" Height="354" Width="584">
+        Title="ChangePwdWindow" Height="354" Width="584" MinHeight="354" MinWidth="584">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

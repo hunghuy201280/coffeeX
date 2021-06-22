@@ -140,6 +140,9 @@
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\NotifyPwdWindow.xaml.cs">
+      <DependentUpon>NotifyPwdWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PaymentWindow.xaml.cs">
       <DependentUpon>PaymentWindow.xaml</DependentUpon>
     </Compile>
@@ -184,6 +187,10 @@
     <Page Include="View\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\NotifyPwdWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PaymentWindow.xaml">
       <SubType>Designer</SubType>
