@@ -134,6 +134,9 @@
     <Compile Include="View\AddBeverage.xaml.cs">
       <DependentUpon>AddBeverage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ChangePwdWindow.xaml.cs">
+      <DependentUpon>ChangePwdWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -171,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddBeverage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ChangePwdWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

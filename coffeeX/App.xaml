@@ -5,7 +5,7 @@
     xmlns:local="clr-namespace:coffeeX"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 
-    StartupUri="View\UpdateBeverageWindow.xaml"
+    StartupUri="View\ChangePwdWindow.xaml"
     >
     <Application.Resources>
         <ResourceDictionary>
