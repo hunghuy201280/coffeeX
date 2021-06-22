@@ -30,6 +30,7 @@ namespace coffeeX.View
 
         public StaticWindow()
         {
+            //temp set date time
             DateTime time = DateTime.Today;
 
             List<int> year;
