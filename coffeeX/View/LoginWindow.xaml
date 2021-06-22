@@ -42,27 +42,17 @@
                 Width="281"
                 Margin="0,0,0,30"
                 VerticalAlignment="Center"
-                materialDesign:HintAssist.Foreground="{StaticResource PrimaryBrush}"
                 materialDesign:HintAssist.Hint="Tài khoản"
-                materialDesign:TextFieldAssist.HasTrailingIcon="True"
+                Style="{StaticResource FloatingHintTextBox}"
                 materialDesign:TextFieldAssist.TrailingIcon="AccountOutline"
-                materialDesign:TextFieldAssist.TrailingIconSize="30"
-                materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource PrimaryBrush}"
-                CaretBrush="{StaticResource PrimaryBrush}"
-                FontSize="16"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                />
             <TextBox
                 Width="281"
                 VerticalAlignment="Center"
-                materialDesign:HintAssist.Foreground="{StaticResource PrimaryBrush}"
                 materialDesign:HintAssist.Hint="Mật khẩu"
-                materialDesign:TextFieldAssist.HasTrailingIcon="True"
+                Style="{StaticResource FloatingHintTextBox}"
                 materialDesign:TextFieldAssist.TrailingIcon="LockOutline"
-                materialDesign:TextFieldAssist.TrailingIconSize="30"
-                materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource PrimaryBrush}"
-                CaretBrush="{StaticResource PrimaryBrush}"
-                FontSize="16"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                 />
             <TextBlock
                 HorizontalAlignment="Center"
                 Margin="0,16,0,0"
@@ -72,12 +62,7 @@
             </TextBlock>
             <Button Height="51"
                     Margin="0,18,0,0"
-                    materialDesign:ButtonAssist.CornerRadius="16"
-                    Background="{StaticResource PrimaryBrush}"
-                    BorderThickness="0"
-                    FontFamily="Roboto"
-                    FontSize="24"
-                    FontWeight="Medium"
+                    Style="{StaticResource PrimaryButton}"
                     >
                 ĐĂNG NHẬP
             </Button>
