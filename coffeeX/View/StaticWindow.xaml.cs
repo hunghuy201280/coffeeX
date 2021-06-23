@@ -69,10 +69,10 @@ namespace coffeeX.View
         {
             List<int> day;
 
-            int tempyear = Convert.ToInt32(cmbYear.SelectedValue);
-            int teammonth = Convert.ToInt32(cmbMonth.SelectedValue);
+            int tempYear = Convert.ToInt32(cmbYear.SelectedValue);
+            int tempMonth = Convert.ToInt32(cmbMonth.SelectedValue);
 
-            day = Enumerable.Range(1, DateTime.DaysInMonth(tempyear, teammonth)).ToList();
+            day = Enumerable.Range(1, DateTime.DaysInMonth(tempYear, tempMonth)).ToList();
 
             cmbDay.ItemsSource = day;
         }
