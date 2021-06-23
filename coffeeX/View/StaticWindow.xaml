@@ -37,11 +37,11 @@
                             Name="cmbDay"
                             Width="230"
                             Height="63"
-                            Margin="50,0,50,0">
+                            Margin="50,0,50,0"  >
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-
+                                        <Rectangle  Width="16" Height="16" Margin="0,2,5,2" />
                                         <TextBlock Text="{Binding}" />
                                     </StackPanel>
                                 </DataTemplate>
@@ -51,11 +51,11 @@
                             Name="cmbMonth"
                             Width="230"
                             Height="63"
-                            Margin="0,0,50,0">
+                            Margin="0,0,50,0" >
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-
+                                        <Rectangle  Width="16" Height="16" Margin="0,2,5,2" />
                                         <TextBlock Text="{Binding}" />
                                     </StackPanel>
                                 </DataTemplate>
@@ -65,11 +65,11 @@
                             Name="cmbYear"
                             Width="230"
                             Height="63"
-                            Margin="0,0,50,0">
+                            Margin="0,0,50,0" >
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-
+                                        <Rectangle  Width="16" Height="16" Margin="0,2,5,2" />
                                         <TextBlock Text="{Binding}" />
                                     </StackPanel>
                                 </DataTemplate>

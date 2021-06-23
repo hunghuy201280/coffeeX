@@ -25,39 +25,57 @@ namespace coffeeX.View
 
 
 
-        List<string> month = new List<string>();
         
 
+        List<int> year;
+        List<int> month = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+        
         public StaticWindow()
         {
             //temp set date time
             DateTime time = DateTime.Today;
 
-            List<int> year;
-            List<int> month = new List<int>() { 1,2,3,4,5,6,7,8,9,10,11,12};
+            
 
             InitializeComponent();
             
-            year = Enumerable.Range(2021, 11).ToList();
+            year = Enumerable.Range(2020, 11).ToList();
             cmbYear.ItemsSource = year;
             cmbYear.SelectedItem = time.Year;
 
             cmbMonth.ItemsSource = month;
             cmbMonth.SelectedItem = DateTime.Today.Month;
 
-            int tempyear =Convert.ToInt32(cmbYear.Text);
-            int teammonth = Convert.ToInt32(cmbMonth.Text);
-
-            List<int> day = Enumerable.Range(1, DateTime.DaysInMonth(tempyear, teammonth)).ToList();
-
-            cmbDay.ItemsSource = day;
+            resetDayInMonth();
             cmbDay.SelectedItem = DateTime.Today.Day;
 
 
-
+            cmbMonth.SelectionChanged += CmbMonth_SelectionChanged;
+            cmbYear.SelectionChanged += CmbYear_SelectionChanged;
 
         }
 
-       
+        private void CmbYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            resetDayInMonth();
+        }
+
+        private void CmbMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            resetDayInMonth();
+        }
+
+        void resetDayInMonth()
+        {
+            List<int> day;
+
+            int tempyear = Convert.ToInt32(cmbYear.SelectedValue);
+            int teammonth = Convert.ToInt32(cmbMonth.SelectedValue);
+
+            day = Enumerable.Range(1, DateTime.DaysInMonth(tempyear, teammonth)).ToList();
+
+            cmbDay.ItemsSource = day;
+        }
     }
+
 }
