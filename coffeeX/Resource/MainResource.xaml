@@ -3,12 +3,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:coffeeX"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:viewmodel="clr-namespace:coffeeX.ViewModel">
+    xmlns:viewmodel="clr-namespace:coffeeX.ViewModel"
+    xmlns:utils="clr-namespace:coffeeX.Utils"
+    >
     <Style x:Key="RobotoRegular">
         <Setter Property="TextElement.FontFamily" Value="/Resource/Fonts/Roboto-Regular.tff" />
     </Style>
 
     <viewmodel:MenuViewModel x:Key="MenuVM" />
+    <viewmodel:BeverageManageViewModel x:Key="BeverageManageVM" />
+    <utils:ImageDataConverter x:Key="ImageDataConverter" />
 
     <Color x:Key="DustyGray">#9B9B9B</Color>
     <Color x:Key="PrimaryColor">#EA8025</Color>
