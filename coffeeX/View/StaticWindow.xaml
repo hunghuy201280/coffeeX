@@ -37,11 +37,25 @@
                             Name="cmbDay"
                             Width="230"
                             Height="63"
-                            Margin="50,0,50,0"  >
+                            Margin="50,0,50,0"
+                            VerticalContentAlignment="Center"
+                            materialDesign:HintAssist.Foreground="{StaticResource PrimaryBrush}"
+                            materialDesign:TextFieldAssist.TextFieldCornerRadius="15"
+                            materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                            Background="{StaticResource SeashellBrush}"
+                            BorderBrush="{StaticResource PrimaryBrush}"
+                            BorderThickness="0"
+                            FontSize="24"
+                            IsEditable="False"
+                            IsTextSearchEnabled="True"
+                            Style="{StaticResource MaterialDesignOutlinedComboBox}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Rectangle  Width="16" Height="16" Margin="0,2,5,2" />
+                                        <Rectangle
+                                            Width="16"
+                                            Height="16"
+                                            Margin="0,2,5,2" />
                                         <TextBlock Text="{Binding}" />
                                     </StackPanel>
                                 </DataTemplate>
@@ -51,11 +65,25 @@
                             Name="cmbMonth"
                             Width="230"
                             Height="63"
-                            Margin="0,0,50,0" >
+                            Margin="0,0,50,0"
+                            VerticalContentAlignment="Center"
+                            materialDesign:HintAssist.Foreground="{StaticResource PrimaryBrush}"
+                            materialDesign:TextFieldAssist.TextFieldCornerRadius="15"
+                            materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                            Background="{StaticResource SeashellBrush}"
+                            BorderBrush="{StaticResource PrimaryBrush}"
+                            BorderThickness="0"
+                            FontSize="24"
+                            IsEditable="False"
+                            IsTextSearchEnabled="True"
+                            Style="{StaticResource MaterialDesignOutlinedComboBox}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Rectangle  Width="16" Height="16" Margin="0,2,5,2" />
+                                        <Rectangle
+                                            Width="16"
+                                            Height="16"
+                                            Margin="0,2,5,2" />
                                         <TextBlock Text="{Binding}" />
                                     </StackPanel>
                                 </DataTemplate>
@@ -65,11 +93,25 @@
                             Name="cmbYear"
                             Width="230"
                             Height="63"
-                            Margin="0,0,50,0" >
+                            Margin="0,0,50,0"
+                            VerticalContentAlignment="Center"
+                            materialDesign:HintAssist.Foreground="{StaticResource PrimaryBrush}"
+                            materialDesign:TextFieldAssist.TextFieldCornerRadius="15"
+                            materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                            Background="{StaticResource SeashellBrush}"
+                            BorderBrush="{StaticResource PrimaryBrush}"
+                            BorderThickness="0"
+                            FontSize="24"
+                            IsEditable="False"
+                            IsTextSearchEnabled="True"
+                            Style="{StaticResource MaterialDesignOutlinedComboBox}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Rectangle  Width="16" Height="16" Margin="0,2,5,2" />
+                                        <Rectangle
+                                            Width="16"
+                                            Height="16"
+                                            Margin="0,2,5,2" />
                                         <TextBlock Text="{Binding}" />
                                     </StackPanel>
                                 </DataTemplate>
