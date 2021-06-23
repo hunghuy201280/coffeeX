@@ -1,4 +1,5 @@
-﻿using System;
+﻿using coffeeX.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace coffeeX.View
     /// </summary>
     public partial class RegisterWindow : Window
     {
+        CoffeeXEntities coffeeXEntities = new CoffeeXEntities();
         public RegisterWindow()
         {
             InitializeComponent();
         }
+
+     
     }
 }

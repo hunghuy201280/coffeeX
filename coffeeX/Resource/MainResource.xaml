@@ -12,6 +12,7 @@
 
     <viewmodel:MenuViewModel x:Key="MenuVM" />
     <viewmodel:BeverageManageViewModel x:Key="BeverageManageVM" />
+    <viewmodel:UserViewModel x:Key="UserVM" />
     <utils:ImageDataConverter x:Key="ImageDataConverter" />
 
     <Color x:Key="DustyGray">#9B9B9B</Color>

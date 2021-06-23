@@ -147,6 +147,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\CoffeeXRepo.cs" />
+    <Compile Include="Utils\CheckValidate.cs" />
     <Compile Include="Utils\DoubleToVNDConverter.cs" />
     <Compile Include="Utils\ImageDataConverter.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
