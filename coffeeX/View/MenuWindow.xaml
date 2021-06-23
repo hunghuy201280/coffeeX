@@ -3,12 +3,14 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:coffeeX.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MenuWindow"
-    Width="1080"
+    Width="2000"
     Height="1000"
+    DataContext="{StaticResource MenuVM}"
     WindowState="Maximized"
     WindowStyle="None"
     mc:Ignorable="d">
@@ -20,6 +22,87 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="553" />
         </Grid.ColumnDefinitions>
+        <ScrollViewer
+            Grid.Column="2"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
+            <ItemsControl Margin="30" ItemsSource="{Binding beverageType}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,0,0,30" Orientation="Vertical">
+                            <TextBlock
+                                FontFamily="Roboto"
+                                FontSize="40"
+                                Text="{Binding typeName}"
+                                FontWeight="Bold"/>
+
+                            <Label
+                                Width="180"
+                                Height="7"
+                                Margin="0,0,0,40"
+                                HorizontalAlignment="Left"
+                                Background="{StaticResource PrimaryBrush}" />
+                            <ListBox materialDesign:RippleAssist.RippleOnTop="True" ItemsSource="{Binding Beverages}">
+                                <ListBox.ItemContainerStyle>
+                                    <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
+                                        <Setter Property="Padding" Value="0" />
+                                        <Setter Property="Margin" Value="0,0,35,10" />
+
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel
+                                            Width="240"
+                                            Background="{StaticResource SeashellBrush}"
+                                            Cursor="Hand"
+                                            Orientation="Vertical">
+                                            <Image
+                                                Width="240"
+                                                Height="240"
+                                                Source="{Binding beverageImage}" />
+                                            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                                                <TextBlock
+                                                    HorizontalAlignment="Center"
+                                                    FontFamily="Roboto"
+                                                    FontSize="27"
+                                                    FontWeight="Medium"
+                                                    Foreground="Black"
+                                                    Text="{Binding beverageName}" />
+                                                <TextBlock
+                                                    HorizontalAlignment="Center"
+                                                    FontFamily="Roboto"
+                                                    FontSize="27"
+                                                    FontWeight="Medium"
+                                                    Foreground="{StaticResource PrimaryBrush}"
+                                                    Text="{Binding beveragePrice}" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+
+
+            </ItemsControl>
+
+
+        </ScrollViewer>
         <GridSplitter
             Grid.Column="1"
             Width="3"
@@ -32,68 +115,41 @@
             VerticalAlignment="Stretch"
             Background="{StaticResource DustyGrayBrush}"
             IsEnabled="False" />
-        <StackPanel HorizontalAlignment="Stretch">
-            <Button
-                Margin="30,50,30,0"
-                HorizontalContentAlignment="Left"
-                materialDesign:RippleAssist.Feedback="{StaticResource PrimaryBrush}"
-                Background="Transparent"
-                BorderThickness="0"
-                FontFamily="Roboto"
-                FontSize="24"
-                FontWeight="Bold"
-                Foreground="Black">
-                CÀ PHÊ VIỆT NAM
-            </Button>
-            <Button
-                Margin="30,10,30,0"
-                HorizontalContentAlignment="Left"
-                materialDesign:RippleAssist.Feedback="{StaticResource PrimaryBrush}"
-                Background="Transparent"
-                BorderThickness="0"
-                FontFamily="Roboto"
-                FontSize="24"
-                FontWeight="Bold"
-                Foreground="Black">
-                CÀ PHÊ MÁY
-            </Button>
-            <Button
-                Margin="30,10,30,0"
-                HorizontalContentAlignment="Left"
-                materialDesign:RippleAssist.Feedback="{StaticResource PrimaryBrush}"
-                Background="Transparent"
-                BorderThickness="0"
-                FontFamily="Roboto"
-                FontSize="24"
-                FontWeight="Bold"
-                Foreground="Black">
-                ĐÁ XAY
-            </Button>
-            <Button
-                Margin="30,10,30,0"
-                HorizontalContentAlignment="Left"
-                materialDesign:RippleAssist.Feedback="{StaticResource PrimaryBrush}"
-                Background="Transparent"
-                BorderThickness="0"
-                FontFamily="Roboto"
-                FontSize="24"
-                FontWeight="Bold"
-                Foreground="Black">
-                TRÀ TRÁI CÂY
-            </Button>
-            <Button
-                Margin="30,10,30,0"
-                HorizontalContentAlignment="Left"
-                materialDesign:RippleAssist.Feedback="{StaticResource PrimaryBrush}"
-                Background="Transparent"
-                BorderThickness="0"
-                FontFamily="Roboto"
-                FontSize="24"
-                FontWeight="Bold"
-                Foreground="Black">
-                TRÀ SỮA MACHIATO
-            </Button>
-        </StackPanel>
+        <ListBox
+            Name="categoryListBox"
+            Margin="30,50,30,0"
+            HorizontalAlignment="Stretch"
+            materialDesign:RippleAssist.ClipToBounds="True"
+            ItemsSource="{Binding beverageType}"
+            SelectionChanged="categoryListBox_SelectionChanged"
+            Style="{StaticResource MaterialDesignListBox}">
+            <ListBox.ItemContainerStyle>
+                <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
+                    <Setter Property="Cursor" Value="Hand" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+
+                <DataTemplate>
+                    <TextBlock
+                        x:Name="beverageNameTextBlock"
+                        Cursor="Hand"
+                        FontFamily="Roboto"
+                        FontSize="24"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Text="{Binding typeName}" />
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" Value="True">
+                            <Setter TargetName="beverageNameTextBlock" Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+
+
+        </ListBox>
         <StackPanel Margin="20,0,0,10" VerticalAlignment="Bottom">
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom">
                 <Run
@@ -160,6 +216,7 @@
                     Width="200"
                     Height="40"
                     Margin="0,0,25,0"
+                    Padding="0"
                     HorizontalAlignment="Right"
                     BorderBrush="{StaticResource PrimaryBrush}"
                     Style="{StaticResource RoundedWhiteTextBox}" />
@@ -179,6 +236,7 @@
                     Width="200"
                     Height="40"
                     Margin="0,0,25,0"
+                    Padding="0"
                     HorizontalAlignment="Right"
                     BorderBrush="{StaticResource PrimaryBrush}"
                     Style="{StaticResource RoundedWhiteTextBox}" />
@@ -198,6 +256,7 @@
                     Width="200"
                     Height="40"
                     Margin="0,0,25,0"
+                    Padding="0"
                     HorizontalAlignment="Right"
                     BorderBrush="{StaticResource PrimaryBrush}"
                     Style="{StaticResource RoundedWhiteTextBox}" />

@@ -35,11 +35,10 @@
             <ComboBox
                 Width="330"
                 Height="63"
-                materialDesign:HintAssist.Hint="Nguyên liệu"
-                
                 Padding="20,10,20,10"
                 VerticalContentAlignment="Center"
                 materialDesign:HintAssist.Foreground="{StaticResource PrimaryBrush}"
+                materialDesign:HintAssist.Hint="Nguyên liệu"
                 materialDesign:TextFieldAssist.TextFieldCornerRadius="15"
                 materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
                 Background="{StaticResource SeashellBrush}"
@@ -56,21 +55,21 @@
             <TextBox
                 Height="63"
                 Margin="0,40,0,0"
-                Padding="20,10,0,0"
+                Padding="20,14,0,0"
                 materialDesign:HintAssist.Hint="Tên thức uống"
                 BorderThickness="0"
                 Style="{StaticResource RoundedTextBox}" />
             <TextBox
                 Height="63"
                 Margin="0,40,0,0"
-                Padding="20,10,0,0"
+                Padding="20,14,0,0"
                 materialDesign:HintAssist.Hint="Đơn vị"
                 BorderThickness="0"
                 Style="{StaticResource RoundedTextBox}" />
             <TextBox
                 Height="63"
                 Margin="0,40,0,0"
-                Padding="20,10,0,0"
+                Padding="20,14,0,0"
                 materialDesign:HintAssist.Hint="Đơn giá"
                 BorderThickness="0"
                 Style="{StaticResource RoundedTextBox}" />
@@ -119,80 +118,71 @@
             Grid.Column="1"
             Width="2"
             VerticalAlignment="Stretch" />
-        <DockPanel Grid.Column="2" >
+        <DockPanel Grid.Column="2">
             <TextBlock
+                Height="auto"
                 Margin="0,44,0,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
+                DockPanel.Dock="Top"
                 FontFamily="Roboto"
                 FontSize="36"
-                Height="auto"
-                DockPanel.Dock="Top"
                 FontWeight="Bold">
                 CHI TIẾT PHIẾU CHI
             </TextBlock>
-            <Grid
-                DockPanel.Dock="Bottom"
-                Background="{StaticResource SeashellBrush}"
-                >
+            <Grid Background="{StaticResource SeashellBrush}" DockPanel.Dock="Bottom">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="74"/>
-                    <RowDefinition Height="130"/>
+                    <RowDefinition Height="74" />
+                    <RowDefinition Height="130" />
                 </Grid.RowDefinitions>
-  
-                        <TextBlock
-                    FontFamily="Roboto"
-                    FontWeight="Medium"
-                    FontSize="24"
-                    HorizontalAlignment="Left"
-                    Foreground="{StaticResource BoulderBrush}"
+
+                <TextBlock
                     Margin="30,0,0,0"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                           >
-                  Tổng
+                    FontFamily="Roboto"
+                    FontSize="24"
+                    FontWeight="Medium"
+                    Foreground="{StaticResource BoulderBrush}">
+                    Tổng
                 </TextBlock>
                 <TextBlock
-                    FontFamily="Roboto"
-                    FontWeight="Medium"
-                    FontSize="24"
-                    HorizontalAlignment="Right"
-                    Foreground="{StaticResource BoulderBrush}"
                     Margin="0,0,20,0"
+                    HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                   >
-                  20,000 Đ
+                    FontFamily="Roboto"
+                    FontSize="24"
+                    FontWeight="Medium"
+                    Foreground="{StaticResource BoulderBrush}">
+                    20,000 Đ
                 </TextBlock>
-                <Grid Grid.Row="1"
-                      Background="White">
+                <Grid Grid.Row="1" Background="White">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Button
-                    Style="{StaticResource PrimaryButton}"
-                    Width="200"
-                    Height="63">
+                        Width="200"
+                        Height="63"
+                        Style="{StaticResource PrimaryButton}">
                         XÁC NHẬN
                     </Button>
                     <Button
-                    Grid.Column="1"
-                  
-                    Style="{StaticResource PrimaryButton}"
-                    Width="200"
-                    Background="{StaticResource SeashellBrush}"
-                    materialDesign:RippleAssist.Feedback="{StaticResource PrimaryBrush}"
-                    Foreground="Black"
-                    Height="63">
+                        Grid.Column="1"
+                        Width="200"
+                        Height="63"
+                        materialDesign:RippleAssist.Feedback="{StaticResource PrimaryBrush}"
+                        Background="{StaticResource SeashellBrush}"
+                        Foreground="Black"
+                        Style="{StaticResource PrimaryButton}">
                         HỦY BỎ
                     </Button>
                 </Grid>
-                    
-                    
+
+
             </Grid>
-            
-            <DataGrid x:Name="paymentDataGrid"
-                      
-                      AutoGenerateColumns="False">
+
+            <DataGrid x:Name="paymentDataGrid" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn
                         Width="*"
@@ -276,13 +266,13 @@
 
                     <DataGridTextColumn
                         Width="*"
-                        Header="Giá"
+                        Binding="{Binding gia}"
                         FontFamily="Roboto"
                         FontSize="20"
                         FontWeight="Medium"
                         Foreground="{StaticResource BoulderBrush}"
-                        Binding="{Binding gia}"
-                        HeaderStyle="{StaticResource DataGridHeaderStyle}" >
+                        Header="Giá"
+                        HeaderStyle="{StaticResource DataGridHeaderStyle}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -292,9 +282,9 @@
                     </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-          
+
         </DockPanel>
-       
+
 
 
     </Grid>

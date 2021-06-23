@@ -1,5 +1,7 @@
-﻿using System;
+﻿using coffeeX.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,30 @@ namespace coffeeX.View
         public MenuWindow()
         {
             InitializeComponent();
+
+         
+        }
+
+
+        public class
+       Drink
+        {
+            public string beverageName { get; set; }
+            public string beveragePrice { get; set; }
+            public string beverageImage { get; set; }
+
+
+            public Drink(string beverageName, string beveragePrice, string beverageImage)
+            {
+                this.beverageName = beverageName;
+                this.beveragePrice = beveragePrice;
+                this.beverageImage = beverageImage;
+            }
+        }
+
+        private void categoryListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //invoke command here
         }
     }
 }
