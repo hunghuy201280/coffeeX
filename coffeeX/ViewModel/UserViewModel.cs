@@ -1,4 +1,5 @@
-﻿using coffeeX.View;
+﻿using coffeeX.Repository;
+using coffeeX.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,6 +64,16 @@ namespace coffeeX.ViewModel
             if (!String.IsNullOrEmpty(_userName) && !String.IsNullOrEmpty(_password) && !String.IsNullOrEmpty(_fullName) && !String.IsNullOrEmpty(_phoneNumber))
             {
                 isLogin = true;
+                if (checkUserNameExisted(_userName))
+                {
+                    MessageBox.Show("Tên tài khoản đã tồn tại, vui lòng tạo tên tài khoản khác");
+                }
+                else
+                { 
+                
+                }
+
+
                 p.Close();
             }
             else {
@@ -71,6 +82,17 @@ namespace coffeeX.ViewModel
             }
            
         }
+
+        bool checkUserNameExisted(String input)
+        {
+            if (CoffeeXRepo.Ins.DB.UserInfoes.ToList().Any(x => x.username == input) )
+            {
+                return true;
+            }
+            return false;
+        
+        }
+
 
         static string ComputeSha256Hash(string rawData)
         {

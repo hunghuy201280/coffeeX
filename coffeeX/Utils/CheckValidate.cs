@@ -11,7 +11,6 @@ namespace coffeeX.Utils
 {
     class CheckValidate : ValidationRule
     {
-        public string validatedPassword { get; set; }
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
@@ -19,11 +18,11 @@ namespace coffeeX.Utils
             var validate = new Regex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$");
             if (str == null)
             {
-                return new ValidationResult(false, "Please enter some text");
+                return new ValidationResult(false, "Vui lòng nhập mật khẩu");
             }
-            if (!(validate.IsMatch(str) ))// TODO: set from here
+            if (!(validate.IsMatch(str) ))
             {
-                return new ValidationResult(false, String.Format("Format không phù hợp", validatedPassword));
+                return new ValidationResult(false, String.Format("Format không phù hợp"));
             }
             return new ValidationResult(true, null);
 
