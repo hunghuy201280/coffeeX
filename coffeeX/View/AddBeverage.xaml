@@ -16,6 +16,7 @@
     MinWidth="845"
     MinHeight="650"
     DataContext="{StaticResource BeverageManageVM}"
+    Name="AddBeverageWindow"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
@@ -129,13 +130,23 @@
         </Grid>
 
         <Button
+            Name="addButton"
             Grid.Row="2"
             Width="222"
             Height="63"
             Margin="0,0,0,80"
             Command="{Binding addCommand}"
-            CommandParameter="{Binding selectedBeverage}"
+            CommandParameter="{Binding ElementName=AddBeverageWindow}"
             Content="Thêm"
-            Style="{StaticResource PrimaryButton}" />
+            ToolTipService.ShowOnDisabled="True"
+            Style="{StaticResource PrimaryButton}" >
+            <Button.ToolTip>
+                <StackPanel>
+                    <TextBlock>xai kieu nay nay</TextBlock>
+                    <TextBlock
+                        Name="toolTipTextBlock"/>
+                </StackPanel>
+            </Button.ToolTip>
+        </Button>
     </Grid>
 </Window>

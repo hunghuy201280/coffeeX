@@ -24,6 +24,7 @@ namespace coffeeX.View
         {
             InitializeComponent();
  
+ 
         }
     }
 }
