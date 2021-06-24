@@ -1,6 +1,7 @@
 ﻿using coffeeX.Model;
 using coffeeX.Repository;
 using coffeeX.Utils;
+using coffeeX.View;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -58,7 +59,7 @@ namespace coffeeX.ViewModel
         public BeverageManageViewModel()
         {
             _beverageTypeSuggest = new ObservableCollection<string>(CoffeeXRepo.Ins.DB.BeverageTypes.Select((e) => e.typeName));
-            addCommand = new RelayCommand<Beverage>((p) => p != null, addBeverage);
+            addCommand = new RelayCommand<AddBeverage>((p) => p != null, addBeverage);
             pickImageCommand = new RelayCommand<Object>((p) => true, pickImage);
             priceTextChanged = new RelayCommand<TextBox>((p) => true, validateTextBox);
               
@@ -83,12 +84,13 @@ namespace coffeeX.ViewModel
 
             }
         }
-        private void addBeverage(Beverage beverage)
-        {
-            if (string.IsNullOrEmpty(beverage.beverageName) || beverage.BeverageType.typeName is null
+        private void addBeverage(AddBeverage addBeverageWindow)
+        {/*
+            if (string.IsNullOrEmpty(selectedBev.beverageName) || beverage.BeverageType.typeName is null
                 || beverage.beveragePrice == 0 || beverage.beverageImage is null)
                 return;
-            MessageBox.Show(beverage.beverageName + "\n" + beverage.beveragePrice + "\n" + beverage.BeverageType.typeName);
+            MessageBox.Show(beverage.beverageName + "\n" + beverage.beveragePrice + "\n" + beverage.BeverageType.typeName);*/
+            addBeverageWindow.toolTipTextBlock.Text = "xài ở viewmodel nè dcm mệt vl";
         }
         private void pickImage(Object p)
         {
