@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:coffeeX.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local1="clr-namespace:coffeeX.Utils"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local1="clr-namespace:coffeeX.Utils" xmlns:i="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
     Name="RegisterWindow1"
     Title="RegisterWindow"
     Width="750"
@@ -40,39 +40,42 @@
                 Đăng ký
             </TextBlock>
             <TextBox
+                x:Name="fullName"
                 Width="281"
                 Margin="0,0,0,10"
                 VerticalAlignment="Center"
                 materialDesign:HintAssist.Hint="Tên"
                 materialDesign:TextFieldAssist.TrailingIcon="TextAccount"
                 Style="{StaticResource FloatingHintTextBox}"
-                Text="{Binding fullName}" />
+                Text="{Binding fullName, UpdateSourceTrigger=PropertyChanged }" />
             <TextBox
+                x:Name="userName"
                 Width="281"
                 Margin="0,0,0,10"
                 VerticalAlignment="Center"
                 materialDesign:HintAssist.Hint="Tài khoản"
                 materialDesign:TextFieldAssist.TrailingIcon="AccountOutline"
                 Style="{StaticResource FloatingHintTextBox}"
-                Text="{Binding userName}" />
+                Text="{Binding userName, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox
+                x:Name="phoneNumber"
                 Width="281"
                 Margin="0,0,0,10"
                 VerticalAlignment="Center"
                 materialDesign:HintAssist.Hint="Số điện thoại"
                 materialDesign:TextFieldAssist.TrailingIcon="Phone"
                 Style="{StaticResource FloatingHintTextBox}"
-                Text="{Binding phoneNumber}" />
+                Text="{Binding phoneNumber, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox
+                x:Name="passWord"
                 Width="281"
                 VerticalAlignment="Center"
                 materialDesign:HintAssist.Hint="Mật khẩu"
                 materialDesign:TextFieldAssist.TrailingIcon="LockOutline"
                 Style="{StaticResource FloatingHintTextBox}"
-                Text="{Binding password}">
-                
-               
-               
+                materialDesign:HintAssist.FontFamily="Roboto"
+                Text="{Binding password, UpdateSourceTrigger=PropertyChanged}"
+                >
             </TextBox>
                 
                 
@@ -86,10 +89,13 @@
             <Button
                 Height="51"
                 Margin="0,18,0,0"
-                Command="{Binding registerCommand}"
+                Command="{Binding registerCommand, UpdateSourceTrigger=PropertyChanged}"
                 CommandParameter="{Binding ElementName=RegisterWindow1}"
-                Style="{StaticResource PrimaryButton}">
+                Style="{StaticResource PrimaryButton}"
+                ToolTip="regToolTip"
+                >
                 ĐĂNG NHẬP
+                
             </Button>
 
         </StackPanel>

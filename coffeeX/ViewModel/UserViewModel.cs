@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace coffeeX.ViewModel
@@ -15,6 +17,13 @@ namespace coffeeX.ViewModel
     public class UserViewModel : BaseViewModel
     {
         public ICommand registerCommand { get; set; }
+        public ICommand passwordChangedCommand { get; set; }
+
+
+      
+
+
+       
 
         public bool isLogin { get; set; }
 
@@ -49,11 +58,31 @@ namespace coffeeX.ViewModel
             }
         }
 
+     
+        
+
+
 
        public UserViewModel()
         {
-            registerCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p); });
+            fullName = phoneNumber = userName = password= "";
+            registerCommand = new RelayCommand<Window>((p) => { return validRegis(); }, (p) => { Login(p); });
+            passwordChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { _password = p.Text; });
         }
+
+
+
+        private bool validRegis()
+        {
+            var passWordValidate = new Regex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$");
+            var userNameValidate = new Regex(@"/^[a-zA-Z0-9_-]{3,16}$/");
+            var phoneValidate = new Regex(@"/^\+?(\d.*){10,}$/");
+
+            
+            return fullName.Trim() != string.Empty && phoneValidate.IsMatch(phoneNumber) && userNameValidate.IsMatch(userName) && passWordValidate.IsMatch(password);
+
+        }
+       
 
         void Login(Window p)
         {
