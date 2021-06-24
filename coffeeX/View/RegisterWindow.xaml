@@ -7,7 +7,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local1="clr-namespace:coffeeX.Utils" xmlns:i="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
     Name="RegisterWindow1"
-    Title="RegisterWindow"
+    Title="Register"
     Width="750"
     Height="500"
     DataContext="{StaticResource UserVM}"
@@ -92,10 +92,13 @@
                 Command="{Binding registerCommand, UpdateSourceTrigger=PropertyChanged}"
                 CommandParameter="{Binding ElementName=RegisterWindow1}"
                 Style="{StaticResource PrimaryButton}"
-                ToolTip="regToolTip"
+                ToolTipService.ShowOnDisabled="True"
                 >
                 ĐĂNG NHẬP
-                
+                <Button.ToolTip>
+                    <ToolTip Content="{Binding tooltip,UpdateSourceTrigger=PropertyChanged}">
+                    </ToolTip>
+                </Button.ToolTip>
             </Button>
 
         </StackPanel>

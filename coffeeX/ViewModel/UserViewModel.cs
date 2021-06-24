@@ -19,11 +19,11 @@ namespace coffeeX.ViewModel
         public ICommand registerCommand { get; set; }
         public ICommand passwordChangedCommand { get; set; }
 
+        
 
-      
 
 
-       
+
 
         public bool isLogin { get; set; }
 
@@ -58,16 +58,21 @@ namespace coffeeX.ViewModel
             }
         }
 
+
+        private string _tooltip;
+        public string tooltip { get => _tooltip; set { _tooltip = value; OnPropertyChanged(); } }
+
      
-        
 
 
-
-       public UserViewModel()
+        public UserViewModel()
         {
+
+            
             fullName = phoneNumber = userName = password= "";
-            registerCommand = new RelayCommand<Window>((p) => { return validRegis(); }, (p) => { Login(p); });
+            registerCommand = new RelayCommand<Window>((p) => { return validRegis(); }, (p) => {  Login(p); });
             passwordChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { _password = p.Text; });
+           
         }
 
 
@@ -75,11 +80,36 @@ namespace coffeeX.ViewModel
         private bool validRegis()
         {
             var passWordValidate = new Regex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$");
-            var userNameValidate = new Regex(@"/^[a-zA-Z0-9_-]{3,16}$/");
-            var phoneValidate = new Regex(@"/^\+?(\d.*){10,}$/");
-
-            
-            return fullName.Trim() != string.Empty && phoneValidate.IsMatch(phoneNumber) && userNameValidate.IsMatch(userName) && passWordValidate.IsMatch(password);
+            var userNameValidate = new Regex(@"^[a-zA-Z0-9_-]{3,16}$");
+            var phoneValidate = new Regex(@"(84|0[3|5|7|8|9])+([0-9]{8})\b");
+            bool result = true;
+            tooltip = "";
+            if (fullName.Trim() == string.Empty)
+            {
+                tooltip = "Tên chưa đúng";
+                result = false;
+            }
+            else
+            if (!userNameValidate.IsMatch(userName))
+            {
+                tooltip = "UserName có từ 3 đên 16 ký tự";
+                result = false;
+            }
+            else
+            if(!phoneValidate.IsMatch(phoneNumber))
+            {
+                tooltip = "Số điện thoại không phù hợp";
+                result = false;
+            }
+           
+            else
+            if (!passWordValidate.IsMatch(password))
+            {
+                tooltip = "Password phải từ 8 ký tự đổ lên(Ít nhất 1 ký tự viết hoa ,1 ký tự viết thường ,1 số)";
+                result = false;
+            }
+            if (result) tooltip = "Có thể đăng ký";
+            return result;
 
         }
        
