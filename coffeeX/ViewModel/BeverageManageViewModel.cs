@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -59,9 +60,29 @@ namespace coffeeX.ViewModel
             _beverageTypeSuggest = new ObservableCollection<string>(CoffeeXRepo.Ins.DB.BeverageTypes.Select((e) => e.typeName));
             addCommand = new RelayCommand<Beverage>((p) => p != null, addBeverage);
             pickImageCommand = new RelayCommand<Object>((p) => true, pickImage);
-
+            priceTextChanged = new RelayCommand<TextBox>((p) => true, validateTextBox);
+              
         }
 
+        private void validateTextBox(TextBox priceTextBox)
+        {
+
+            String txt = priceTextBox.Text;
+            if (string.IsNullOrEmpty(txt))
+                return;
+            if (!txt.Contains("Đ"))
+                priceTextBox.Text =priceTextBox.Text.Trim()+ " Đ";
+            else
+            {
+                if(txt.Last() != 'Đ')
+                {
+                    txt = txt.Replace(" Đ", "").Trim();
+                    txt = txt + " Đ";
+                    priceTextBox.Text = txt;
+                }
+
+            }
+        }
         private void addBeverage(Beverage beverage)
         {
             if (string.IsNullOrEmpty(beverage.beverageName) || beverage.BeverageType.typeName is null
@@ -83,6 +104,7 @@ namespace coffeeX.ViewModel
         }
         public ICommand addCommand { get; set; }
         public ICommand pickImageCommand { get; set; }
+        public ICommand priceTextChanged { get; set; }
 
 
     }

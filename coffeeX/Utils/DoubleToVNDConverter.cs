@@ -19,9 +19,22 @@ namespace coffeeX.Utils
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            /*string val = value as string;
-            val*/
-            return 1;
+            string val = value as string;
+            val = val.Replace(" Đ","").Trim();
+            double res;
+            if(double.TryParse(val,out res))
+            {
+                return res;
+            }
+            else
+            {
+               var str = new string((from c in val
+                                  where !char.IsWhiteSpace(c) && !char.IsLetter(c)
+                                  select c
+                            ).ToArray());
+                res = double.Parse(str);
+                return res;
+            }
         }
     }
 }
