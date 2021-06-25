@@ -19,8 +19,7 @@ namespace coffeeX.ViewModel
     {
         public ICommand registerCommand { get; set; }
         public ICommand passwordChangedCommand { get; set; }
-
-        
+        public ICommand loginCommand { get; set; }
 
 
 
@@ -69,9 +68,9 @@ namespace coffeeX.ViewModel
         public UserViewModel()
         {
             fullName = phoneNumber = userName = password= "";
-            registerCommand = new RelayCommand<Window>((p) => { return validRegis(); }, (p) => {  Login(p); });
-            passwordChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { _password = p.Text; });
-           
+            registerCommand = new RelayCommand<Window>((p) => { return validRegis(); }, (p) => {  register(p); });
+            passwordChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { password = p.Text; });
+            loginCommand = new RelayCommand<Window>((p) => { return checkEmptyUserIDPassword(); }, (p) => { login(p); });
         }
 
 
@@ -111,9 +110,34 @@ namespace coffeeX.ViewModel
             return result;
 
         }
-       
 
-        void Login(Window p)
+
+        bool checkEmptyUserIDPassword()
+        {
+            if (!String.IsNullOrEmpty(userName) && !String.IsNullOrEmpty(password))
+                return true;
+            return false;
+        }
+
+
+        void login(Window p)
+        {
+            if (p == null)
+            {
+                return;
+            }
+            if (checkNameAndPassword(userName, password))
+            {
+                isLogin = true;
+                p.Close();
+            }
+            else
+                MessageBox.Show("Tài khoản hoặc mật khẩu không dúng");
+
+        }
+
+
+        void register(Window p)
         {
             if (p == null)
             {
@@ -128,12 +152,12 @@ namespace coffeeX.ViewModel
                 }
                 else
                 {
-                    isLogin = true;
+                    
                     UserInfo newUser = new UserInfo() {fullName= fullName,phoneNumber= phoneNumber,username=userName,passwordEncrypted=ComputeSha256Hash(password),roleID=1};
                     CoffeeXRepo.Ins.DB.UserInfoes.Add(newUser);
                     CoffeeXRepo.Ins.DB.SaveChanges();
 
-
+                   isLogin = true;
                     p.Close();
                 }
 
@@ -155,6 +179,18 @@ namespace coffeeX.ViewModel
             }
             return false;
         
+        }
+
+
+        bool checkNameAndPassword(String name, String password)
+        {
+
+            if (CoffeeXRepo.Ins.DB.UserInfoes.ToList().Where(x => x.username == name && x.passwordEncrypted == ComputeSha256Hash(password)).Count()>0)
+            {
+                return true;
+            }
+            return false;
+
         }
 
 
