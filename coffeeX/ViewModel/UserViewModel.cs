@@ -1,4 +1,5 @@
-﻿using coffeeX.Repository;
+﻿using coffeeX.Model;
+using coffeeX.Repository;
 using coffeeX.View;
 using System;
 using System.Collections.Generic;
@@ -67,8 +68,6 @@ namespace coffeeX.ViewModel
 
         public UserViewModel()
         {
-
-            
             fullName = phoneNumber = userName = password= "";
             registerCommand = new RelayCommand<Window>((p) => { return validRegis(); }, (p) => {  Login(p); });
             passwordChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { _password = p.Text; });
@@ -122,18 +121,24 @@ namespace coffeeX.ViewModel
             }
             if (!String.IsNullOrEmpty(_userName) && !String.IsNullOrEmpty(_password) && !String.IsNullOrEmpty(_fullName) && !String.IsNullOrEmpty(_phoneNumber))
             {
-                isLogin = true;
+                
                 if (checkUserNameExisted(_userName))
                 {
                     MessageBox.Show("Tên tài khoản đã tồn tại, vui lòng tạo tên tài khoản khác");
                 }
                 else
-                { 
-                
+                {
+                    isLogin = true;
+                    UserInfo newUser = new UserInfo() {fullName= fullName,phoneNumber= phoneNumber,username=userName,passwordEncrypted=ComputeSha256Hash(password),roleID=1};
+                    CoffeeXRepo.Ins.DB.UserInfoes.Add(newUser);
+                    CoffeeXRepo.Ins.DB.SaveChanges();
+
+
+                    p.Close();
                 }
 
 
-                p.Close();
+                
             }
             else {
                 MessageBox.Show("Vui lòng điền đúng hoặc đầy đủ các thông tin");
