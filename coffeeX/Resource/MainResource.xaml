@@ -10,12 +10,12 @@
         <Setter Property="TextElement.FontFamily" Value="/Resource/Fonts/Roboto-Regular.tff" />
     </Style>
 
+
     <viewmodel:MenuViewModel x:Key="MenuVM" />
     <viewmodel:BeverageManageViewModel x:Key="BeverageManageVM" />
     <viewmodel:UserViewModel x:Key="UserVM" />
     <utils:ImageDataConverter x:Key="ImageDataConverter" />
-    <utils:DoubleToVNDConverter x:Key="DoubleToVNDConverter" />
-    <utils:PriceValidationRule x:Key="PriceValidationRule" />
+
 
     <Color x:Key="DustyGray">#9B9B9B</Color>
     <Color x:Key="PrimaryColor">#EA8025</Color>
@@ -88,5 +88,7 @@
         <Setter Property="materialDesign:TextFieldAssist.TextFieldCornerRadius" Value="10" />
 
     </Style>
-
+    <Style x:Key="PasswordFont" BasedOn="{StaticResource FloatingHintTextBox}" TargetType="TextBox">
+        <Setter Property="TextElement.FontFamily" Value="/Resource/Fonts/password_font.tff" />
+    </Style>
 </ResourceDictionary>

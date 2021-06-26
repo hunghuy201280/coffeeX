@@ -36,7 +36,6 @@
                 HorizontalAlignment="Center"
                 FontSize="44"
                 FontWeight="Medium"
-                FontFamily="Roboto"
                 >
                 Welcome!
             </TextBlock>
@@ -56,10 +55,11 @@
                 Width="281"
                 VerticalAlignment="Center"
                 materialDesign:HintAssist.Hint="Mật khẩu"
-                Style="{StaticResource FloatingHintTextBox}"
+                Style="{StaticResource PasswordFont}"
                 materialDesign:TextFieldAssist.TrailingIcon="LockOutline"
                 Text="{Binding password,UpdateSourceTrigger=PropertyChanged}"
                 materialDesign:HintAssist.FontFamily="Roboto"
+              
                  />
             <TextBlock
                 HorizontalAlignment="Center"

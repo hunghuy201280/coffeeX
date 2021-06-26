@@ -10,10 +10,10 @@ using System.Windows.Media.Imaging;
 
 namespace coffeeX.Utils
 {
-    public class ImageDataConverter : IValueConverter
+    class ImageDataConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter,
-        System.Globalization.CultureInfo culture)
+       System.Globalization.CultureInfo culture)
         {
 
             return ImageFromBytearray((byte[])value);
@@ -46,6 +46,7 @@ namespace coffeeX.Utils
         System.Globalization.CultureInfo culture)
         {
             return ConvertBitmapSourceToByteArray(value as ImageSource);
+
         }
 
         public static byte[] ConvertBitmapSourceToByteArray(BitmapEncoder encoder, ImageSource imageSource)

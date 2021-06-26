@@ -9,20 +9,40 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-
+using System.Windows.Media.Imaging;
 
 namespace coffeeX.ViewModel
 {
     class BeverageManageViewModel : BaseViewModel
     {
-    
- 
-        private string _currentBeverageName;
+
+        private Byte[] _currentBeverageImage;
+
+        public Byte[] currentBeverageImage
+        {
+            get => _currentBeverageImage; set
+            {
+                _currentBeverageImage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _currentBeverageType;
+
+        public string currentBeverageType
+        {
+            get => _currentBeverageType; set
+            {
+                _currentBeverageType = value;
+                OnPropertyChanged();
+            }
+        } private string _currentBeverageName;
 
         public string currentBeverageName
         {
@@ -56,41 +76,79 @@ namespace coffeeX.ViewModel
 
 
         private OpenFileDialog imagePicker;
+        private bool hasImage=false;
         public BeverageManageViewModel()
         {
             _beverageTypeSuggest = new ObservableCollection<string>(CoffeeXRepo.Ins.DB.BeverageTypes.Select((e) => e.typeName));
-            addCommand = new RelayCommand<AddBeverage>((p) => p != null, addBeverage);
+            addCommand = new RelayCommand<AddBeverage>(validateData, addBeverage);
             pickImageCommand = new RelayCommand<Object>((p) => true, pickImage);
-            priceTextChanged = new RelayCommand<TextBox>((p) => true, validateTextBox);
+            onLoaded = new RelayCommand<AddBeverage>((p) => true, onWindowLoaded);
+           // priceTextChanged = new RelayCommand<Object>((p) => true, beveragePrice_KeyDown);
               
         }
 
-        private void validateTextBox(TextBox priceTextBox)
+   
+        private void onWindowLoaded(AddBeverage addBeverage)
         {
+            addBeverage.beveragePrice.PreviewTextInput += BeveragePrice_PreviewTextInput;
+        }
 
-            String txt = priceTextBox.Text;
-            if (string.IsNullOrEmpty(txt))
-                return;
-            if (!txt.Contains("Đ"))
-                priceTextBox.Text =priceTextBox.Text.Trim()+ " Đ";
-            else
+        private void BeveragePrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
+        }
+
+   
+
+        private bool validateData(AddBeverage addBeverage)
+        {
+            if (addBeverage == null)
+                return false; 
+            String error = "";
+            if (!hasImage)
+                error += "Chưa có ảnh thức uống\n";
+            if (string.IsNullOrEmpty(currentBeverageName))
+                error += "Chưa có tên thức uống\n";
+            if (string.IsNullOrEmpty(currentBeverageType))
+                error += "Chưa có loại thức uống\n"; 
+            if (currentBeveragePrice==0)
+                error += "Chưa có giá thức uống\n";
+            if (!string.IsNullOrEmpty(error))
             {
-                if(txt.Last() != 'Đ')
-                {
-                    txt = txt.Replace(" Đ", "").Trim();
-                    txt = txt + " Đ";
-                    priceTextBox.Text = txt;
-                }
-
+           
+                
+                addBeverage.toolTipTextBlock.Text = error;
+                return false;
             }
+            
+
+            addBeverage.toolTipTextBlock.Text = "";
+
+            return true;
         }
         private void addBeverage(AddBeverage addBeverageWindow)
-        {/*
-            if (string.IsNullOrEmpty(selectedBev.beverageName) || beverage.BeverageType.typeName is null
-                || beverage.beveragePrice == 0 || beverage.beverageImage is null)
-                return;
-            MessageBox.Show(beverage.beverageName + "\n" + beverage.beveragePrice + "\n" + beverage.BeverageType.typeName);*/
-            addBeverageWindow.toolTipTextBlock.Text = "xài ở viewmodel nè dcm mệt vl";
+        {
+            BeverageType type= CoffeeXRepo.Ins.DB.BeverageTypes.Where(e => e.typeName == currentBeverageType).First();
+            if(type==null)
+            {
+
+            }
+            else
+            {
+                if(CoffeeXRepo.Ins.DB.Beverages.Any(b=>b.beverageName==currentBeverageName))
+                    {
+                    MessageBox.Show("Thức uống này đã tồn tại");
+                    return;
+                }
+                Beverage newBeverage = new Beverage();
+                newBeverage.beverageImage = currentBeverageImage;
+                newBeverage.beverageName = currentBeverageName;
+                newBeverage.beveragePrice = currentBeveragePrice;
+                newBeverage.BeverageType = type;
+                CoffeeXRepo.Ins.DB.Beverages.Add(newBeverage);
+                CoffeeXRepo.Ins.DB.SaveChanges();
+            }
         }
         private void pickImage(Object p)
         {
@@ -98,15 +156,16 @@ namespace coffeeX.ViewModel
             imagePicker.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
             if ((bool)imagePicker.ShowDialog())
             {
-              /*  Beverage temp = selectedBeverage;
-                temp.beverageImage = ImageDataConverter.ConvertBitmapSourceToByteArray(imagePicker.FileName);
-                selectedBeverage = temp;*/
+  
+              currentBeverageImage = ImageDataConverter.ConvertBitmapSourceToByteArray(imagePicker.FileName);
+                hasImage = true;
             }
 
         }
         public ICommand addCommand { get; set; }
         public ICommand pickImageCommand { get; set; }
         public ICommand priceTextChanged { get; set; }
+        public ICommand onLoaded { get; set; }
 
 
     }

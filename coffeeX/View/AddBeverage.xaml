@@ -9,15 +9,20 @@
     xmlns:local="clr-namespace:coffeeX.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:utils="clr-namespace:coffeeX.Utils"
+    Name="AddBeverageWindow"
     Title="AddBeverage"
     Width="845"
     Height="650"
     MinWidth="845"
     MinHeight="650"
     DataContext="{StaticResource BeverageManageVM}"
-    Name="AddBeverageWindow"
     mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding onLoaded}" CommandParameter="{Binding ElementName=AddBeverageWindow}" />
+
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -51,8 +56,9 @@
                     Background="#F1F1F1"
                     BorderThickness="0"
                     Style="{StaticResource RoundedTextBox}"
-                    Text="{Binding currentBeverageName}" />
+                    Text="{Binding currentBeverageName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <controls:AutoCompleteBox
+                    x:Name="beverageType"
                     Width="330"
                     Margin="0,0,0,30"
                     Padding="10"
@@ -61,31 +67,29 @@
                     Background="#F1F1F1"
                     BorderThickness="0"
                     ItemsSource="{Binding beverageTypeSuggest}"
+                    Text="{Binding currentBeverageType,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextBoxStyle="{StaticResource RoundedTextBox}" />
 
-                <TextBox
-                    x:Name="beveragePrice"
-                    Width="330"
-                    Padding="10"
-                    materialDesign:HintAssist.Hint="Đơn Giá"
-                    AcceptsReturn="False"
-                    Background="#F1F1F1"
-                    BorderThickness="0"
-                    Style="{StaticResource RoundedTextBox}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="KeyDown">
-                            <i:InvokeCommandAction Command="{Binding priceTextChanged}" CommandParameter="{Binding ElementName=beveragePrice}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <Binding
-                        Converter="{StaticResource DoubleToVNDConverter}"
-                        Path="currentBeveragePrice"
-                        UpdateSourceTrigger="PropertyChanged">
-                        <Binding.ValidationRules>
-                            <utils:PriceValidationRule MustEndWith="Đ" />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox>
+                <Grid>
+                    <TextBox
+                        x:Name="beveragePrice"
+                        Width="330"
+                        Padding="10,10,70,10"
+                        materialDesign:HintAssist.Hint="Đơn Giá"
+                        AcceptsReturn="False"
+                        Background="#F1F1F1"
+                        BorderThickness="0"
+                        Style="{StaticResource RoundedTextBox}"
+                        Text="{Binding currentBeveragePrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBlock
+                        Margin="0,0,10,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        FontSize="24">
+                        VND
+                    </TextBlock>
+                </Grid>
             </StackPanel>
             <StackPanel
                 Grid.Column="1"
@@ -93,11 +97,16 @@
                 VerticalAlignment="Center"
                 Orientation="Vertical">
                 <Border
+                    x:Name="beverageImageBorder"
                     Width="268"
                     Height="268"
-                    CornerRadius="10">
+                    CornerRadius="10"
+                    Tag="yes">
                     <Border.Background>
-                        <ImageBrush ImageSource="{Binding selectedBeverage.beverageImage, Converter={StaticResource ImageDataConverter}}" Stretch="Fill" />
+                        <ImageBrush
+                            x:Name="beverageImage"
+                            ImageSource="{Binding currentBeverageImage, Converter={StaticResource ImageDataConverter}}"
+                            Stretch="Fill" />
                     </Border.Background>
                 </Border>
 
@@ -135,16 +144,17 @@
             Width="222"
             Height="63"
             Margin="0,0,0,80"
-            Command="{Binding addCommand}"
+            Command="{Binding addCommand, UpdateSourceTrigger=PropertyChanged}"
             CommandParameter="{Binding ElementName=AddBeverageWindow}"
             Content="Thêm"
-            ToolTipService.ShowOnDisabled="True"
-            Style="{StaticResource PrimaryButton}" >
-            <Button.ToolTip>
+            Style="{StaticResource PrimaryButton}"
+            ToolTipService.InitialShowDelay="0"
+            ToolTipService.ShowOnDisabled="True">
+            <Button.ToolTip
+                >
                 <StackPanel>
-                    <TextBlock>xai kieu nay nay</TextBlock>
-                    <TextBlock
-                        Name="toolTipTextBlock"/>
+
+                    <TextBlock Name="toolTipTextBlock" Foreground="Red" />
                 </StackPanel>
             </Button.ToolTip>
         </Button>

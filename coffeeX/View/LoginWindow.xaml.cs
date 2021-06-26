@@ -23,6 +23,7 @@ namespace coffeeX.View
         {
             InitializeComponent();
             passWord.FontFamily = new FontFamily("Webdings");
+
         }
     }
 }
