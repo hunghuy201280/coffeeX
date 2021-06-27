@@ -129,13 +129,32 @@ namespace coffeeX.ViewModel
         }
         private void addBeverage(AddBeverage addBeverageWindow)
         {
-            BeverageType type= CoffeeXRepo.Ins.DB.BeverageTypes.Where(e => e.typeName == currentBeverageType).First();
-            if(type==null)
+            List<BeverageType> types=CoffeeXRepo.Ins.DB.BeverageTypes.Where(e => e.typeName == currentBeverageType).ToList();
+            BeverageType type;
+
+            if (types.Count==0)
             {
 
+                type = new BeverageType();
+                type.typeName = currentBeverageType;
+                type=CoffeeXRepo.Ins.DB.BeverageTypes.Add(type);
+                CoffeeXRepo.Ins.DB.SaveChanges();
+                if (CoffeeXRepo.Ins.DB.Beverages.Any(b => b.beverageName == currentBeverageName))
+                {
+                    MessageBox.Show("Thức uống này đã tồn tại");
+                    return;
+                }
+                Beverage newBeverage = new Beverage();
+                newBeverage.beverageImage = currentBeverageImage;
+                newBeverage.beverageName = currentBeverageName;
+                newBeverage.beveragePrice = currentBeveragePrice;
+                newBeverage.BeverageType = type;
+                CoffeeXRepo.Ins.DB.Beverages.Add(newBeverage);
+                CoffeeXRepo.Ins.DB.SaveChanges();
             }
             else
             {
+                type = types.First();
                 if(CoffeeXRepo.Ins.DB.Beverages.Any(b=>b.beverageName==currentBeverageName))
                     {
                     MessageBox.Show("Thức uống này đã tồn tại");
@@ -149,6 +168,12 @@ namespace coffeeX.ViewModel
                 CoffeeXRepo.Ins.DB.Beverages.Add(newBeverage);
                 CoffeeXRepo.Ins.DB.SaveChanges();
             }
+            currentBeverageName =currentBeverageType ="";
+            currentBeveragePrice = 0;
+            currentBeverageImage = null;
+            MessageBox.Show("Thêm món thành công!");
+
+
         }
         private void pickImage(Object p)
         {

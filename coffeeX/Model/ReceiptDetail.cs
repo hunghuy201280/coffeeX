@@ -9,14 +9,27 @@
 
 namespace coffeeX.Model
 {
+    using coffeeX.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class ReceiptDetail
+    public partial class ReceiptDetail : BaseViewModel
     {
         public int receiptID { get; set; }
         public int beverageID { get; set; }
-        public int quantity { get; set; }
+        private int _quantity;
+        public int quantity { get => _quantity; set
+            {
+                _quantity = value;
+                total = _quantity * Beverage.beveragePrice;
+                OnPropertyChanged();
+            } }
+        private double _total;
+        public double total { get => _total; set
+            {
+                _total = value;
+                OnPropertyChanged();
+            } }
     
         public virtual Beverage Beverage { get; set; }
         public virtual Receipt Receipt { get; set; }
