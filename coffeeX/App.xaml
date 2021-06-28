@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:coffeeX"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     d1p1:Ignorable="d"
-    StartupUri="View\MenuWindow.xaml">
+    StartupUri="View\HomeWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

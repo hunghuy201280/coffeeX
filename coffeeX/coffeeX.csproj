@@ -181,6 +181,7 @@
     <Compile Include="Utils\ImageDataConverter.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BeverageManageViewModel.cs" />
+    <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="View\AddBeverage.xaml.cs">
@@ -188,6 +189,9 @@
     </Compile>
     <Compile Include="View\ChangePwdWindow.xaml.cs">
       <DependentUpon>ChangePwdWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HomeWindow.xaml.cs">
+      <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -237,6 +241,10 @@
     <Page Include="View\ChangePwdWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HomeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -297,6 +305,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resource\Fonts\Roboto-Medium.ttf" />
+    <Resource Include="Resource\Fonts\SVN-Avo bold.ttf" />
     <Resource Include="Resource\Fonts\BSSYM7.TTF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -324,6 +334,12 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resource\Images\icon_add.png" />
+    <Resource Include="Resource\Images\icon_diagram.png" />
+    <Resource Include="Resource\Images\icon_edit.png" />
+    <Resource Include="Resource\Images\icon_history.png" />
+    <Resource Include="Resource\Images\icon_spending.png" />
+    <Resource Include="Resource\Images\icon_user.png" />
     <Resource Include="Resource\Images\pick_beverage_image.png" />
     <Resource Include="Resource\Images\add_beverage_pick_image.png" />
     <Resource Include="Resource\Images\camera.png" />
