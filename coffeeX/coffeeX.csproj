@@ -168,6 +168,7 @@
     <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Table.cs" />
     <Compile Include="Model\Unit.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -179,6 +180,7 @@
     </Compile>
     <Compile Include="Repository\CoffeeXRepo.cs" />
     <Compile Include="Utils\ImageDataConverter.cs" />
+    <Compile Include="Utils\TableStatusToColorConverter.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BeverageManageViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
@@ -190,9 +192,6 @@
     </Compile>
     <Compile Include="View\ChangePwdWindow.xaml.cs">
       <DependentUpon>ChangePwdWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ChoiceBeverageManageDialog.xaml.cs">
-      <DependentUpon>ChoiceBeverageManageDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
@@ -218,16 +217,8 @@
     <Compile Include="View\UpdateBeverageWindow.xaml.cs">
       <DependentUpon>UpdateBeverageWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resource\UserControls\BeverageNameUC.xaml">
@@ -243,10 +234,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ChangePwdWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ChoiceBeverageManageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

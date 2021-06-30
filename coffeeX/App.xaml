@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:coffeeX"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     d1p1:Ignorable="d"
-    StartupUri="View\HomeWindow.xaml">
+    StartupUri="View\LoginWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,11 +17,10 @@
                     SecondaryColor="Lime" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="/Resource/MainResource.xaml">
-                
-                    
+
+
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
-<!--  StartupUri="View\LoginWindow.xaml"  -->
