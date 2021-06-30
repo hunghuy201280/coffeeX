@@ -175,44 +175,62 @@ namespace coffeeX.ViewModel
             switch (currentTable.status)
             {
                 case TableStatus.Free:
-                    currentTable.status = TableStatus.Pending;
-                    saveReceipt(p);
+                    if (saveReceipt(p))
+                    {
+                        currentTable.status = TableStatus.Pending;
+                        p.Close();
+
+                    }
                     break;
                 case TableStatus.Pending:
                     currentTable.status = TableStatus.Done;
+                    p.Close();
+
                     break;
                 case TableStatus.Done:
                     currentTable.resetStatus();
-
+                    p.Close();
                     break;
 
             }
-            p.Close();
         }
 
-        private void saveReceipt(MenuWindow p)
+        private bool saveReceipt(MenuWindow p)
         {
             Customer customer;
             Table table = currentTable;
-            if (table.currentVoucher!=null && !String.IsNullOrEmpty(p.voucherTextBox.Text))
+            String phoneText = p.phoneTextBox.Text;
+            String customerName = p.customerNameTextBox.Text;
+            if (!String.IsNullOrEmpty(p.voucherTextBox.Text) && !voucherSuggest.Any((e)=>e.voucherID==p.voucherTextBox.Text))
             {
                 new NotifyPwdWindow("Voucher không hợp lệ").ShowDialog();
+                return false;
             }
             if (table.currentCustomer==null)
             {
                 customer = new Customer()
                 {
-                    customerName = p.customerNameTextBox.Text,
-                    phone = p.phoneTextBox.Text,
+                    customerName = customerName,
+                    phone = phoneText,
                 };
                 if(String.IsNullOrEmpty(customer.customerName)||String.IsNullOrEmpty(customer.phone))
                 {
                     new NotifyPwdWindow("Vui lòng nhập thông tin khách hàng").ShowDialog();
-                    return;
+                    return false;
                 }
             }
             else
             {
+                if(phoneText.Length!=0)
+                {
+                    new NotifyPwdWindow("Số điện thoại không hợp lệ").ShowDialog();
+                    return false;
+                }
+                if (String.IsNullOrEmpty(table.currentCustomer.customerName) || String.IsNullOrEmpty(table.currentCustomer.phone))
+                {
+                    new NotifyPwdWindow("Vui lòng nhập thông tin khách hàng").ShowDialog();
+                    return false;
+                }
                 customer = table.currentCustomer;
             }
 
@@ -220,7 +238,13 @@ namespace coffeeX.ViewModel
             new Thread(() =>
             {
                 CoffeeXRepo.addReceipt(customer, currentStaff, table.currentVoucher, table.receiptItems.ToList());
+                if (currentTable.currentCustomer == null)
+                {
+                    currentTable.currentCustomer = CoffeeXRepo.Ins.DB.Customers.Where((e) => e.phone == phoneText).First();
+                }
+
             }).Start();
+            return true;
 
 
         }
@@ -246,6 +270,9 @@ namespace coffeeX.ViewModel
         {
             menuWd = menuWindow;
             currentTable = menuWd._currentTable;
+            
+            if(!suggestWorker.IsBusy)
+            suggestWorker.RunWorkerAsync();
         }
 
         private void MenuListBox_SelectionChanged(Beverage beverage)

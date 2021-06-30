@@ -34,16 +34,26 @@ namespace coffeeX.Repository
        static public void addReceipt(Customer customer,UserInfo user,Voucher voucher,List<ReceiptDetail> receiptDetails)
         {
             DateTime dateCreated = DateTime.Now;
-            Receipt receipt = new Receipt() {
-                Customer = customer,
-                UserInfo = user,
-                Voucher = voucher,
-                ReceiptDetails=receiptDetails,
-            };
-            using(CoffeeXEntities db=new CoffeeXEntities())
+            Customer tempCus = Ins.DB.Customers.Find(customer.customerID);
+            String voucherID = null;
+
+            if (voucher != null)
             {
-                db.Receipts.Add(receipt);
+                voucherID = voucher.voucherID;
             }
+            if (tempCus == null)
+                tempCus = customer;
+            Receipt receipt = new Receipt()
+            {
+                Customer = tempCus,
+                UserInfo = user,
+                voucherID = voucherID,
+                ReceiptDetails = receiptDetails,
+                dateCreated = dateCreated,
+                receiptValue = receiptDetails.Sum(e => e.quantity * e.Beverage.beveragePrice)
+            };
+            Ins.DB.Receipts.Add(receipt);
+            Ins.DB.SaveChanges();
         }
         static public List<Beverage> getBeverages()
         {
