@@ -80,7 +80,11 @@ namespace coffeeX.ViewModel
                     currentTable.receiptValue = currentTable.receiptItems.Sum(it => it.total);
                 }).Start();
             });
-            cancelClickCmd = new RelayCommand<Window>((p) => true, onCancelClick);
+            cancelClickCmd = new RelayCommand<Window>((p) => {
+                if (currentTable is null)
+                    return false;
+                return currentTable.status == TableStatus.Free;
+            }, onCancelClick);
             confirmClickCmd = new RelayCommand<MenuWindow>((p) => true, onConfirmClick);
             itemSelectedCmd = new RelayCommand<Beverage>((p) => true, MenuListBox_SelectionChanged);
             categoryListBoxSelectionChangedCmd = new RelayCommand<ListBox>((p) => true, CategoryListBox_SelectionChanged);
@@ -201,6 +205,11 @@ namespace coffeeX.ViewModel
             Table table = currentTable;
             String phoneText = p.phoneTextBox.Text;
             String customerName = p.customerNameTextBox.Text;
+            if(table.receiptItems.Count==0)
+            {
+                new NotifyPwdWindow("Hóa đơn rỗng").ShowDialog();
+                return false;
+            }
             if (!String.IsNullOrEmpty(p.voucherTextBox.Text) && !voucherSuggest.Any((e)=>e.voucherID==p.voucherTextBox.Text))
             {
                 new NotifyPwdWindow("Voucher không hợp lệ").ShowDialog();
@@ -213,27 +222,22 @@ namespace coffeeX.ViewModel
                     customerName = customerName,
                     phone = phoneText,
                 };
-                if(String.IsNullOrEmpty(customer.customerName)||String.IsNullOrEmpty(customer.phone))
-                {
-                    new NotifyPwdWindow("Vui lòng nhập thông tin khách hàng").ShowDialog();
-                    return false;
-                }
+             
             }
             else
-            {
-                if(phoneText.Length!=0)
-                {
-                    new NotifyPwdWindow("Số điện thoại không hợp lệ").ShowDialog();
-                    return false;
-                }
-                if (String.IsNullOrEmpty(table.currentCustomer.customerName) || String.IsNullOrEmpty(table.currentCustomer.phone))
-                {
-                    new NotifyPwdWindow("Vui lòng nhập thông tin khách hàng").ShowDialog();
-                    return false;
-                }
+            { 
                 customer = table.currentCustomer;
             }
-
+            if (phoneText.Length !=10)
+            {
+                new NotifyPwdWindow("Số điện thoại không hợp lệ").ShowDialog();
+                return false;
+            }
+            if (String.IsNullOrEmpty(customer.customerName) || String.IsNullOrEmpty(customer.phone))
+            {
+                new NotifyPwdWindow("Vui lòng nhập thông tin khách hàng").ShowDialog();
+                return false;
+            }
             UserInfo currentStaff =( p.staffTextBox.DataContext as UserViewModel).currentUser;
             new Thread(() =>
             {

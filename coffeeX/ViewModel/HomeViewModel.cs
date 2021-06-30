@@ -37,7 +37,7 @@ namespace coffeeX.ViewModel
             onTableClickCmd = new RelayCommand<Table>((p) => true, (p)=> {
      
                 new MenuWindow(p).ShowDialog();
-                
+             
             });
       
             

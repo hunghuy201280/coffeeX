@@ -29,9 +29,49 @@ namespace coffeeX.Model
             get => _currentVoucher; set
             {
                 _currentVoucher = value;
+                calcDiscount();
+
+                OnPropertyChanged();
+            }
+        }     
+        private void calcDiscount()
+        {
+            if (currentVoucher != null)
+            {
+                discount = _receiptValue * _currentVoucher.voucherValue;
+
+            }
+            else
+            {
+                discount = 0;
+
+            }
+            total = receiptValue - discount;
+        }
+        
+        private double _discount;
+        public double discount
+        {
+            get => _discount; set
+            {
+                _discount = value;
+                if (currentVoucher != null)
+                {
+                    _discount = _receiptValue * _currentVoucher.voucherValue;
+
+                }
+                else
+                {
+                    _discount = 0;
+
+                }
+                total = receiptValue - discount;
+
+
                 OnPropertyChanged();
             }
         }
+
 
         private Customer _currentCustomer;
         public Customer currentCustomer
@@ -49,8 +89,8 @@ namespace coffeeX.Model
             status = TableStatus.Free;
             receiptValue = 0;
             currentCustomer = new Customer();
-
             currentVoucher = null;
+            discount = 0;
         }
         private int _number;
 
@@ -82,6 +122,16 @@ namespace coffeeX.Model
             get => _receiptValue; set
             {
                 _receiptValue = value;
+                calcDiscount();
+                OnPropertyChanged();
+            }
+        }
+        private double _total;
+        public double total
+        {
+            get => _total; set
+            {
+                _total = value;
                 OnPropertyChanged();
             }
         }

@@ -36,10 +36,11 @@ namespace coffeeX.Repository
             DateTime dateCreated = DateTime.Now;
             Customer tempCus = Ins.DB.Customers.Find(customer.customerID);
             String voucherID = null;
-
+            double receiptValue = receiptDetails.Sum(e => e.quantity * e.Beverage.beveragePrice);
             if (voucher != null)
             {
                 voucherID = voucher.voucherID;
+                receiptValue = receiptValue * (1 - voucher.voucherValue);
             }
             if (tempCus == null)
                 tempCus = customer;
@@ -50,7 +51,7 @@ namespace coffeeX.Repository
                 voucherID = voucherID,
                 ReceiptDetails = receiptDetails,
                 dateCreated = dateCreated,
-                receiptValue = receiptDetails.Sum(e => e.quantity * e.Beverage.beveragePrice)
+                receiptValue = receiptValue
             };
             Ins.DB.Receipts.Add(receipt);
             Ins.DB.SaveChanges();

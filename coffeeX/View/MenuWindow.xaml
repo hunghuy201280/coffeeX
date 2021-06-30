@@ -339,16 +339,26 @@
                     Foreground="{StaticResource BoulderBrush}">
                     Giảm giá
                 </TextBlock>
-                <TextBlock
+                <StackPanel
                     Grid.Row="3"
-                    Margin="0,0,20,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    FontFamily="Roboto"
-                    FontSize="24"
-                    FontWeight="Medium"
-                    Foreground="{StaticResource BoulderBrush}"
-                    Text="20,000 Đ" />
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Margin="0,0,20,0"
+                        FontFamily="Roboto"
+                        FontSize="24"
+                        FontWeight="Medium"
+                        Foreground="{StaticResource BoulderBrush}"
+                        Text="{Binding currentTable.discount, StringFormat={}{0:n0}}" />
+                    <TextBlock
+                        Margin="0,0,20,0"
+                        FontFamily="Roboto"
+                        FontSize="24"
+                        FontWeight="Medium"
+                        Foreground="{StaticResource BoulderBrush}"
+                        Text=" VNĐ" />
+                </StackPanel>
 
                 <TextBlock
                     Grid.Row="4"
@@ -372,7 +382,7 @@
                         FontSize="24"
                         FontWeight="Medium"
                         Foreground="{StaticResource BoulderBrush}"
-                        Text="{Binding currentTable.receiptValue, StringFormat={}{0:n0}}" />
+                        Text="{Binding currentTable.total, StringFormat={}{0:n0}}" />
                     <TextBlock
                         Margin="0,0,20,0"
                         FontFamily="Roboto"
