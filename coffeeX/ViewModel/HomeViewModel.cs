@@ -31,12 +31,7 @@ namespace coffeeX.ViewModel
 
         private void LoadTableNumberList()
         {
-            tableNumber = new ObservableCollection<int>();
-            for (int i = 1; i <= 42; i++)
-            {
-                tableNumber.Add(i);
-            }
-            homeWd.tableNumberListBox.ItemsSource = tableNumber;
+          
         }
         private void onWindowLoaded(HomeWindow wd)
         {

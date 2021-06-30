@@ -111,6 +111,7 @@
                                             </StackPanel>
                                         </StackPanel>
                                         <Grid Background="Transparent" 
+                                             
                                               Cursor="Hand">
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="MouseDown">
