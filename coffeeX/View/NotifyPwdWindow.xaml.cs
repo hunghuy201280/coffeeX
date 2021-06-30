@@ -25,7 +25,6 @@ namespace coffeeX.View
             notiText.Text = v;
 
         }
-
        
     }
 }

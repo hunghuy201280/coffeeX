@@ -19,20 +19,22 @@ namespace coffeeX.ViewModel
     {
         private HomeWindow homeWd;
         public ICommand onLoaded { get; set; }
+        public ICommand manageMenuCmd { get; set; }
 
         private ObservableCollection<int> _tableNumber;
         public ObservableCollection<int> tableNumber { get => _tableNumber; set { _tableNumber = value; OnPropertyChanged(); } }
 
         public HomeViewModel()
         {
+            tableNumber = new ObservableCollection<int>();
+            for (int i = 0; i < 40; i++)
+                tableNumber.Add(i + 1);
             onLoaded = new RelayCommand<HomeWindow>((p) => true, onWindowLoaded);
-            LoadTableNumberList();
+            manageMenuCmd = new RelayCommand<HomeWindow>((p) => true, (p)=>new ChoiceBeverageManageDialog().ShowDialog());
+      
         }
 
-        private void LoadTableNumberList()
-        {
-          
-        }
+  
         private void onWindowLoaded(HomeWindow wd)
         {
             homeWd = wd;

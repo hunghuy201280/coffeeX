@@ -80,15 +80,15 @@ namespace coffeeX.ViewModel
         public BeverageManageViewModel()
         {
             _beverageTypeSuggest = new ObservableCollection<string>(CoffeeXRepo.Ins.DB.BeverageTypes.Select((e) => e.typeName));
-            addCommand = new RelayCommand<AddBeverage>(validateData, addBeverage);
+            addCommand = new RelayCommand<AddBeverageWindow>(validateData, addBeverage);
             pickImageCommand = new RelayCommand<Object>((p) => true, pickImage);
-            onLoaded = new RelayCommand<AddBeverage>((p) => true, onWindowLoaded);
+            onLoaded = new RelayCommand<AddBeverageWindow>((p) => true, onWindowLoaded);
            // priceTextChanged = new RelayCommand<Object>((p) => true, beveragePrice_KeyDown);
               
         }
 
    
-        private void onWindowLoaded(AddBeverage addBeverage)
+        private void onWindowLoaded(AddBeverageWindow addBeverage)
         {
             addBeverage.beveragePrice.PreviewTextInput += BeveragePrice_PreviewTextInput;
         }
@@ -101,7 +101,7 @@ namespace coffeeX.ViewModel
 
    
 
-        private bool validateData(AddBeverage addBeverage)
+        private bool validateData(AddBeverageWindow addBeverage)
         {
             if (addBeverage == null)
                 return false; 
@@ -127,7 +127,7 @@ namespace coffeeX.ViewModel
 
             return true;
         }
-        private void addBeverage(AddBeverage addBeverageWindow)
+        private void addBeverage(AddBeverageWindow addBeverageWindow)
         {
             List<BeverageType> types=CoffeeXRepo.Ins.DB.BeverageTypes.Where(e => e.typeName == currentBeverageType).ToList();
             BeverageType type;

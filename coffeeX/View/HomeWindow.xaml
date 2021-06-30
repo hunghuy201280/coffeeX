@@ -2,17 +2,17 @@
     x:Class="coffeeX.View.HomeWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:coffeeX.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
-    DataContext="{StaticResource HomeVM}"
     Name="HomeWD"
     Title="HomeWindow"
     Width="1600"
     Height="900"
+    DataContext="{StaticResource HomeVM}"
     WindowState="Maximized"
     WindowStyle="None"
     mc:Ignorable="d">
@@ -24,165 +24,211 @@
     </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="345"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="345" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid Background="#323E3E">
             <Grid.RowDefinitions>
-                <RowDefinition Height="120"/>
-                <RowDefinition Height="75"/>
-                <RowDefinition Height="75"/>
-                <RowDefinition Height="75"/>
-                <RowDefinition Height="75"/>
-                <RowDefinition Height="75"/>
-                <RowDefinition Height="240"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="120" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="240" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left">
-                <Image Margin="40 0 0 0"
-                              Width="190"
-                              Source="/Resource/Images/app_logo.png"></Image>
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Image
+                    Width="190"
+                    Margin="40,0,0,0"
+                    Source="/Resource/Images/app_logo.png" />
             </StackPanel>
 
-            <ToggleButton Grid.Row="1" VerticalAlignment="Top" VerticalContentAlignment="Stretch" Height="75">
-                <ToggleButton.Template>
-                    <ControlTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Height="48"
-                                            Width="48"
-                                            Source="/Resource/Images/icon_spending.png"></Image>
-                            <TextBlock VerticalAlignment="Center"
-                                                Grid.Column="1"
-                                                Text="Lập phiếu chi"
-                                                Foreground="White"
-                                                FontSize="30"
-                                                FontFamily="/Resource/Fonts/#SVN-Avo"></TextBlock>
-                        </Grid>
-                    </ControlTemplate>
-                </ToggleButton.Template>
-            </ToggleButton>
+            <Button
+                Grid.Row="1"
+                Height="75"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Stretch"
+                Background="Transparent"
+                BorderThickness="0">
 
-            <ToggleButton Grid.Row="2" VerticalAlignment="Top" VerticalContentAlignment="Stretch" Height="75">
-                <ToggleButton.Template>
-                    <ControlTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Height="48"
-                                            Width="48"
-                                            Source="/Resource/Images/icon_history.png"></Image>
-                            <TextBlock VerticalAlignment="Center"
-                                                Grid.Column="1"
-                                                Text="Lịch sử"
-                                                Foreground="White"
-                                                FontSize="30"
-                                                FontFamily="/Resource/Fonts/#SVN-Avo"></TextBlock>
-                        </Grid>
-                    </ControlTemplate>
-                </ToggleButton.Template>
-            </ToggleButton>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Width="48"
+                        Height="48"
+                        Source="/Resource/Images/icon_spending.png" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/Resource/Fonts/#SVN-Avo"
+                        FontSize="30"
+                        Foreground="White"
+                        Text="Lập phiếu chi" />
+                </Grid>
 
-            <ToggleButton Grid.Row="3" VerticalAlignment="Top" VerticalContentAlignment="Stretch" Height="75">
-                <ToggleButton.Template>
-                    <ControlTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Height="48"
-                                            Width="48"
-                                            Source="/Resource/Images/icon_edit.png"></Image>
-                            <TextBlock VerticalAlignment="Center"
-                                                Grid.Column="1"
-                                                Text="Chỉnh sửa"
-                                                Foreground="White"
-                                                FontSize="30"
-                                                FontFamily="/Resource/Fonts/#SVN-Avo"></TextBlock>
-                        </Grid>
-                    </ControlTemplate>
-                </ToggleButton.Template>
-            </ToggleButton>
+            </Button>
 
-            <ToggleButton Grid.Row="4" VerticalAlignment="Top" VerticalContentAlignment="Stretch" Height="75">
-                <ToggleButton.Template>
-                    <ControlTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Height="48"
-                                            Width="48"
-                                            Source="/Resource/Images/icon_add.png"></Image>
-                            <TextBlock VerticalAlignment="Center"
-                                                Grid.Column="1"
-                                                Text="Thêm món"
-                                                Foreground="White"
-                                                FontSize="30"
-                                                FontFamily="/Resource/Fonts/#SVN-Avo"></TextBlock>
-                        </Grid>
-                    </ControlTemplate>
-                </ToggleButton.Template>
-            </ToggleButton>
+            <Button
+                Grid.Row="2"
+                Height="75"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Stretch"
+                Background="Transparent"
+                BorderThickness="0">
 
-            <ToggleButton Grid.Row="5" VerticalAlignment="Top" VerticalContentAlignment="Stretch" Height="75">
-                <ToggleButton.Template>
-                    <ControlTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Height="48"
-                                            Width="48"
-                                            Source="/Resource/Images/icon_user.png"></Image>
-                            <TextBlock VerticalAlignment="Center"
-                                                Grid.Column="1"
-                                                Text="Tài khoản"
-                                                Foreground="White"
-                                                FontSize="30"
-                                                FontFamily="/Resource/Fonts/#SVN-Avo"></TextBlock>
-                        </Grid>
-                    </ControlTemplate>
-                </ToggleButton.Template>
-            </ToggleButton>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Width="48"
+                        Height="48"
+                        Source="/Resource/Images/icon_history.png" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/Resource/Fonts/#SVN-Avo"
+                        FontSize="30"
+                        Foreground="White"
+                        Text="Lịch sử" />
+                </Grid>
+
+            </Button>
+
+            <Button
+                Grid.Row="3"
+                Height="75"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Stretch"
+                Background="Transparent"
+                BorderThickness="0">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Width="48"
+                        Height="48"
+                        Source="/Resource/Images/icon_edit.png" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/Resource/Fonts/#SVN-Avo"
+                        FontSize="30"
+                        Foreground="White"
+                        Text="Chỉnh sửa" />
+                </Grid>
+
+            </Button>
+
+            <Button
+                Grid.Row="4"
+                Height="75"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Stretch"
+                Background="Transparent"
+                Command="{Binding manageMenuCmd}"
+                
+                BorderThickness="0">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Width="48"
+                        Height="48"
+                        Source="/Resource/Images/icon_add.png" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/Resource/Fonts/#SVN-Avo"
+                        FontSize="30"
+                        Foreground="White"
+                        Text="Quản lý món" />
+                </Grid>
+
+            </Button>
+
+            <Button
+                Grid.Row="5"
+                Height="75"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Stretch"
+                Background="Transparent"
+                BorderThickness="0">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Width="48"
+                        Height="48"
+                        Source="/Resource/Images/icon_user.png" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontFamily="/Resource/Fonts/#SVN-Avo"
+                        FontSize="30"
+                        Foreground="White"
+                        Text="Tài khoản" />
+                </Grid>
+
+            </Button>
 
             <Grid Grid.Row="7">
-                <Label HorizontalAlignment="Center"
-                            VerticalAlignment="Bottom"
-                            Margin = "0 0 0 10">
-                    <TextBlock  Text="Hưng Huy"
-                                         Foreground="White"
-                                         FontSize="24"
-                                         FontFamily="Roboto">
-                    </TextBlock>
+                <Label
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom">
+                    <TextBlock
+                        FontFamily="Roboto"
+                        FontSize="24"
+                        Foreground="White"
+                        Text="Hưng Huy" />
                 </Label>
             </Grid>
 
             <Grid Grid.Row="8">
-                <Button   materialDesign:ButtonAssist.CornerRadius="15"
-                                FontSize="24"
-                                Foreground="#FFFFFF"
-                                FontFamily="Roboto"
-                                Content="ĐĂNG XUẤT"
-                                Background="#FFEA8025"                                
-                                Width="260"
-                                Height="50">
-                </Button>
+                <Button
+                    Width="260"
+                    Height="50"
+                    materialDesign:ButtonAssist.CornerRadius="15"
+                    Background="#FFEA8025"
+                    Content="ĐĂNG XUẤT"
+                    FontFamily="Roboto"
+                    FontSize="24"
+                    Foreground="#FFFFFF" />
             </Grid>
         </Grid>
         <Grid Grid.Column="1">
-            <ListBox    x:Name="tableNumberListBox"
-                               Margin="20 30 20 30">
+            <ListBox
+                x:Name="tableNumberListBox"
+                Margin="20,30,20,30"
+                ItemsSource="{Binding tableNumber}">
                 <ListBox.ItemContainerStyle>
                     <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
                         <Setter Property="Padding" Value="0" />
@@ -197,16 +243,16 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Button
-                            Height="80"
                             Width="80"
-                            Background="#DADADA"
+                            Height="80"
                             materialDesign:ButtonAssist.CornerRadius="12"
+                            Background="#DADADA"
                             BorderBrush="Transparent">
-                            <TextBlock     FontFamily="Roboto"
-                                                    Text="{Binding}"
-                                                    FontSize="32"
-                                                    Foreground="#333333">
-                            </TextBlock>
+                            <TextBlock
+                                FontFamily="Roboto"
+                                FontSize="32"
+                                Foreground="#333333"
+                                Text="{Binding}" />
                         </Button>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using coffeeX.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,17 @@ using System.Windows.Shapes;
 namespace coffeeX.View
 {
     /// <summary>
-    /// Interaction logic for AddBerverageWindow.xaml
+    /// Interaction logic for AddBeverage.xaml
     /// </summary>
-    public partial class AddBerverageWindow : Window
+    public partial class AddBeverageWindow : Window
     {
-        public AddBerverageWindow()
+        public AddBeverageWindow()
         {
             InitializeComponent();
+ 
+ 
         }
+
+    
     }
 }
