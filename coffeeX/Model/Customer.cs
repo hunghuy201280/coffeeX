@@ -18,6 +18,7 @@ namespace coffeeX.Model
         public Customer()
         {
             this.Receipts = new HashSet<Receipt>();
+            point = 0;
         }
     
         public int customerID { get; set; }
