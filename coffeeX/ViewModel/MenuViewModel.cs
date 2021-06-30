@@ -266,11 +266,12 @@ namespace coffeeX.ViewModel
                     Beverage = beverage,
                     quantity = 1
                 });
-                new Thread(() =>
-                {
-                    currentTable.receiptValue = currentTable.receiptItems.Sum(it => it.total);
-                }).Start();
+            
             }
+            new Thread(() =>
+            {
+                currentTable.receiptValue = currentTable.receiptItems.Sum(it => it.total);
+            }).Start();
         }
 
         private void CategoryListBox_SelectionChanged(ListBox listBox)

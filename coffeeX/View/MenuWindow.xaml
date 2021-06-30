@@ -2,13 +2,13 @@
     x:Class="coffeeX.View.MenuWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:coffeeX.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
-
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Name="MenuWD"
     Title="MenuWindow"
     Width="2000"
@@ -40,8 +40,7 @@
             <ListBox.ItemContainerStyle>
                 <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
                     <Style.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
-                             Color="Transparent"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
                     </Style.Resources>
                 </Style>
             </ListBox.ItemContainerStyle>
@@ -110,9 +109,7 @@
                                                     Text="{Binding beveragePrice}" />
                                             </StackPanel>
                                         </StackPanel>
-                                        <Grid Background="Transparent" 
-                                             
-                                              Cursor="Hand">
+                                        <Grid Background="Transparent" Cursor="Hand">
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="MouseDown">
                                                     <i:InvokeCommandAction Command="{Binding itemSelectedCmd, Source={StaticResource MenuVM}}" CommandParameter="{Binding}" />
@@ -149,6 +146,7 @@
         <ListBox
             Name="categoryListBox"
             Margin="30,50,30,0"
+            SelectedIndex="0"
             HorizontalAlignment="Stretch"
             materialDesign:RippleAssist.ClipToBounds="True"
             ItemsSource="{Binding beverageType}"
@@ -188,7 +186,11 @@
 
         </ListBox>
         <StackPanel Margin="20,0,0,10" VerticalAlignment="Bottom">
-            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <TextBlock
+                x:Name="staffTextBox"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                DataContext="{StaticResource UserVM}">
                 <Run
                     FontFamily="Roboto"
                     FontSize="24"
@@ -200,7 +202,7 @@
                     FontFamily="Roboto"
                     FontSize="24"
                     FontWeight="Normal"
-                    Text="Tên nhân viên" />
+                    Text="{Binding currentUser.fullName}" />
             </TextBlock>
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom">
                 <Run
@@ -214,7 +216,7 @@
                     FontFamily="Roboto"
                     FontSize="24"
                     FontWeight="Normal"
-                    Text="30-04-1975" />
+                    Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='{}{0:dd-MM-yyyy}', Mode=OneWay}" />
             </TextBlock>
         </StackPanel>
         <DockPanel Grid.Column="4">
@@ -250,22 +252,27 @@
                     Số điện thoại
                 </TextBlock>
                 <controls:AutoCompleteBox
+                    x:Name="phoneTextBox"
                     Width="200"
                     Height="40"
                     Margin="0,0,25,0"
-                    x:Name="phoneTextBox"
                     Padding="0"
-                    ItemsSource="{Binding customerPhoneSuggest}"
                     HorizontalAlignment="Right"
-                   
                     BorderBrush="{StaticResource PrimaryBrush}"
-                    TextBoxStyle="{StaticResource RoundedWhiteTextBox}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="TextChanged">
-                            <i:InvokeCommandAction Command="{Binding phoneTextBoxTextChangedCmd}" CommandParameter="{Binding ElementName=MenuWD}" />
-
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
+                    ItemsSource="{Binding customerSuggest}"
+                    TextBoxStyle="{StaticResource RoundedWhiteTextBox}"
+                    ValueMemberPath="phone"
+                    SelectedItem="{Binding currentTable.currentCustomer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    
+                    >
+                    <controls:AutoCompleteBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Text="{Binding phone}"
+                                />
+                        </DataTemplate>
+                    </controls:AutoCompleteBox.ItemTemplate>
+                   
                 </controls:AutoCompleteBox>
                 <TextBlock
                     Grid.Row="1"
@@ -285,6 +292,7 @@
                     Height="40"
                     Margin="0,0,25,0"
                     Padding="0"
+                    Text="{Binding currentTable.currentCustomer.customerName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                     HorizontalAlignment="Right"
                     BorderBrush="{StaticResource PrimaryBrush}"
                     Style="{StaticResource RoundedWhiteTextBox}" />
@@ -299,15 +307,27 @@
                     Foreground="{StaticResource BoulderBrush}">
                     Mã giảm giá
                 </TextBlock>
-                <TextBox
+                <controls:AutoCompleteBox
+                    x:Name="voucherTextBox"
                     Grid.Row="2"
                     Width="200"
                     Height="40"
                     Margin="0,0,25,0"
                     Padding="0"
                     HorizontalAlignment="Right"
+                    ItemsSource="{Binding voucherSuggest}"
+                    ValueMemberPath="voucherID"
+                    SelectedItem="{Binding currentTable.currentVoucher,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                     BorderBrush="{StaticResource PrimaryBrush}"
-                    Style="{StaticResource RoundedWhiteTextBox}" />
+                    TextBoxStyle="{StaticResource RoundedWhiteTextBox}" >
+                    <controls:AutoCompleteBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Text="{Binding voucherID}"
+                                />
+                        </DataTemplate>
+                    </controls:AutoCompleteBox.ItemTemplate>
+                </controls:AutoCompleteBox>
                 <TextBlock
                     Grid.Row="3"
                     Margin="30,0,0,0"
@@ -343,28 +363,25 @@
                 </TextBlock>
                 <StackPanel
                     Grid.Row="4"
-                     HorizontalAlignment="Right"
+                    HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    Orientation="Horizontal"
-                    >
+                    Orientation="Horizontal">
                     <TextBlock
-                    Margin="0,0,20,0"
-                
-                    FontFamily="Roboto"
-                    FontSize="24"
-                    FontWeight="Medium"
-                    Foreground="{StaticResource BoulderBrush}"
-                    Text="{Binding receiptValue, StringFormat={}{0:n0}}" />
+                        Margin="0,0,20,0"
+                        FontFamily="Roboto"
+                        FontSize="24"
+                        FontWeight="Medium"
+                        Foreground="{StaticResource BoulderBrush}"
+                        Text="{Binding currentTable.receiptValue, StringFormat={}{0:n0}}" />
                     <TextBlock
-                    Margin="0,0,20,0"
-                   
-                    FontFamily="Roboto"
-                    FontSize="24"
-                    FontWeight="Medium"
-                    Foreground="{StaticResource BoulderBrush}"
-                    Text=" VNĐ" />
+                        Margin="0,0,20,0"
+                        FontFamily="Roboto"
+                        FontSize="24"
+                        FontWeight="Medium"
+                        Foreground="{StaticResource BoulderBrush}"
+                        Text=" VNĐ" />
                 </StackPanel>
-              
+
                 <Grid Grid.Row="5" Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -373,8 +390,12 @@
                     <Button
                         Width="200"
                         Height="63"
-                        Style="{StaticResource PrimaryButton}">
-                        XÁC NHẬN
+                        Command="{Binding confirmClickCmd}"
+                        CommandParameter="{Binding ElementName=MenuWD}"
+                        Style="{StaticResource PrimaryButton}"
+                        Content="{Binding currentTable.status,Converter={StaticResource TableStatusToButtonTextConverter}}"
+                        >
+                      
                     </Button>
                     <Button
                         Grid.Column="1"
@@ -382,6 +403,8 @@
                         Height="63"
                         materialDesign:RippleAssist.Feedback="{StaticResource PrimaryBrush}"
                         Background="{StaticResource SeashellBrush}"
+                        Command="{Binding cancelClickCmd}"
+                        CommandParameter="{Binding ElementName=MenuWD}"
                         Foreground="Black"
                         Style="{StaticResource PrimaryButton}">
                         HỦY BỎ
@@ -396,7 +419,7 @@
                 x:Name="paymentDataGrid"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
-                ItemsSource="{Binding receiptItems}"
+                ItemsSource="{Binding currentTable.receiptItems}"
                 SelectionMode="Single">
 
                 <DataGrid.Columns>

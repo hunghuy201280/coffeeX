@@ -30,5 +30,27 @@ namespace coffeeX.Repository
         {
             DB = new CoffeeXEntities();
         }
+
+       static public void addReceipt(Customer customer,UserInfo user,Voucher voucher,List<ReceiptDetail> receiptDetails)
+        {
+            DateTime dateCreated = DateTime.Now;
+            Receipt receipt = new Receipt() {
+                Customer = customer,
+                UserInfo = user,
+                Voucher = voucher,
+                ReceiptDetails=receiptDetails,
+            };
+            using(CoffeeXEntities db=new CoffeeXEntities())
+            {
+                db.Receipts.Add(receipt);
+            }
+        }
+        static public List<Beverage> getBeverages()
+        {
+            using (CoffeeXEntities db = new CoffeeXEntities())
+            {
+                return db.Beverages.ToList();
+            }
+        }
     }
 }

@@ -19,23 +19,32 @@ namespace coffeeX.ViewModel
     {
         private HomeWindow homeWd;
         public ICommand onLoaded { get; set; }
-        public ICommand manageMenuCmd { get; set; }
+        public ICommand addBeverageCmd { get; set; }
+        public ICommand modifyBeverageCmd { get; set; }
+        public ICommand onTableClickCmd { get; set; }
 
-        private ObservableCollection<int> _tableNumber;
-        public ObservableCollection<int> tableNumber { get => _tableNumber; set { _tableNumber = value; OnPropertyChanged(); } }
+        private ObservableCollection<Table> _table;
+        public ObservableCollection<Table> table { get => _table; set { _table = value; OnPropertyChanged(); } }
 
         public HomeViewModel()
         {
-            tableNumber = new ObservableCollection<int>();
+            table = new ObservableCollection<Table>();
             for (int i = 0; i < 40; i++)
-                tableNumber.Add(i + 1);
-            onLoaded = new RelayCommand<HomeWindow>((p) => true, onWindowLoaded);
-            manageMenuCmd = new RelayCommand<HomeWindow>((p) => true, (p)=>new ChoiceBeverageManageDialog().ShowDialog());
+                table.Add(new Table(i + 1) ) ;
+            onLoaded = new RelayCommand<HomeWindow>((p) => true, OnWindowLoaded);
+            addBeverageCmd = new RelayCommand<Object>((p) => true, (p)=>new AddBeverageWindow().ShowDialog());
+            modifyBeverageCmd = new RelayCommand<Object>((p) => true, (p)=>new UpdateBeverageWindow().ShowDialog());
+            onTableClickCmd = new RelayCommand<Table>((p) => true, (p)=> {
+     
+                new MenuWindow(p).ShowDialog();
+                
+            });
       
+            
         }
 
   
-        private void onWindowLoaded(HomeWindow wd)
+        private void OnWindowLoaded(HomeWindow wd)
         {
             homeWd = wd;
         }

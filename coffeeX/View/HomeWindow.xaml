@@ -15,6 +15,7 @@
     DataContext="{StaticResource HomeVM}"
     WindowState="Maximized"
     WindowStyle="None"
+   
     mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -115,7 +116,8 @@
                 HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Stretch"
                 Background="Transparent"
-                BorderThickness="0">
+                BorderThickness="0"
+                Command="{Binding modifyBeverageCmd}">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -145,9 +147,8 @@
                 HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Stretch"
                 Background="Transparent"
-                Command="{Binding manageMenuCmd}"
-                
-                BorderThickness="0">
+                BorderThickness="0"
+                Command="{Binding addBeverageCmd}">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -164,7 +165,7 @@
                         FontFamily="/Resource/Fonts/#SVN-Avo"
                         FontSize="30"
                         Foreground="White"
-                        Text="Quản lý món" />
+                        Text="Thêm món" />
                 </Grid>
 
             </Button>
@@ -205,30 +206,30 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom">
                     <TextBlock
+                        DataContext="{StaticResource UserVM}"
                         FontFamily="Roboto"
                         FontSize="24"
                         Foreground="White"
-                        Text="Hưng Huy" />
+                        Text="{Binding currentUser.fullName}" />
                 </Label>
             </Grid>
 
             <Grid Grid.Row="8">
                 <Button
                     Width="260"
+                    DataContext="{StaticResource UserVM}"
                     Height="50"
-                    materialDesign:ButtonAssist.CornerRadius="15"
-                    Background="#FFEA8025"
                     Content="ĐĂNG XUẤT"
-                    FontFamily="Roboto"
-                    FontSize="24"
-                    Foreground="#FFFFFF" />
+                    Command="{Binding logOutCmd}"
+                    CommandParameter="{Binding ElementName=HomeWD}"
+                    Style="{StaticResource PrimaryButton}" />
             </Grid>
         </Grid>
         <Grid Grid.Column="1">
             <ListBox
                 x:Name="tableNumberListBox"
                 Margin="20,30,20,30"
-                ItemsSource="{Binding tableNumber}">
+                ItemsSource="{Binding table}">
                 <ListBox.ItemContainerStyle>
                     <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
                         <Setter Property="Padding" Value="0" />
@@ -246,13 +247,15 @@
                             Width="80"
                             Height="80"
                             materialDesign:ButtonAssist.CornerRadius="12"
-                            Background="#DADADA"
+                            Background="{Binding status,Converter={StaticResource TableStatusToColorConverter}}"
+                            Command="{Binding Source={StaticResource HomeVM},Path=onTableClickCmd}"
+                            CommandParameter="{Binding}"
                             BorderBrush="Transparent">
                             <TextBlock
                                 FontFamily="Roboto"
                                 FontSize="32"
                                 Foreground="#333333"
-                                Text="{Binding}" />
+                                Text="{Binding number}" />
                         </Button>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

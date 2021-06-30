@@ -11,6 +11,8 @@
     Title="Register"
     Width="750"
     Height="500"
+    WindowStartupLocation="CenterScreen"
+   
     DataContext="{StaticResource UserVM}"
     ResizeMode="NoResize"
     mc:Ignorable="d">

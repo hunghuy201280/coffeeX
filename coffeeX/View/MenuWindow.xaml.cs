@@ -21,14 +21,20 @@ namespace coffeeX.View
     /// </summary>
     public partial class MenuWindow : Window
     {
+
+        public Model.Table _currentTable;
+      
         public MenuWindow()
         {
             InitializeComponent();
-            
-
-         
+                
+        }
+        public MenuWindow(Model.Table table)
+        {
+            InitializeComponent();
+            _currentTable = table;
         }
 
-     
+
     }
 }

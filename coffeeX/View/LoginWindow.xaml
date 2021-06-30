@@ -12,6 +12,7 @@
     Width="750"
     Height="500"
     ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -66,7 +67,11 @@
                 Margin="0,16,0,0"
                 FontSize="16">
                 <Span Foreground="{StaticResource DustyGrayBrush}">Bạn chưa có tài khoản?</Span> 
-                <Hyperlink Foreground="{StaticResource PrimaryBrush}">Đăng ký</Hyperlink>
+                <Hyperlink Foreground="{StaticResource PrimaryBrush}"
+                            Command="{Binding registerClickCommand}"
+                           >Đăng ký
+                            
+                </Hyperlink>
             </TextBlock>
             <Button Height="51"
                     Margin="0,18,0,0"

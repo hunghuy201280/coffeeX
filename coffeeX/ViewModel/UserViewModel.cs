@@ -20,10 +20,15 @@ namespace coffeeX.ViewModel
         public ICommand registerCommand { get; set; }
         public ICommand passwordChangedCommand { get; set; }
         public ICommand loginCommand { get; set; }
+        public ICommand registerClickCommand { get; set; }
+
+        public ICommand logOutCmd { get; set; }
 
 
 
+        private UserInfo _currentUser;
 
+        public UserInfo currentUser { get => _currentUser; set { _currentUser = value; OnPropertyChanged(); } }
 
         public bool isLogin { get; set; }
 
@@ -68,13 +73,24 @@ namespace coffeeX.ViewModel
         public UserViewModel()
         {
             fullName = phoneNumber = userName = password= "";
-            registerCommand = new RelayCommand<Window>((p) => { return validRegis(); }, (p) => {  register(p); });
+            registerCommand = new RelayCommand<Window>((p) => { return validRegis(); }, register);
             passwordChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { password = p.Text; });
-            loginCommand = new RelayCommand<Window>((p) => { return checkEmptyUserIDPassword(); }, (p) => { login(p); });
-           
+            loginCommand = new RelayCommand<Window>((p) => { return checkEmptyUserIDPassword(); },  login);
+            registerClickCommand = new RelayCommand<Object>((p) =>true,  (p)=>new RegisterWindow().Show());
+            logOutCmd= new RelayCommand<Window>((p) => p!=null, onLogOutCleanup);
         }
 
 
+        private void onLogOutCleanup(Window p)
+        {
+            currentUser = null;
+            userName = password = "";
+            isLogin = false;
+            new LoginWindow().Show();
+            p.Close();
+
+
+        }
 
         private bool validRegis()
         {
@@ -130,6 +146,7 @@ namespace coffeeX.ViewModel
             if (checkNameAndPassword(userName, password))
             {
                 isLogin = true;
+                new HomeWindow().Show();
                 p.Close();
             }
             else
@@ -194,9 +211,10 @@ namespace coffeeX.ViewModel
 
         bool checkNameAndPassword(String name, String password)
         {
-
-            if (CoffeeXRepo.Ins.DB.UserInfoes.ToList().Where(x => x.username == name && x.passwordEncrypted == ComputeSha256Hash(password)).Count()>0)
+            var results = CoffeeXRepo.Ins.DB.UserInfoes.ToList().Where(x => x.username == name && x.passwordEncrypted == ComputeSha256Hash(password)).ToList();
+            if (results.Count>0)
             {
+                currentUser = results[0];
                 return true;
             }
             return false;
