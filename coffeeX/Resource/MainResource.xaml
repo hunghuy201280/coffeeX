@@ -3,9 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:coffeeX"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:viewmodel="clr-namespace:coffeeX.ViewModel"
     xmlns:utils="clr-namespace:coffeeX.Utils"
-    >
+    xmlns:viewmodel="clr-namespace:coffeeX.ViewModel">
     <Style x:Key="RobotoRegular">
         <Setter Property="TextElement.FontFamily" Value="/Resource/Fonts/Roboto-Regular.tff" />
     </Style>
@@ -17,6 +16,8 @@
     <viewmodel:HomeViewModel x:Key="HomeVM" />
     <viewmodel:NotifyViewModel x:Key="NotiVM" />
     <utils:ImageDataConverter x:Key="ImageDataConverter" />
+    <utils:TableStatusToColorConverter x:Key="TableStatusToColorConverter" />
+    <utils:TableStatusToButtonTextConverter x:Key="TableStatusToButtonTextConverter" />
 
 
     <Color x:Key="DustyGray">#9B9B9B</Color>
@@ -90,7 +91,10 @@
         <Setter Property="materialDesign:TextFieldAssist.TextFieldCornerRadius" Value="10" />
 
     </Style>
-    <Style x:Key="PasswordFont" BasedOn="{StaticResource FloatingHintTextBox}" TargetType="TextBox">
+    <Style
+        x:Key="PasswordFont"
+        BasedOn="{StaticResource FloatingHintTextBox}"
+        TargetType="TextBox">
         <Setter Property="TextElement.FontFamily" Value="/Resource/Fonts/password_font.tff" />
     </Style>
 </ResourceDictionary>
