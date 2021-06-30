@@ -62,7 +62,7 @@ namespace coffeeX.ViewModel
         private string _tooltip;
         public string tooltip { get => _tooltip; set { _tooltip = value; OnPropertyChanged(); } }
 
-     
+        
 
 
         public UserViewModel()
@@ -71,6 +71,7 @@ namespace coffeeX.ViewModel
             registerCommand = new RelayCommand<Window>((p) => { return validRegis(); }, (p) => {  register(p); });
             passwordChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { password = p.Text; });
             loginCommand = new RelayCommand<Window>((p) => { return checkEmptyUserIDPassword(); }, (p) => { login(p); });
+           
         }
 
 
@@ -132,7 +133,11 @@ namespace coffeeX.ViewModel
                 p.Close();
             }
             else
-                MessageBox.Show("Tài khoản hoặc mật khẩu không dúng");
+            {
+               
+                NotifyPwdWindow notifyWindow = new NotifyPwdWindow("Tài khoản hoặc mật khẩu không đúng");
+                notifyWindow.ShowDialog();
+            }
 
         }
 
@@ -148,7 +153,10 @@ namespace coffeeX.ViewModel
                 
                 if (checkUserNameExisted(_userName))
                 {
-                    MessageBox.Show("Tên tài khoản đã tồn tại, vui lòng tạo tên tài khoản khác");
+                   
+                    NotifyPwdWindow notifyWindow = new NotifyPwdWindow("Tên tài khoản đã tồn tại, vui lòng tạo tên tài khoản khác");
+                    notifyWindow.ShowDialog();
+
                 }
                 else
                 {
@@ -165,8 +173,10 @@ namespace coffeeX.ViewModel
                 
             }
             else {
-                MessageBox.Show("Vui lòng điền đúng hoặc đầy đủ các thông tin");
-            
+           
+                NotifyPwdWindow notifyWindow = new NotifyPwdWindow("Vui lòng điền đúng hoặc đầy đủ các thông tin");
+                notifyWindow.ShowDialog();
+
             }
            
         }

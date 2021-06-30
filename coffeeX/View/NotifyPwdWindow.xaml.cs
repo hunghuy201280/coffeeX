@@ -19,9 +19,13 @@ namespace coffeeX.View
     /// </summary>
     public partial class NotifyPwdWindow : Window
     {
-        public NotifyPwdWindow()
+        public NotifyPwdWindow(string v)
         {
             InitializeComponent();
+            notiText.Text = v;
+
         }
+
+       
     }
 }

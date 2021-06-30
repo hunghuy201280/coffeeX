@@ -15,6 +15,7 @@
     <viewmodel:BeverageManageViewModel x:Key="BeverageManageVM" />
     <viewmodel:UserViewModel x:Key="UserVM" />
     <viewmodel:HomeViewModel x:Key="HomeVM" />
+    <viewmodel:NotifyViewModel x:Key="NotiVM" />
     <utils:ImageDataConverter x:Key="ImageDataConverter" />
 
 
