@@ -292,7 +292,7 @@ namespace coffeeX.ViewModel
                 CoffeeXRepo.Ins.DB.Beverages.Find(beverageId).beverageName=currentBeverageName;
                 CoffeeXRepo.Ins.DB.Beverages.Find(beverageId).beveragePrice = currentBeveragePrice;
                 CoffeeXRepo.Ins.DB.Beverages.Find(beverageId).beverageImage = currentBeverageImage;
-                CoffeeXRepo.Ins.DB.Beverages.Find(beverageId).BeverageType.typeID = temp.typeID;
+                CoffeeXRepo.Ins.DB.Beverages.Find(beverageId).BeverageType = temp;
                 CoffeeXRepo.Ins.DB.SaveChanges();
                 currentBeverageName = currentBeverageType = "";
                 currentBeveragePrice = 0;
