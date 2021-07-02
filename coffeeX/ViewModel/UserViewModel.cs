@@ -24,7 +24,8 @@ namespace coffeeX.ViewModel
 
         public ICommand logOutCmd { get; set; }
 
-
+        public ICommand cancelChangePwdCmd { get; set; }
+        public ICommand acceptChangePwdCmd { get; set; }
 
         private UserInfo _currentUser;
 
@@ -67,17 +68,21 @@ namespace coffeeX.ViewModel
         private string _tooltip;
         public string tooltip { get => _tooltip; set { _tooltip = value; OnPropertyChanged(); } }
 
-        
+        private string _tooltipOfChangePwd;
+        public string tooltipOfChangePwd { get => _tooltipOfChangePwd; set { _tooltipOfChangePwd = value; OnPropertyChanged(); } }
 
 
         public UserViewModel()
         {
             fullName = phoneNumber = userName = password= "";
+            changePwdNewPwd = changePwdPhone = changePwdUserName = "";
             registerCommand = new RelayCommand<Window>((p) => { return validRegis(); }, register);
             passwordChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { password = p.Text; });
             loginCommand = new RelayCommand<Window>((p) => { return checkEmptyUserIDPassword(); },  login);
             registerClickCommand = new RelayCommand<Object>((p) =>true,  (p)=>new RegisterWindow().Show());
             logOutCmd= new RelayCommand<Window>((p) => p!=null, onLogOutCleanup);
+            cancelChangePwdCmd = new RelayCommand<ChangePwdWindow>((p) => true, (p) => { p.Close(); cleanUpChangePwd(); });
+            acceptChangePwdCmd = new RelayCommand<ChangePwdWindow>((p) => { return checkValidateNewPwd(); }, changePassword);
         }
 
 
@@ -239,6 +244,83 @@ namespace coffeeX.ViewModel
                 return builder.ToString();
             }
         }
+        private string _changePwdUserName;
+        public string changePwdUserName { get => _changePwdUserName; set { _changePwdUserName = value; OnPropertyChanged(); } }
+
+        private string _changePwdPhone;
+        public string changePwdPhone { get => _changePwdPhone; set { _changePwdPhone = value; OnPropertyChanged(); } }
+
+        private string _changePwdNewPwd;
+        public string changePwdNewPwd { get => _changePwdNewPwd; set { _changePwdNewPwd = value; OnPropertyChanged(); } }
+
+
+        void changePassword(ChangePwdWindow p)
+        {
+            UserInfo currentStaff = (p.DataContext as UserViewModel).currentUser;
+            
+            if (changePwdUserName != currentStaff.username || changePwdPhone != currentStaff.phoneNumber)
+            {
+                NotifyPwdWindow notifyWindow = new NotifyPwdWindow("Tên hoặc SDT của tài khoản không đúng");
+                notifyWindow.ShowDialog();
+
+            }
+            else if(ComputeSha256Hash(changePwdNewPwd) == currentStaff.passwordEncrypted)
+            {
+                NotifyPwdWindow notifyWindow = new NotifyPwdWindow("PassWord mới giống với PassWord cũ vui lòng kiểm tra lại");
+                notifyWindow.ShowDialog();
+            }
+            else {
+                CoffeeXRepo.Ins.DB.UserInfoes.Find(currentStaff.userID).passwordEncrypted = ComputeSha256Hash(changePwdNewPwd);
+                CoffeeXRepo.Ins.DB.SaveChanges();
+                cleanUpChangePwd();
+                p.Close();
+                NotifyPwdWindow notifyWindow = new NotifyPwdWindow("Đổi mật khẩu thành công");
+                notifyWindow.ShowDialog();
+                
+               
+            }
+
+        }
+
+
+        void cleanUpChangePwd()
+        {
+            changePwdUserName = changePwdPhone = changePwdNewPwd = "";
+
+
+        }
+
+
+        bool checkValidateNewPwd()
+        {
+            var passWordValidate = new Regex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$");
+            var userNameValidate = new Regex(@"^[a-zA-Z0-9_-]{3,16}$");
+            var phoneValidate = new Regex(@"(84|0[3|5|7|8|9])+([0-9]{8})\b");
+            bool result = true;
+            tooltipOfChangePwd = "";
+            if (!userNameValidate.IsMatch(changePwdUserName))
+            {
+                tooltipOfChangePwd = "Username của tài khoản hiện tại";
+                result = false;
+            }
+            else
+            if (!phoneValidate.IsMatch(changePwdPhone))
+            {
+                tooltipOfChangePwd = "SDT của tài khoản hiện tại";
+                result = false;
+            }
+
+            else
+            if (!passWordValidate.IsMatch(changePwdNewPwd))
+            {
+                tooltipOfChangePwd = "Password mới phải khác Password cũ và Password phải từ 8 ký tự đổ lên(Ít nhất 1 ký tự viết hoa ,1 ký tự viết thường ,1 số)";
+                result = false;
+            }
+            if (result) tooltipOfChangePwd = "Có thể đăng ký";
+            return result;
+        }
+
+
 
 
 

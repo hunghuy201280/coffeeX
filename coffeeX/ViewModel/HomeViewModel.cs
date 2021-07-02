@@ -23,6 +23,8 @@ namespace coffeeX.ViewModel
         public ICommand modifyBeverageCmd { get; set; }
         public ICommand onTableClickCmd { get; set; }
 
+        public ICommand changePwdCmd { get; set; }
+
         private ObservableCollection<Table> _table;
         public ObservableCollection<Table> table { get => _table; set { _table = value; OnPropertyChanged(); } }
 
@@ -39,8 +41,8 @@ namespace coffeeX.ViewModel
                 new MenuWindow(p).ShowDialog();
                 
             });
-      
-            
+            changePwdCmd = new RelayCommand<Object>((p) => true, (p) => new ChangePwdWindow().ShowDialog());
+
         }
 
   
