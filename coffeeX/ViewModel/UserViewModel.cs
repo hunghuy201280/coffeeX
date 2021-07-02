@@ -266,7 +266,7 @@ namespace coffeeX.ViewModel
             }
             else if(ComputeSha256Hash(changePwdNewPwd) == currentStaff.passwordEncrypted)
             {
-                NotifyPwdWindow notifyWindow = new NotifyPwdWindow("PassWord mới giống với PassWord cũ vui lòng kiểm tra lại");
+                NotifyPwdWindow notifyWindow = new NotifyPwdWindow("Password mới giống với Password cũ vui lòng kiểm tra lại");
                 notifyWindow.ShowDialog();
             }
             else {
@@ -276,8 +276,10 @@ namespace coffeeX.ViewModel
                 p.Close();
                 NotifyPwdWindow notifyWindow = new NotifyPwdWindow("Đổi mật khẩu thành công");
                 notifyWindow.ShowDialog();
-                
-               
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Shutdown();
+
+
             }
 
         }

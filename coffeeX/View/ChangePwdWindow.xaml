@@ -6,14 +6,14 @@
     xmlns:local="clr-namespace:coffeeX.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    WindowStartupLocation="CenterScreen"
-    Title="ChangePassword"
     Name="changePwdWD"
+    Title="ChangePassword"
     Width="584"
     Height="354"
     MinWidth="584"
     MinHeight="354"
     DataContext="{StaticResource UserVM}"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
@@ -27,27 +27,26 @@
                 VerticalAlignment="Center"
                 materialDesign:HintAssist.Hint="Tài khoản"
                 materialDesign:TextFieldAssist.TrailingIcon="None"
-                Style="{StaticResource FloatingHintTextBox}" 
-                Text="{Binding changePwdUserName, UpdateSourceTrigger=PropertyChanged }"
-                />
+                Style="{StaticResource FloatingHintTextBox}"
+                Text="{Binding changePwdUserName, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox
+                Name="passWord"
                 Width="281"
                 Margin="0,0,0,20"
                 VerticalAlignment="Center"
+                materialDesign:HintAssist.FontFamily="Roboto"
                 materialDesign:HintAssist.Hint="Mật khẩu mới"
                 materialDesign:TextFieldAssist.TrailingIcon="None"
                 Style="{StaticResource FloatingHintTextBox}"
-                Text="{Binding changePwdNewPwd, UpdateSourceTrigger=PropertyChanged }"
-                />
+                Text="{Binding changePwdNewPwd, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox
                 Width="281"
                 Margin="0,0,0,20"
                 VerticalAlignment="Center"
                 materialDesign:HintAssist.Hint="Số điện thoại"
                 materialDesign:TextFieldAssist.TrailingIcon="None"
-                Style="{StaticResource FloatingHintTextBox}" 
-                Text="{Binding changePwdPhone, UpdateSourceTrigger=PropertyChanged }"
-                />
+                Style="{StaticResource FloatingHintTextBox}"
+                Text="{Binding changePwdPhone, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
 
         <StackPanel
@@ -60,15 +59,13 @@
                 Height="43"
                 Margin="0,0,44,0"
                 materialDesign:ButtonAssist.CornerRadius="16"
-                Content="Xác nhận"
-                Style="{StaticResource PrimaryButton}" 
                 Command="{Binding acceptChangePwdCmd, UpdateSourceTrigger=PropertyChanged}"
                 CommandParameter="{Binding ElementName=changePwdWD}"
-                 ToolTipService.ShowOnDisabled="True"
-                >
+                Content="Xác nhận"
+                Style="{StaticResource PrimaryButton}"
+                ToolTipService.ShowOnDisabled="True">
                 <Button.ToolTip>
-                    <ToolTip Content="{Binding tooltipOfChangePwd,UpdateSourceTrigger=PropertyChanged}">
-                    </ToolTip>
+                    <ToolTip Content="{Binding tooltipOfChangePwd, UpdateSourceTrigger=PropertyChanged}" />
                 </Button.ToolTip>
             </Button>
             <Button
@@ -76,11 +73,11 @@
                 Height="43"
                 materialDesign:ButtonAssist.CornerRadius="16"
                 Background="White"
+                Command="{Binding cancelChangePwdCmd, UpdateSourceTrigger=PropertyChanged}"
+                CommandParameter="{Binding ElementName=changePwdWD}"
                 Content="Trở về"
                 Foreground="Black"
-                Style="{StaticResource PrimaryButton}" 
-                Command="{Binding cancelChangePwdCmd, UpdateSourceTrigger=PropertyChanged}"
-                CommandParameter="{Binding ElementName=changePwdWD}"/>
+                Style="{StaticResource PrimaryButton}" />
         </StackPanel>
     </Grid>
 </Window>
