@@ -187,6 +187,7 @@
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\NotifyViewModel.cs" />
+    <Compile Include="ViewModel\PaymentViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="View\AddBeverageWindow.xaml.cs">
       <DependentUpon>AddBeverageWindow.xaml</DependentUpon>

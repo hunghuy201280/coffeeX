@@ -15,6 +15,7 @@
     <viewmodel:UserViewModel x:Key="UserVM" />
     <viewmodel:HomeViewModel x:Key="HomeVM" />
     <viewmodel:NotifyViewModel x:Key="NotiVM" />
+    <viewmodel:PaymentViewModel x:Key="PaymentViewModel" />
     <utils:ImageDataConverter x:Key="ImageDataConverter" />
     <utils:TableStatusToColorConverter x:Key="TableStatusToColorConverter" />
     <utils:TableStatusToButtonTextConverter x:Key="TableStatusToButtonTextConverter" />

@@ -133,8 +133,7 @@ namespace coffeeX.ViewModel
             BeverageType type;
 
             if (types.Count==0)
-            {
-
+            { 
                 type = new BeverageType();
                 type.typeName = currentBeverageType;
                 type=CoffeeXRepo.Ins.DB.BeverageTypes.Add(type);

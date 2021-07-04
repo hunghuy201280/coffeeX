@@ -146,10 +146,10 @@
         <ListBox
             Name="categoryListBox"
             Margin="30,50,30,0"
-            SelectedIndex="0"
             HorizontalAlignment="Stretch"
             materialDesign:RippleAssist.ClipToBounds="True"
             ItemsSource="{Binding beverageType}"
+            SelectedIndex="0"
             SelectionMode="Single"
             Style="{StaticResource MaterialDesignListBox}">
             <i:Interaction.Triggers>
@@ -260,19 +260,15 @@
                     HorizontalAlignment="Right"
                     BorderBrush="{StaticResource PrimaryBrush}"
                     ItemsSource="{Binding customerSuggest}"
+                    SelectedItem="{Binding currentTable.currentCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextBoxStyle="{StaticResource RoundedWhiteTextBox}"
-                    ValueMemberPath="phone"
-                    SelectedItem="{Binding currentTable.currentCustomer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                    
-                    >
+                    ValueMemberPath="phone">
                     <controls:AutoCompleteBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock
-                                Text="{Binding phone}"
-                                />
+                            <TextBlock Text="{Binding phone}" />
                         </DataTemplate>
                     </controls:AutoCompleteBox.ItemTemplate>
-                   
+
                 </controls:AutoCompleteBox>
                 <TextBlock
                     Grid.Row="1"
@@ -292,10 +288,10 @@
                     Height="40"
                     Margin="0,0,25,0"
                     Padding="0"
-                    Text="{Binding currentTable.currentCustomer.customerName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                     HorizontalAlignment="Right"
                     BorderBrush="{StaticResource PrimaryBrush}"
-                    Style="{StaticResource RoundedWhiteTextBox}" />
+                    Style="{StaticResource RoundedWhiteTextBox}"
+                    Text="{Binding currentTable.currentCustomer.customerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock
                     Grid.Row="2"
                     Margin="30,0,0,0"
@@ -315,16 +311,14 @@
                     Margin="0,0,25,0"
                     Padding="0"
                     HorizontalAlignment="Right"
-                    ItemsSource="{Binding voucherSuggest}"
-                    ValueMemberPath="voucherID"
-                    SelectedItem="{Binding currentTable.currentVoucher,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                     BorderBrush="{StaticResource PrimaryBrush}"
-                    TextBoxStyle="{StaticResource RoundedWhiteTextBox}" >
+                    ItemsSource="{Binding voucherSuggest}"
+                    SelectedItem="{Binding currentTable.currentVoucher, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    TextBoxStyle="{StaticResource RoundedWhiteTextBox}"
+                    ValueMemberPath="voucherID">
                     <controls:AutoCompleteBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock
-                                Text="{Binding voucherID}"
-                                />
+                            <TextBlock Text="{Binding voucherID}" />
                         </DataTemplate>
                     </controls:AutoCompleteBox.ItemTemplate>
                 </controls:AutoCompleteBox>
@@ -402,11 +396,8 @@
                         Height="63"
                         Command="{Binding confirmClickCmd}"
                         CommandParameter="{Binding ElementName=MenuWD}"
-                        Style="{StaticResource PrimaryButton}"
-                        Content="{Binding currentTable.status,Converter={StaticResource TableStatusToButtonTextConverter}}"
-                        >
-                      
-                    </Button>
+                        Content="{Binding currentTable.status, Converter={StaticResource TableStatusToButtonTextConverter}}"
+                        Style="{StaticResource PrimaryButton}" />
                     <Button
                         Grid.Column="1"
                         Width="200"

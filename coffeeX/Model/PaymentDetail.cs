@@ -9,16 +9,35 @@
 
 namespace coffeeX.Model
 {
+    using coffeeX.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class PaymentDetail
+
+    public partial class PaymentDetail : BaseViewModel
     {
         public int paymentID { get; set; }
         public int ingredientID { get; set; }
-        public int ingredientQuantity { get; set; }
-    
-        public virtual Ingredient Ingredient { get; set; }
+        public int ingredientQuantity
+        {
+            get => _ingredientQuantity
+            ; set
+            {
+                _ingredientQuantity = value;
+                OnPropertyChanged();
+
+            }
+        }
+        private int _ingredientQuantity;
+
+        public virtual Ingredient Ingredient
+        {
+            get => _Ingredient; set
+            {
+                _Ingredient = value;
+                OnPropertyChanged();
+            }
+        }
+        private Ingredient _Ingredient;
         public virtual PaymentVoucher PaymentVoucher { get; set; }
     }
 }

@@ -9,9 +9,19 @@
     Title="PaymentWindow"
     Width="922"
     Height="877"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    Name="PaymentWD"
     MinWidth="922"
+    WindowStartupLocation="CenterScreen"
     MinHeight="877"
+    DataContext="{StaticResource PaymentViewModel}"
     mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding onLoaded}" CommandParameter="{Binding ElementName=PaymentWD}" />
+
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" MinWidth="460" />
@@ -36,6 +46,7 @@
                 Width="330"
                 Height="63"
                 Padding="20,10,20,10"
+                Name="ingredientComboBox"
                 VerticalContentAlignment="Center"
                 materialDesign:HintAssist.Foreground="{StaticResource PrimaryBrush}"
                 materialDesign:HintAssist.Hint="Nguyên liệu"
@@ -47,17 +58,22 @@
                 FontSize="24"
                 IsEditable="True"
                 IsTextSearchEnabled="True"
+                ItemsSource="{Binding ingredients}"
+                SelectedItem="{Binding currentDetail.Ingredient}"
+                DisplayMemberPath="ingredientName"
+                
                 Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                <ComboBoxItem>ComboBox Item #1</ComboBoxItem>
-                <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
-                <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+             
+        
             </ComboBox>
             <TextBox
+                x:Name="quantityTextBox"
                 Height="63"
                 Margin="0,40,0,0"
                 Padding="20,14,0,0"
-                materialDesign:HintAssist.Hint="Tên thức uống"
+                materialDesign:HintAssist.Hint="Số lượng"
                 BorderThickness="0"
+                      Text="{Binding currentDetail.ingredientQuantity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource RoundedTextBox}" />
             <TextBox
                 Height="63"
@@ -65,14 +81,32 @@
                 Padding="20,14,0,0"
                 materialDesign:HintAssist.Hint="Đơn vị"
                 BorderThickness="0"
+                Text="{Binding currentDetail.Ingredient.Unit.unitName,Mode=OneWay}"
+                
                 Style="{StaticResource RoundedTextBox}" />
-            <TextBox
-                Height="63"
-                Margin="0,40,0,0"
-                Padding="20,14,0,0"
-                materialDesign:HintAssist.Hint="Đơn giá"
-                BorderThickness="0"
-                Style="{StaticResource RoundedTextBox}" />
+            <Grid>
+                <TextBox
+                    x:Name="priceTextBox"
+                    Height="63"
+                    Margin="0,40,0,0"
+                    Padding="20,14,0,0"
+                    materialDesign:HintAssist.Hint="Đơn Giá"
+                    AcceptsReturn="False"
+                    Background="#F1F1F1"
+                    BorderThickness="0"
+                    Style="{StaticResource RoundedTextBox}"
+                    Text="{Binding currentDetail.Ingredient.ingredientPrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock
+                    Height="63"
+                    Margin="0,40,0,0"
+                    Padding="20,14,0,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontSize="24">
+                    VND
+                </TextBlock>
+            </Grid>
             <Button
                 Width="222"
                 Height="63"
@@ -182,7 +216,10 @@
 
             </Grid>
 
-            <DataGrid x:Name="paymentDataGrid" AutoGenerateColumns="False">
+            <DataGrid x:Name="paymentDataGrid" AutoGenerateColumns="False"
+                IsReadOnly="True"
+                      
+                      >
                 <DataGrid.Columns>
                     <DataGridTemplateColumn
                         Width="*"

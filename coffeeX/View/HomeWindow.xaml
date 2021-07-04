@@ -56,7 +56,8 @@
                 HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Stretch"
                 Background="Transparent"
-                BorderThickness="0">
+                BorderThickness="0"
+                Command="{Binding addPaymentVoucherCmd}">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
