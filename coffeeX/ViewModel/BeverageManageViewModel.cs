@@ -42,7 +42,9 @@ namespace coffeeX.ViewModel
                 _currentBeverageType = value;
                 OnPropertyChanged();
             }
-        } private string _currentBeverageName;
+        } 
+        
+        private string _currentBeverageName;
 
         public string currentBeverageName
         {
@@ -83,14 +85,28 @@ namespace coffeeX.ViewModel
             addCommand = new RelayCommand<AddBeverageWindow>(validateData, addBeverage);
             pickImageCommand = new RelayCommand<Object>((p) => true, pickImage);
             onLoaded = new RelayCommand<AddBeverageWindow>((p) => true, onWindowLoaded);
-           // priceTextChanged = new RelayCommand<Object>((p) => true, beveragePrice_KeyDown);
-              
+            // priceTextChanged = new RelayCommand<Object>((p) => true, beveragePrice_KeyDown);
+            chooseBeverage = new RelayCommand<Beverage>((p) => p!=null, p=> 
+            {
+                addToTextBox(p);
+            });
+            updatedBeverage = new ObservableCollection<Beverage>();
+            onUpdateBeverageWindowLoaded= new RelayCommand<UpdateBeverageWindow>((p) => true, onUpdateWindowLoaded);
+            deleteBeverageCmd = new RelayCommand<Object>((p) => true, deleteBeverage);
+            updateBeverageCmd = new RelayCommand<Object>((p) => true,updateBeverage );
         }
 
-   
+
+        private void onUpdateWindowLoaded(UpdateBeverageWindow updateBeverage)
+        {
+            loadbeverage();
+
+        }
+
         private void onWindowLoaded(AddBeverageWindow addBeverage)
         {
             addBeverage.beveragePrice.PreviewTextInput += BeveragePrice_PreviewTextInput;
+            
         }
 
         private void BeveragePrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -190,7 +206,103 @@ namespace coffeeX.ViewModel
         public ICommand pickImageCommand { get; set; }
         public ICommand priceTextChanged { get; set; }
         public ICommand onLoaded { get; set; }
+        public ICommand onUpdateBeverageWindowLoaded { get; set; }
+        public ICommand chooseBeverage { get; set; }
+        public ICommand deleteBeverageCmd { get; set; }
+        public ICommand updateBeverageCmd { get; set; }
 
+        private ObservableCollection<Beverage> _updatedBeverage;
+        public ObservableCollection<Beverage> updatedBeverage
+        {
+            get => this._updatedBeverage; set
+            {
+                this._updatedBeverage = value;
+                OnPropertyChanged();
+
+            }
+        }
+
+        public void loadbeverage()
+        {
+            updatedBeverage.Clear();
+            try
+            {
+                var tempBeverage = CoffeeXRepo.Ins.DB.Beverages.ToList();
+
+                var tempType = CoffeeXRepo.Ins.DB.BeverageTypes.ToList();
+                
+                foreach (Beverage i in tempBeverage)
+                {
+                    var temp = tempType.Where(o=> i.typeID ==o.typeID).ToList();
+
+                    BeverageType type = temp[0];
+                    i.BeverageType = type;
+                    updatedBeverage.Add(i);
+                }
+
+
+            }
+            catch
+            {
+
+            }
+        }
+
+        int beverageId;
+
+        void addToTextBox(Beverage input) 
+        {
+            beverageId = input.beverageID;
+
+            currentBeverageName = input.beverageName;
+            currentBeveragePrice = input.beveragePrice;
+            currentBeverageType = input.BeverageType.typeName;
+            currentBeverageImage = input.beverageImage;
+
+        }
+
+
+        void deleteBeverage(Object o)
+        {
+            
+                var x = CoffeeXRepo.Ins.DB.Beverages.Where(p => p.beverageName == currentBeverageName).SingleOrDefault();
+                CoffeeXRepo.Ins.DB.Beverages.Remove(x);
+                CoffeeXRepo.Ins.DB.SaveChanges();
+                currentBeverageName = currentBeverageType = "";
+                currentBeveragePrice = 0;
+                currentBeverageImage = null;
+                
+                loadbeverage();
+                NotifyPwdWindow notifyWindow = new NotifyPwdWindow("Xóa món thành công");
+                notifyWindow.ShowDialog();
+
+        }
+
+        void updateBeverage(Object p)
+        {
+            if (String.IsNullOrEmpty(currentBeverageName) || currentBeveragePrice == 0 || String.IsNullOrEmpty(currentBeverageType) || currentBeverageImage == null)
+            {
+                NotifyPwdWindow notifyWindow = new NotifyPwdWindow("Vui lòng điền đầy đủ các thông tin");
+                notifyWindow.ShowDialog();
+            }
+            else {
+                /*MessageBox.Show(beverageId.ToString());*/
+                var temp= CoffeeXRepo.Ins.DB.BeverageTypes.Where(x => x.typeName == currentBeverageType).FirstOrDefault();
+                CoffeeXRepo.Ins.DB.Beverages.Find(beverageId).beverageName=currentBeverageName;
+                CoffeeXRepo.Ins.DB.Beverages.Find(beverageId).beveragePrice = currentBeveragePrice;
+                CoffeeXRepo.Ins.DB.Beverages.Find(beverageId).beverageImage = currentBeverageImage;
+                CoffeeXRepo.Ins.DB.Beverages.Find(beverageId).BeverageType = temp;
+                CoffeeXRepo.Ins.DB.SaveChanges();
+                currentBeverageName = currentBeverageType = "";
+                currentBeveragePrice = 0;
+                currentBeverageImage = null;
+                loadbeverage();
+                NotifyPwdWindow notifyWindow = new NotifyPwdWindow("Chỉnh sửa món thành công");
+                notifyWindow.ShowDialog();
+                
+            }
+
+        }
 
     }
 }

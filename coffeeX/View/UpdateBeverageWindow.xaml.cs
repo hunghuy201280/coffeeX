@@ -17,11 +17,25 @@ namespace coffeeX.View
     /// <summary>
     /// Interaction logic for UpdateBeverageWindow.xaml
     /// </summary>
+    /// 
+   
+
     public partial class UpdateBeverageWindow : Window
     {
+        public Model.Table _updateTable;
         public UpdateBeverageWindow()
         {
             InitializeComponent();
+        }
+        public UpdateBeverageWindow(Model.Table table)
+        {
+            InitializeComponent();
+            _updateTable = table;
+        }
+
+        private void DataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+
         }
     }
 }

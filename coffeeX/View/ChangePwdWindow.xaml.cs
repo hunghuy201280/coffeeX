@@ -22,6 +22,7 @@ namespace coffeeX.View
         public ChangePwdWindow()
         {
             InitializeComponent();
+            passWord.FontFamily = new FontFamily("Webdings");
         }
     }
 }

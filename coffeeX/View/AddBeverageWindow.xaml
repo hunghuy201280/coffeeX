@@ -12,12 +12,11 @@
     Name="AddBeverageWD"
     Title="AddBeverage"
     Width="845"
-        WindowStartupLocation="CenterScreen"
-    
     Height="650"
     MinWidth="845"
     MinHeight="650"
     DataContext="{StaticResource BeverageManageVM}"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -58,7 +57,7 @@
                     Background="#F1F1F1"
                     BorderThickness="0"
                     Style="{StaticResource RoundedTextBox}"
-                    Text="{Binding currentBeverageName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding currentBeverageName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <controls:AutoCompleteBox
                     x:Name="beverageType"
                     Width="330"
@@ -69,7 +68,7 @@
                     Background="#F1F1F1"
                     BorderThickness="0"
                     ItemsSource="{Binding beverageTypeSuggest}"
-                    Text="{Binding currentBeverageType,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding currentBeverageType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextBoxStyle="{StaticResource RoundedTextBox}" />
 
                 <Grid>
@@ -152,8 +151,7 @@
             Style="{StaticResource PrimaryButton}"
             ToolTipService.InitialShowDelay="0"
             ToolTipService.ShowOnDisabled="True">
-            <Button.ToolTip
-                >
+            <Button.ToolTip>
                 <StackPanel>
 
                     <TextBlock Name="toolTipTextBlock" Foreground="Red" />
