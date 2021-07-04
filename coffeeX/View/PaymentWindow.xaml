@@ -2,19 +2,21 @@
     x:Class="coffeeX.View.PaymentWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:coffeeX.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="PaymentWindow"
-    Width="922"
-    Height="877"
-    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Name="PaymentWD"
+    Title="PaymentWindow"
+    Width="1022"
+    Height="877"
     MinWidth="922"
-    WindowStartupLocation="CenterScreen"
     MinHeight="877"
     DataContext="{StaticResource PaymentViewModel}"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -43,10 +45,10 @@
             VerticalAlignment="Center"
             Orientation="Vertical">
             <ComboBox
+                Name="ingredientComboBox"
                 Width="330"
                 Height="63"
                 Padding="20,10,20,10"
-                Name="ingredientComboBox"
                 VerticalContentAlignment="Center"
                 materialDesign:HintAssist.Foreground="{StaticResource PrimaryBrush}"
                 materialDesign:HintAssist.Hint="Nguyên liệu"
@@ -55,17 +57,13 @@
                 Background="{StaticResource SeashellBrush}"
                 BorderBrush="{StaticResource PrimaryBrush}"
                 BorderThickness="0"
+                DisplayMemberPath="ingredientName"
                 FontSize="24"
                 IsEditable="True"
                 IsTextSearchEnabled="True"
                 ItemsSource="{Binding ingredients}"
                 SelectedItem="{Binding currentDetail.Ingredient}"
-                DisplayMemberPath="ingredientName"
-                
-                Style="{StaticResource MaterialDesignOutlinedComboBox}">
-             
-        
-            </ComboBox>
+                Style="{StaticResource MaterialDesignOutlinedComboBox}" />
             <TextBox
                 x:Name="quantityTextBox"
                 Height="63"
@@ -73,29 +71,40 @@
                 Padding="20,14,0,0"
                 materialDesign:HintAssist.Hint="Số lượng"
                 BorderThickness="0"
-                      Text="{Binding currentDetail.ingredientQuantity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                Style="{StaticResource RoundedTextBox}" />
-            <TextBox
+                Style="{StaticResource RoundedTextBox}"
+                Text="{Binding currentDetail.ingredientQuantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <controls:AutoCompleteBox
+                x:Name="unitNameTextBox"
                 Height="63"
                 Margin="0,40,0,0"
                 Padding="20,14,0,0"
                 materialDesign:HintAssist.Hint="Đơn vị"
+                Background="{StaticResource SeashellBrush}"
+                IsEnabled="False"
                 BorderThickness="0"
-                Text="{Binding currentDetail.Ingredient.Unit.unitName,Mode=OneWay}"
-                
-                Style="{StaticResource RoundedTextBox}" />
+                ItemsSource="{Binding units}"
+                SelectedItem="{Binding currentDetail.Ingredient.Unit, Mode=TwoWay}"
+                TextBoxStyle="{StaticResource RoundedTextBox}"
+                ValueMemberPath="unitName">
+                <controls:AutoCompleteBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding unitName}" />
+                    </DataTemplate>
+                </controls:AutoCompleteBox.ItemTemplate>
+            </controls:AutoCompleteBox>
             <Grid>
                 <TextBox
                     x:Name="priceTextBox"
                     Height="63"
                     Margin="0,40,0,0"
                     Padding="20,14,0,0"
+                    IsEnabled="False"
                     materialDesign:HintAssist.Hint="Đơn Giá"
                     AcceptsReturn="False"
                     Background="#F1F1F1"
                     BorderThickness="0"
                     Style="{StaticResource RoundedTextBox}"
-                    Text="{Binding currentDetail.Ingredient.ingredientPrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding currentDetail.Ingredient.ingredientPrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
                 <TextBlock
                     Height="63"
@@ -111,6 +120,8 @@
                 Width="222"
                 Height="63"
                 Margin="0,60,0,0"
+                Command="{Binding addPaymentItemCmd}"
+                CommandParameter="{Binding ElementName=PaymentWD}"
                 Content="THÊM"
                 Style="{StaticResource PrimaryButton}" />
         </StackPanel>
@@ -119,7 +130,11 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Orientation="Vertical">
-            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <TextBlock
+                x:Name="staffTextBlock"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                DataContext="{StaticResource UserVM}">
                 <Run
                     FontFamily="Roboto"
                     FontSize="24"
@@ -131,7 +146,7 @@
                     FontFamily="Roboto"
                     FontSize="24"
                     FontWeight="Normal"
-                    Text="Tên nhân viên" />
+                    Text="{Binding currentUser.fullName}" />
             </TextBlock>
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom">
                 <Run
@@ -145,7 +160,7 @@
                     FontFamily="Roboto"
                     FontSize="24"
                     FontWeight="Normal"
-                    Text="21-06-2021" />
+                    Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='{}{0:dd-MM-yyyy}', Mode=OneWay}" />
             </TextBlock>
         </StackPanel>
         <GridSplitter
@@ -180,16 +195,26 @@
                     Foreground="{StaticResource BoulderBrush}">
                     Tổng
                 </TextBlock>
-                <TextBlock
-                    Margin="0,0,20,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    FontFamily="Roboto"
-                    FontSize="24"
-                    FontWeight="Medium"
-                    Foreground="{StaticResource BoulderBrush}">
-                    20,000 Đ
-                </TextBlock>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <TextBlock
+                        Margin="0,0,20,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        FontFamily="Roboto"
+                        FontSize="24"
+                        FontWeight="Medium"
+                        Foreground="{StaticResource BoulderBrush}"
+                        Text="{Binding paymentValue, StringFormat={}{0:n0}}" />
+                    <TextBlock
+                        Margin="0,0,20,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        FontFamily="Roboto"
+                        FontSize="24"
+                        FontWeight="Medium"
+                        Foreground="{StaticResource BoulderBrush}"
+                        Text=" VNĐ" />
+                </StackPanel>
                 <Grid Grid.Row="1" Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -198,6 +223,7 @@
                     <Button
                         Width="200"
                         Height="63"
+                        Command="{Binding confirmCmd}"
                         Style="{StaticResource PrimaryButton}">
                         XÁC NHẬN
                     </Button>
@@ -207,7 +233,10 @@
                         Height="63"
                         materialDesign:RippleAssist.Feedback="{StaticResource PrimaryBrush}"
                         Background="{StaticResource SeashellBrush}"
+                        Command="{Binding cancelCmd}"
+                        CommandParameter="{Binding ElementName=PaymentWD}"
                         Foreground="Black"
+                        
                         Style="{StaticResource PrimaryButton}">
                         HỦY BỎ
                     </Button>
@@ -216,10 +245,11 @@
 
             </Grid>
 
-            <DataGrid x:Name="paymentDataGrid" AutoGenerateColumns="False"
+            <DataGrid
+                x:Name="paymentDataGrid"
+                AutoGenerateColumns="False"
                 IsReadOnly="True"
-                      
-                      >
+                ItemsSource="{Binding paymentDetails}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn
                         Width="*"
@@ -233,7 +263,9 @@
                                         Height="35"
                                         Padding="0"
                                         Background="Transparent"
-                                        BorderThickness="0">
+                                        BorderThickness="0"
+                                        Command="{Binding deletePaymentItemCmd, Source={StaticResource PaymentViewModel}}"
+                                        CommandParameter="{Binding ElementName=paymentDataGrid}">
                                         <materialDesign:PackIcon
                                             Width="35"
                                             Height="35"
@@ -246,7 +278,7 @@
                                         FontSize="20"
                                         FontWeight="Medium"
                                         Foreground="{StaticResource BoulderBrush}"
-                                        Text="{Binding ten}" />
+                                        Text="{Binding Ingredient.ingredientName}" />
 
 
                                 </StackPanel>
@@ -269,7 +301,9 @@
                                         Height="35"
                                         Padding="0"
                                         Background="Transparent"
-                                        BorderThickness="0">
+                                        BorderThickness="0"
+                                        Command="{Binding decreaseQuantity, Source={StaticResource PaymentViewModel}}"
+                                        CommandParameter="{Binding ElementName=paymentDataGrid}">
                                         <materialDesign:PackIcon
                                             Width="35"
                                             Height="35"
@@ -283,13 +317,15 @@
                                         FontSize="20"
                                         FontWeight="Medium"
                                         Foreground="{StaticResource BoulderBrush}"
-                                        Text="{Binding num}" />
+                                        Text="{Binding ingredientQuantity}" />
                                     <Button
                                         Width="35"
                                         Height="35"
                                         Padding="0"
                                         Background="Transparent"
-                                        BorderThickness="0">
+                                        BorderThickness="0"
+                                        Command="{Binding increaseQuantity, Source={StaticResource PaymentViewModel}}"
+                                        CommandParameter="{Binding ElementName=paymentDataGrid}">
                                         <materialDesign:PackIcon
                                             Width="35"
                                             Height="35"
@@ -300,23 +336,33 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-
-                    <DataGridTextColumn
+                    <DataGridTemplateColumn
                         Width="*"
-                        Binding="{Binding gia}"
-                        FontFamily="Roboto"
-                        FontSize="20"
-                        FontWeight="Medium"
-                        Foreground="{StaticResource BoulderBrush}"
                         Header="Giá"
                         HeaderStyle="{StaticResource DataGridHeaderStyle}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        FontFamily="Roboto"
+                                        FontSize="20"
+                                        FontWeight="Medium"
+                                        Foreground="{StaticResource BoulderBrush}"
+                                        Text="{Binding total, StringFormat={}{0:n0}}" />
+                                    <TextBlock
+                                        FontFamily="Roboto"
+                                        FontSize="20"
+                                        FontWeight="Medium"
+                                        Foreground="{StaticResource BoulderBrush}"
+                                        Text="  VNĐ" />
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
 

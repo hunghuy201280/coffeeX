@@ -13,8 +13,10 @@ namespace coffeeX.Model
     using System;
     using System.Collections.Generic;
 
+    [Serializable]
     public partial class PaymentDetail : BaseViewModel
     {
+    
         public int paymentID { get; set; }
         public int ingredientID { get; set; }
         public int ingredientQuantity
@@ -23,6 +25,10 @@ namespace coffeeX.Model
             ; set
             {
                 _ingredientQuantity = value;
+                if (Ingredient != null)
+                {
+                    total = _ingredientQuantity * Ingredient.ingredientPrice;
+                }
                 OnPropertyChanged();
 
             }
@@ -34,6 +40,15 @@ namespace coffeeX.Model
             get => _Ingredient; set
             {
                 _Ingredient = value;
+                OnPropertyChanged();
+            }
+        }
+        private double _total;
+        public double total
+        {
+            get => _total; set
+            {
+                _total = value;
                 OnPropertyChanged();
             }
         }

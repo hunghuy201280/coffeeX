@@ -417,7 +417,7 @@
 
 
             <DataGrid
-                x:Name="paymentDataGrid"
+                x:Name="receiptDataGrid"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
                 ItemsSource="{Binding currentTable.receiptItems}"
@@ -438,7 +438,7 @@
                                         Background="Transparent"
                                         BorderThickness="0"
                                         Command="{Binding deleteReceiptItemCmd, Source={StaticResource MenuVM}}"
-                                        CommandParameter="{Binding ElementName=paymentDataGrid}">
+                                        CommandParameter="{Binding ElementName=receiptDataGrid}">
 
                                         <materialDesign:PackIcon
                                             Width="35"
@@ -475,7 +475,7 @@
                                         Background="Transparent"
                                         BorderThickness="0"
                                         Command="{Binding decreaseQuantity, Source={StaticResource MenuVM}}"
-                                        CommandParameter="{Binding ElementName=paymentDataGrid}">
+                                        CommandParameter="{Binding ElementName=receiptDataGrid}">
                                         <materialDesign:PackIcon
                                             Width="35"
                                             Height="35"
@@ -497,7 +497,7 @@
                                         Background="Transparent"
                                         BorderThickness="0"
                                         Command="{Binding increaseQuantity, Source={StaticResource MenuVM}}"
-                                        CommandParameter="{Binding ElementName=paymentDataGrid}">
+                                        CommandParameter="{Binding ElementName=receiptDataGrid}">
                                         <materialDesign:PackIcon
                                             Width="35"
                                             Height="35"
