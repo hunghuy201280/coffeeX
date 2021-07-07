@@ -36,10 +36,8 @@
             Name="DataGrid"
             Grid.Row="3"
             AutoGenerateColumns="False"
-            CurrentCell="{Binding CellInfo, Mode=TwoWay}"
             IsReadOnly="True"
             ItemsSource="{Binding updatedBeverage}"
-            SelectedIndex="{Binding selectedBeverage}"
             SelectionMode="Single">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
