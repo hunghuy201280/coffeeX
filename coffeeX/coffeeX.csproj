@@ -188,6 +188,7 @@
     <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\NotifyViewModel.cs" />
     <Compile Include="ViewModel\PaymentViewModel.cs" />
+    <Compile Include="ViewModel\StatisticViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="View\AddBeverageWindow.xaml.cs">
       <DependentUpon>AddBeverageWindow.xaml</DependentUpon>
@@ -213,8 +214,8 @@
     <Compile Include="View\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\StaticWindow.xaml.cs">
-      <DependentUpon>StaticWindow.xaml</DependentUpon>
+    <Compile Include="View\StatisticWindow.xaml.cs">
+      <DependentUpon>StatisticWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UpdateBeverageWindow.xaml.cs">
       <DependentUpon>UpdateBeverageWindow.xaml</DependentUpon>
@@ -263,7 +264,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\StaticWindow.xaml">
+    <Page Include="View\StatisticWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

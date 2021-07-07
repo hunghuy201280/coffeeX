@@ -20,17 +20,13 @@ namespace coffeeX.View
     /// </summary>
 
     
-    public partial class StaticWindow : Window
+    public partial class StatisticWindow : Window
     {
-
-
-
-        
 
         List<int> year;
         List<int> month = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
         
-        public StaticWindow()
+        public StatisticWindow()
         {
             //temp set date time
             DateTime time = DateTime.Today;

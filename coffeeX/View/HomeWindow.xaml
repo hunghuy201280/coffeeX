@@ -15,7 +15,6 @@
     DataContext="{StaticResource HomeVM}"
     WindowState="Maximized"
     WindowStyle="None"
-   
     mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -87,7 +86,8 @@
                 HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Stretch"
                 Background="Transparent"
-                BorderThickness="0">
+                BorderThickness="0"
+                Command="{Binding onStatisticClickCmd}">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -104,7 +104,7 @@
                         FontFamily="/Resource/Fonts/#SVN-Avo"
                         FontSize="30"
                         Foreground="White"
-                        Text="Lịch sử" />
+                        Text="Thống kê" />
                 </Grid>
 
             </Button>
@@ -180,8 +180,7 @@
                 VerticalContentAlignment="Stretch"
                 Background="Transparent"
                 BorderThickness="0"
-                Command="{Binding changePwdCmd}"
-                >
+                Command="{Binding changePwdCmd}">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -220,11 +219,11 @@
             <Grid Grid.Row="8">
                 <Button
                     Width="260"
-                    DataContext="{StaticResource UserVM}"
                     Height="50"
-                    Content="ĐĂNG XUẤT"
                     Command="{Binding logOutCmd}"
                     CommandParameter="{Binding ElementName=HomeWD}"
+                    Content="ĐĂNG XUẤT"
+                    DataContext="{StaticResource UserVM}"
                     Style="{StaticResource PrimaryButton}" />
             </Grid>
         </Grid>
@@ -250,10 +249,10 @@
                             Width="80"
                             Height="80"
                             materialDesign:ButtonAssist.CornerRadius="12"
-                            Background="{Binding status,Converter={StaticResource TableStatusToColorConverter}}"
-                            Command="{Binding Source={StaticResource HomeVM},Path=onTableClickCmd}"
-                            CommandParameter="{Binding}"
-                            BorderBrush="Transparent">
+                            Background="{Binding status, Converter={StaticResource TableStatusToColorConverter}}"
+                            BorderBrush="Transparent"
+                            Command="{Binding Source={StaticResource HomeVM}, Path=onTableClickCmd}"
+                            CommandParameter="{Binding}">
                             <TextBlock
                                 FontFamily="Roboto"
                                 FontSize="32"
