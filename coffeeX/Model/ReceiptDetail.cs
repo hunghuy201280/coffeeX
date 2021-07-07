@@ -21,6 +21,7 @@ namespace coffeeX.Model
         public int quantity { get => _quantity; set
             {
                 _quantity = value;
+                if(Beverage!=null)
                 total = _quantity * Beverage.beveragePrice;
                 OnPropertyChanged();
             } }

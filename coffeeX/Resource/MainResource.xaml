@@ -16,7 +16,7 @@
     <viewmodel:HomeViewModel x:Key="HomeVM" />
     <viewmodel:NotifyViewModel x:Key="NotiVM" />
     <viewmodel:PaymentViewModel x:Key="PaymentViewModel" />
-    <viewmodel:StatisticViewModel x:Key="StatisticViewModel" />
+    <viewmodel:StatisticViewModel x:Key="StatisticVM" />
     <utils:ImageDataConverter x:Key="ImageDataConverter" />
     <utils:TableStatusToColorConverter x:Key="TableStatusToColorConverter" />
     <utils:TableStatusToButtonTextConverter x:Key="TableStatusToButtonTextConverter" />
@@ -72,6 +72,19 @@
     <Style x:Key="DataGridHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="Background" Value="{StaticResource SeashellBrush}" />
         <Setter Property="Foreground" Value="{StaticResource BoulderBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="SeparatorBrush" Value="Red" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontFamily" Value="Roboto" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="Height" Value="66" />
+    </Style>
+
+    <Style x:Key="DataGridHeaderStyleBlack" TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="Background" Value="{StaticResource SeashellBrush}" />
+        <Setter Property="Foreground" Value="Black" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="IsTabStop" Value="False" />

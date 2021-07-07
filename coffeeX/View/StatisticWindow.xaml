@@ -11,7 +11,7 @@
     Title="StatisticWindow"
     Width="1600"
     Height="900"
-    DataContext="{StaticResource StatisticViewModel}"
+    DataContext="{StaticResource StatisticVM}"
     ResizeMode="NoResize"
     WindowState="Maximized"
     mc:Ignorable="d">
@@ -142,6 +142,8 @@
                         materialDesign:ButtonAssist.CornerRadius="15"
                         materialDesign:ShadowAssist.ShadowDepth="Depth3"
                         Background="#EA8025"
+                        Command="{Binding calcStatisticCmd}"
+                        CommandParameter="{Binding ElementName=StatisticWD}"
                         FontFamily="Roboto"
                         FontSize="28"
                         Foreground="#FFFFFF"
@@ -159,6 +161,8 @@
                         materialDesign:RippleAssist.Feedback="{StaticResource PrimaryBrush}"
                         materialDesign:ShadowAssist.ShadowDepth="Depth3"
                         Background="#F1F1F1"
+                        Command="{Binding onBackCmd}"
+                        CommandParameter="{Binding ElementName=StatisticWD}"
                         FontFamily="Roboto"
                         FontSize="28"
                         Foreground="#000000"
@@ -179,71 +183,65 @@
                     <DataGrid
                         Name="dgRevenue"
                         AutoGenerateColumns="False"
-                        GridLinesVisibility="None">
+                        GridLinesVisibility="None"
+                        ItemsSource="{Binding receiptStatistic}">
                         <DataGrid.Columns>
                             <DataGridTextColumn
-                                Width="150"
-                                Binding="{Binding MaHD}"
+                                Width="130"
+                                Binding="{Binding receiptID}"
                                 FontFamily="Roboto"
-                                FontSize="18"
-                                Foreground="#7B7B7B"
+                                FontSize="24"
+                                Foreground="Black"
+                                Header="Mã hóa đơn"
+                                HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True">
-                                <DataGridTextColumn.Header>
-                                    <HeaderedContentControl
-                                        HorizontalAlignment="Center"
-                                        FontFamily="Roboto"
-                                        FontSize="20"
-                                        Foreground="#000000"
-                                        Header="Mã hóa đơn" />
-                                </DataGridTextColumn.Header>
+
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
                             <DataGridTextColumn
-                                Width="350"
-                                Binding="{Binding Name}"
+                                Width="*"
+                                Binding="{Binding Beverage.beverageName}"
                                 FontFamily="Roboto"
-                                FontSize="18"
-                                Foreground="#7B7B7B"
+                                FontSize="24"
+                                Foreground="Black"
+                                Header="Tên"
+                                HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
+                                IsReadOnly="True" />
+                            <DataGridTextColumn
+                                Width="120"
+                                Binding="{Binding quantity}"
+                                FontFamily="Roboto"
+                                FontSize="24"
+                                Foreground="Black"
+                                Header="Số lượng"
+                                HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True">
-                                <DataGridTextColumn.Header>
-                                    <HeaderedContentControl
-                                        HorizontalAlignment="Center"
-                                        FontFamily="Roboto"
-                                        FontSize="20"
-                                        Foreground="#000000"
-                                        Header="Tên" />
-                                </DataGridTextColumn.Header>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+
                             </DataGridTextColumn>
                             <DataGridTextColumn
-                                Width="150"
-                                Binding="{Binding Quantity}"
+                                Width="250"
+                                Binding="{Binding total, StringFormat={}{0:n0} VNĐ}"
                                 FontFamily="Roboto"
-                                FontSize="18"
-                                Foreground="#7B7B7B"
+                                FontSize="24"
+                                Foreground="Black"
+                                Header="Giá"
+                                HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True">
-                                <DataGridTextColumn.Header>
-                                    <HeaderedContentControl
-                                        HorizontalAlignment="Center"
-                                        FontFamily="Roboto"
-                                        FontSize="20"
-                                        Foreground="#000000"
-                                        Header="Số lượng" />
-                                </DataGridTextColumn.Header>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn
-                                Width="150"
-                                Binding="{Binding Price, StringFormat={}{0:0} đ}"
-                                FontFamily="Roboto"
-                                FontSize="18"
-                                Foreground="#7B7B7B"
-                                IsReadOnly="True">
-                                <DataGridTextColumn.Header>
-                                    <HeaderedContentControl
-                                        Width="43"
-                                        FontFamily="Roboto"
-                                        FontSize="20"
-                                        Foreground="#000000"
-                                        Header="Giá" />
-                                </DataGridTextColumn.Header>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+
                             </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
@@ -254,88 +252,78 @@
                     <DataGrid
                         Name="dgSpending"
                         AutoGenerateColumns="False"
+                        ItemsSource="{Binding paymentStatistic}"
                         GridLinesVisibility="None">
                         <DataGrid.Columns>
                             <DataGridTextColumn
                                 Width="150"
-                                Binding="{Binding MaHD}"
+                                Binding="{Binding paymentID}"
                                 FontFamily="Roboto"
-                                FontSize="18"
-                                Foreground="#7B7B7B"
+                                FontSize="24"
+                                Foreground="Black"
+                                Header="Mã phiếu chi"
+                                HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True">
-                                <DataGridTextColumn.Header>
-                                    <HeaderedContentControl
-                                        HorizontalAlignment="Center"
-                                        FontFamily="Roboto"
-                                        FontSize="20"
-                                        Foreground="#000000"
-                                        Header="Mã hóa đơn" />
-                                </DataGridTextColumn.Header>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
                             <DataGridTextColumn
-                                Width="320"
-                                Binding="{Binding Name}"
+                                Width="*"
+                                Binding="{Binding Ingredient.ingredientName}"
                                 FontFamily="Roboto"
-                                FontSize="18"
-                                Foreground="#7B7B7B"
-                                IsReadOnly="True">
-                                <DataGridTextColumn.Header>
-                                    <HeaderedContentControl
-                                        HorizontalAlignment="Center"
-                                        FontFamily="Roboto"
-                                        FontSize="20"
-                                        Foreground="#000000"
-                                        Header="Tên" />
-                                </DataGridTextColumn.Header>
-                            </DataGridTextColumn>
+                                FontSize="24"
+                                Foreground="Black"
+                                Header="Tên"
+                                HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
+                                IsReadOnly="True" />
                             <DataGridTextColumn
                                 Width="120"
-                                Binding="{Binding Quantity}"
+                                Binding="{Binding ingredientQuantity}"
                                 FontFamily="Roboto"
-                                FontSize="18"
-                                Foreground="#7B7B7B"
+                                FontSize="24"
+                                Foreground="Black"
+                                Header="Số lượng"
+                                HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True">
-                                <DataGridTextColumn.Header>
-                                    <HeaderedContentControl
-                                        HorizontalAlignment="Center"
-                                        FontFamily="Roboto"
-                                        FontSize="20"
-                                        Foreground="#000000"
-                                        Header="Số lượng" />
-                                </DataGridTextColumn.Header>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
 
                             <DataGridTextColumn
                                 Width="100"
-                                Binding="{Binding Unit}"
+                                Binding="{Binding Ingredient.Unit.unitName}"
                                 FontFamily="Roboto"
-                                FontSize="18"
-                                Foreground="#7B7B7B"
+                                FontSize="24"
+                                Foreground="Black"
+                                Header="Đơn vị"
+                                HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True">
-                                <DataGridTextColumn.Header>
-                                    <HeaderedContentControl
-                                        HorizontalAlignment="Center"
-                                        FontFamily="Roboto"
-                                        FontSize="20"
-                                        Foreground="#000000"
-                                        Header="Đơn vị" />
-                                </DataGridTextColumn.Header>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
                             <DataGridTextColumn
-                                Width="150"
-                                Binding="{Binding Price, StringFormat={}{0:0} đ}"
+                                Width="250"
+                                Binding="{Binding total, StringFormat={}{0:n0} VNĐ}"
                                 FontFamily="Roboto"
-                                FontSize="18"
-                                Foreground="#7B7B7B"
+                                FontSize="24"
+                                Foreground="Black"
+                                Header="Giá"
+                                HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True">
-                                <DataGridTextColumn.Header>
-                                    <HeaderedContentControl
-                                        Width="43"
-                                        FontFamily="Roboto"
-                                        FontSize="20"
-                                        Foreground="#000000"
-                                        Header="Giá" />
-                                </DataGridTextColumn.Header>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
@@ -418,19 +406,17 @@
             <Grid Grid.Row="4" Background="#EA8025" />
             <StackPanel
                 Grid.Row="5"
-                Background="#F1F1F1"
                 HorizontalAlignment="Center"
+                Background="#F1F1F1"
                 Orientation="Horizontal">
                 <TextBlock
-              
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontFamily="Roboto"
                     FontSize="32"
                     FontWeight="Bold"
-                    Text="Doanh thu :" /> 
+                    Text="Doanh thu :   " />
                 <TextBlock
-              
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontFamily="Roboto"
@@ -438,15 +424,14 @@
                     FontWeight="Bold"
                     Text="{Binding revenue, StringFormat={}{0:n0}}" />
                 <TextBlock
-              
+                    Margin="40,0,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontFamily="Roboto"
                     FontSize="32"
                     FontWeight="Bold"
-                    Margin="40 0 0 0"
                     Text="VNĐ" />
-                
+
             </StackPanel>
         </Grid>
     </Grid>

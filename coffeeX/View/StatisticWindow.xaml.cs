@@ -24,7 +24,7 @@ namespace coffeeX.View
     {
 
         List<int> year;
-        List<int> month = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+        List<int> month = new List<int>() { 0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
         
         public StatisticWindow()
         {
@@ -67,9 +67,15 @@ namespace coffeeX.View
 
             int tempYear = Convert.ToInt32(cmbYear.SelectedValue);
             int tempMonth = Convert.ToInt32(cmbMonth.SelectedValue);
-
-            day = Enumerable.Range(1, DateTime.DaysInMonth(tempYear, tempMonth)).ToList();
-
+            if (tempMonth == 0)
+            {
+                day = new List<int>();
+                day.Add(0);
+            }
+            else
+            {
+                day = Enumerable.Range(0, DateTime.DaysInMonth(tempYear, tempMonth) + 1).ToList();
+            }
             cmbDay.ItemsSource = day;
         }
     }
