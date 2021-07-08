@@ -33,6 +33,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <DataGrid
+         
             Name="DataGrid"
             Grid.Row="3"
             AutoGenerateColumns="False"

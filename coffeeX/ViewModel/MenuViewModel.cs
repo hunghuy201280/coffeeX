@@ -65,11 +65,28 @@ namespace coffeeX.ViewModel
         {
 
             initBackgroundWorker();
+
+            loadMenu();
+            initVariable();
+           
+            initCmd();
+
+        }
+
+        public void loadMenu()
+        {
+            if(!loadMenuWorker.IsBusy)
             loadMenuWorker.RunWorkerAsync();
-            suggestWorker.RunWorkerAsync();
+        }
+
+            private void initVariable()
+        {
             beverageType = new ObservableCollection<BeverageType>();
             beverages = new ObservableCollection<List<Beverage>>();
-            
+        }
+
+        private void initCmd()
+        {
             onLoaded = new RelayCommand<MenuWindow>((p) => true, onWindowLoaded);
 
             deleteReceiptItemCmd = new RelayCommand<DataGrid>((p) => true, (p) =>
@@ -105,9 +122,8 @@ namespace coffeeX.ViewModel
                     currentTable.receiptValue = currentTable.receiptItems.Sum(it => it.total);
                 }).Start();
             });
-
-
         }
+
         private void initBackgroundWorker()
         {
             loadMenuWorker = new BackgroundWorker();

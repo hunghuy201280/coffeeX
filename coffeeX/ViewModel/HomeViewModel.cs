@@ -32,24 +32,34 @@ namespace coffeeX.ViewModel
 
         public HomeViewModel()
         {
-            table = new ObservableCollection<Table>();
-            for (int i = 0; i < 40; i++)
-                table.Add(new Table(i + 1) ) ;
-            onLoaded = new RelayCommand<HomeWindow>((p) => true, OnWindowLoaded);
-            onStatisticClickCmd = new RelayCommand<Object>((p) => true, (p)=>new StatisticWindow().ShowDialog());
-            addBeverageCmd = new RelayCommand<Object>((p) => true, (p)=>new AddBeverageWindow().ShowDialog());
-            modifyBeverageCmd = new RelayCommand<Object>((p) => true, (p)=>new UpdateBeverageWindow().ShowDialog());
-            addPaymentVoucherCmd = new RelayCommand<Object>((p) => true, (p)=>new PaymentWindow().ShowDialog());
-            onTableClickCmd = new RelayCommand<Table>((p) => true, (p)=> {
-     
-                new MenuWindow(p).ShowDialog();
-             
-            });
-            changePwdCmd = new RelayCommand<Object>((p) => true, (p) => new ChangePwdWindow().ShowDialog());
+            initTable();
+            initCmd();
+         
 
         }
 
-  
+        private void initCmd()
+        {
+            onLoaded = new RelayCommand<HomeWindow>((p) => true, OnWindowLoaded);
+            onStatisticClickCmd = new RelayCommand<Object>((p) => true, (p) => new StatisticWindow().ShowDialog());
+            addBeverageCmd = new RelayCommand<Object>((p) => true, (p) => new AddBeverageWindow().ShowDialog());
+            modifyBeverageCmd = new RelayCommand<Object>((p) => true, (p) => new UpdateBeverageWindow().ShowDialog());
+            addPaymentVoucherCmd = new RelayCommand<Object>((p) => true, (p) => new PaymentWindow().ShowDialog());
+            onTableClickCmd = new RelayCommand<Table>((p) => true, (p) => {
+
+                new MenuWindow(p).ShowDialog();
+
+            });
+            changePwdCmd = new RelayCommand<Object>((p) => true, (p) => new ChangePwdWindow().ShowDialog());
+        }
+
+        private void initTable()
+        {
+            table = new ObservableCollection<Table>();
+            for (int i = 0; i < 40; i++)
+                table.Add(new Table(i + 1));
+        }
+
         private void OnWindowLoaded(HomeWindow wd)
         {
             homeWd = wd;

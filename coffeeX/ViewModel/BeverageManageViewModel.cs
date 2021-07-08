@@ -81,25 +81,30 @@ namespace coffeeX.ViewModel
         private bool hasImage=false;
         public BeverageManageViewModel()
         {
+            loadbeverage();
+
+            initCmd();
+          
+        }
+
+        private void initCmd()
+        {
             _beverageTypeSuggest = new ObservableCollection<string>(CoffeeXRepo.Ins.DB.BeverageTypes.Select((e) => e.typeName));
             addCommand = new RelayCommand<AddBeverageWindow>(validateData, addBeverage);
             pickImageCommand = new RelayCommand<Object>((p) => true, pickImage);
             onLoaded = new RelayCommand<AddBeverageWindow>((p) => true, onWindowLoaded);
             // priceTextChanged = new RelayCommand<Object>((p) => true, beveragePrice_KeyDown);
-            chooseBeverage = new RelayCommand<Beverage>((p) => p!=null, p=> 
+            chooseBeverage = new RelayCommand<Beverage>((p) => p != null, p =>
             {
                 addToTextBox(p);
             });
-            updatedBeverage = new ObservableCollection<Beverage>();
-            onUpdateBeverageWindowLoaded= new RelayCommand<UpdateBeverageWindow>((p) => true, onUpdateWindowLoaded);
+            onUpdateBeverageWindowLoaded = new RelayCommand<UpdateBeverageWindow>((p) => true, onUpdateWindowLoaded);
             deleteBeverageCmd = new RelayCommand<Object>((p) => true, deleteBeverage);
-            updateBeverageCmd = new RelayCommand<Object>((p) => true,updateBeverage );
+            updateBeverageCmd = new RelayCommand<Object>((p) => true, updateBeverage);
         }
-
 
         private void onUpdateWindowLoaded(UpdateBeverageWindow updateBeverage)
         {
-            loadbeverage();
 
         }
 
@@ -224,6 +229,9 @@ namespace coffeeX.ViewModel
 
         public void loadbeverage()
         {
+            if(updatedBeverage ==null)
+                updatedBeverage = new ObservableCollection<Beverage>();
+
             updatedBeverage.Clear();
             try
             {

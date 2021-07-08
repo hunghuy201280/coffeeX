@@ -42,6 +42,8 @@
 
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
                 <Image
+                    DataContext="{StaticResource MenuVM}"
+                    Name="menuViewModel"
                     Width="190"
                     Margin="40,0,0,0"
                     Source="/Resource/Images/app_logo.png" />
@@ -188,6 +190,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Image
+                        DataContext="{StaticResource BeverageManageVM}"
                         Width="48"
                         Height="48"
                         Source="/Resource/Images/icon_user.png" />

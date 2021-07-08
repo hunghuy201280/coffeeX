@@ -96,17 +96,17 @@
                                                 <TextBlock
                                                     HorizontalAlignment="Center"
                                                     FontFamily="Roboto"
-                                                    FontSize="27"
+                                                    FontSize="20"
                                                     FontWeight="Medium"
                                                     Foreground="Black"
                                                     Text="{Binding beverageName}" />
                                                 <TextBlock
                                                     HorizontalAlignment="Center"
                                                     FontFamily="Roboto"
-                                                    FontSize="27"
+                                                    FontSize="24"
                                                     FontWeight="Medium"
                                                     Foreground="{StaticResource PrimaryBrush}"
-                                                    Text="{Binding beveragePrice}" />
+                                                    Text="{Binding beveragePrice,StringFormat={}{0:n0} VNĐ}" />
                                             </StackPanel>
                                         </StackPanel>
                                         <Grid Background="Transparent" Cursor="Hand">
