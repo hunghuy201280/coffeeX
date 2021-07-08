@@ -185,6 +185,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BeverageManageViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\IngredientManageViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\NotifyViewModel.cs" />
     <Compile Include="ViewModel\PaymentViewModel.cs" />
@@ -192,6 +193,9 @@
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="View\AddBeverageWindow.xaml.cs">
       <DependentUpon>AddBeverageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddIngredientWindow.xaml.cs">
+      <DependentUpon>AddIngredientWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ChangePwdWindow.xaml.cs">
       <DependentUpon>ChangePwdWindow.xaml</DependentUpon>
@@ -224,6 +228,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\UpdateIngredientWindow.xaml.cs">
+      <DependentUpon>UpdateIngredientWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Resource\UserControls\BeverageNameUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -233,6 +240,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\AddBeverageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddIngredientWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -269,6 +280,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UpdateBeverageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UpdateIngredientWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -332,11 +347,13 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Resource Include="Resource\Images\icon_add.png" />
+    <Resource Include="Resource\Images\icon_edit_ingredient.png" />
+    <Resource Include="Resource\Images\icon_add_ingredient.png" />
+    <Resource Include="Resource\Images\icon_buy.png" />
+    <Resource Include="Resource\Images\icon_add_beverage.png" />
     <Resource Include="Resource\Images\icon_diagram.png" />
-    <Resource Include="Resource\Images\icon_edit.png" />
+    <Resource Include="Resource\Images\icon_edit_beverage.png" />
     <Resource Include="Resource\Images\icon_history.png" />
-    <Resource Include="Resource\Images\icon_spending.png" />
     <Resource Include="Resource\Images\icon_user.png" />
     <Resource Include="Resource\Images\pick_beverage_image.png" />
     <Resource Include="Resource\Images\add_beverage_pick_image.png" />

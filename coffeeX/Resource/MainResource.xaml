@@ -12,6 +12,7 @@
 
     <viewmodel:MenuViewModel x:Key="MenuVM" />
     <viewmodel:BeverageManageViewModel x:Key="BeverageManageVM" />
+    <viewmodel:IngredientManageViewModel x:Key="IngredientManageVM" />
     <viewmodel:UserViewModel x:Key="UserVM" />
     <viewmodel:HomeViewModel x:Key="HomeVM" />
     <viewmodel:NotifyViewModel x:Key="NotiVM" />

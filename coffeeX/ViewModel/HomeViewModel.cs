@@ -25,6 +25,10 @@ namespace coffeeX.ViewModel
         public ICommand onStatisticClickCmd { get; set; }
         public ICommand addPaymentVoucherCmd { get; set; }
 
+        public ICommand modifyIngredientCmd { get; set; }
+
+        public ICommand addIngredientCmd { get; set; }
+
         public ICommand changePwdCmd { get; set; }
 
         private ObservableCollection<Table> _table;
@@ -45,6 +49,8 @@ namespace coffeeX.ViewModel
             addBeverageCmd = new RelayCommand<Object>((p) => true, (p) => new AddBeverageWindow().ShowDialog());
             modifyBeverageCmd = new RelayCommand<Object>((p) => true, (p) => new UpdateBeverageWindow().ShowDialog());
             addPaymentVoucherCmd = new RelayCommand<Object>((p) => true, (p) => new PaymentWindow().ShowDialog());
+            addIngredientCmd = new RelayCommand<Object>((p) => true, (p) => new AddBeverageWindow().ShowDialog());
+            modifyIngredientCmd = new RelayCommand<Object>((p) => true, (p) => new UpdateIngredientWindow().ShowDialog());
             onTableClickCmd = new RelayCommand<Table>((p) => true, (p) => {
 
                 new MenuWindow(p).ShowDialog();
