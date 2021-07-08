@@ -9,24 +9,57 @@
 
 namespace coffeeX.Model
 {
+    using coffeeX.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class Beverage
+
+    public partial class Beverage : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Beverage()
         {
             this.ReceiptDetails = new HashSet<ReceiptDetail>();
         }
-    
+
         public int beverageID { get; set; }
-        public string beverageName { get; set; }
-        public double beveragePrice { get; set; }
-        public byte[] beverageImage { get; set; }
+        private string _beverageName { get; set; }
+        public string beverageName
+        {
+            get => _beverageName; set
+            {
+                _beverageName = value;
+                OnPropertyChanged();
+            }
+        }
+        private double _beveragePrice { get; set; }
+        public double beveragePrice
+        {
+            get => _beveragePrice; set
+            {
+                _beveragePrice = value;
+                OnPropertyChanged();
+            }
+        }
+        private byte[] _beverageImage { get; set; }
+        public byte[] beverageImage
+        {
+            get => _beverageImage; set
+            {
+                _beverageImage = value;
+                OnPropertyChanged();
+            }
+        }
         public int typeID { get; set; }
-    
-        public virtual BeverageType BeverageType { get; set; }
+
+        private BeverageType _BeverageType { get; set; }
+        public BeverageType BeverageType
+        {
+            get => _BeverageType; set
+            {
+                _BeverageType = value;
+                OnPropertyChanged();
+            }
+        }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReceiptDetail> ReceiptDetails { get; set; }
     }
