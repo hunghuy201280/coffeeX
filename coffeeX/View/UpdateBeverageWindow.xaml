@@ -79,7 +79,7 @@
         <Label
             Margin="0,20,0,0"
             HorizontalAlignment="Center"
-            Content="THÊM MÓN ĂN VÀO MENU"
+            Content="SỬA MÓN ĂN"
             FontSize="36"
             FontWeight="Bold" />
 
