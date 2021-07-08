@@ -261,7 +261,6 @@ namespace coffeeX.ViewModel
         void addToTextBox(Beverage input) 
         {
             beverageId = input.beverageID;
-
             currentBeverageName = input.beverageName;
             currentBeveragePrice = input.beveragePrice;
             currentBeverageType = input.BeverageType.typeName;
@@ -275,12 +274,11 @@ namespace coffeeX.ViewModel
             
                 var x = CoffeeXRepo.Ins.DB.Beverages.Where(p => p.beverageName == currentBeverageName).SingleOrDefault();
                 CoffeeXRepo.Ins.DB.Beverages.Remove(x);
+                updatedBeverage.Remove(x);
                 CoffeeXRepo.Ins.DB.SaveChanges();
                 currentBeverageName = currentBeverageType = "";
                 currentBeveragePrice = 0;
                 currentBeverageImage = null;
-                
-                loadbeverage();
                 NotifyPwdWindow notifyWindow = new NotifyPwdWindow("Xóa món thành công");
                 notifyWindow.ShowDialog();
 
@@ -296,18 +294,36 @@ namespace coffeeX.ViewModel
             else {
                 /*MessageBox.Show(beverageId.ToString());*/
                 var temp= CoffeeXRepo.Ins.DB.BeverageTypes.Where(x => x.typeName == currentBeverageType).FirstOrDefault();
-                CoffeeXRepo.Ins.DB.Beverages.Find(beverageId).beverageName=currentBeverageName;
-                CoffeeXRepo.Ins.DB.Beverages.Find(beverageId).beveragePrice = currentBeveragePrice;
-                CoffeeXRepo.Ins.DB.Beverages.Find(beverageId).beverageImage = currentBeverageImage;
-                CoffeeXRepo.Ins.DB.Beverages.Find(beverageId).BeverageType = temp;
-                CoffeeXRepo.Ins.DB.SaveChanges();
+
+                var result = CoffeeXRepo.Ins.DB.Beverages.SingleOrDefault(b => b.beverageID == beverageId);
+                if (result != null)
+                {
+                    result.beverageName = currentBeverageName;
+                    result.beveragePrice = currentBeveragePrice;
+                    result.beverageImage = currentBeverageImage;
+                    result.BeverageType = temp;
+                    CoffeeXRepo.Ins.DB.SaveChanges();
+
+                }
+
+                var obj = updatedBeverage.FirstOrDefault(x => x.beverageID == beverageId);
+                if (obj != null) 
+                {
+                    obj.beverageName = currentBeverageName;
+                    obj.beveragePrice = currentBeveragePrice;
+                    obj.beverageImage = currentBeverageImage;
+                    obj.BeverageType = temp;
+
+                }
+
                 currentBeverageName = currentBeverageType = "";
                 currentBeveragePrice = 0;
                 currentBeverageImage = null;
-                loadbeverage();
                 NotifyPwdWindow notifyWindow = new NotifyPwdWindow("Chỉnh sửa món thành công");
                 notifyWindow.ShowDialog();
-                
+
+
+
             }
 
         }
