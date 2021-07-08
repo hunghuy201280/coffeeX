@@ -84,3 +84,6 @@ create table PaymentDetail(
 	ingredientQuantity int not null,
 	primary key(paymentID,ingredientID) 
 )
+
+select * from BeverageType
+select * from Receipt
