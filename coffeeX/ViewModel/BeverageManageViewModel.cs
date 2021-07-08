@@ -191,6 +191,7 @@ namespace coffeeX.ViewModel
             currentBeverageName =currentBeverageType ="";
             currentBeveragePrice = 0;
             currentBeverageImage = null;
+            (addBeverageWindow.menuViewModel.DataContext as MenuViewModel).loadMenu();
             MessageBox.Show("Thêm món thành công!");
 
 

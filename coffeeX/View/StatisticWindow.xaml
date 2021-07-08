@@ -330,7 +330,9 @@
 
                 </Grid>
             </Grid>
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="3"
+                    Background="#F1F1F1"
+                  >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="4" />
@@ -340,7 +342,6 @@
                     Grid.Column="0"
                     Height="80"
                     HorizontalAlignment="Right"
-                    Background="#F1F1F1"
                     Orientation="Horizontal">
                     <TextBlock
                         Name="tbRevenue"

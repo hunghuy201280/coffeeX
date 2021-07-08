@@ -94,11 +94,20 @@ namespace coffeeX.ViewModel
             paymentStatistic.Clear();
             int day = 0, month = 0, year = 0;
             if (statisticWD.cmbDay.SelectedItem != null)
+            {
                 int.TryParse(statisticWD.cmbDay.Text, out day);
+            }
+
             if (statisticWD.cmbMonth.SelectedItem != null)
+            {
                 int.TryParse(statisticWD.cmbMonth.Text, out month);
+            }
+
             if (statisticWD.cmbYear.SelectedItem != null)
+            {
                 int.TryParse(statisticWD.cmbYear.Text, out year);
+            }
+
             List<Receipt> receipts = null;
             List<PaymentVoucher> paymentVouchers = null;
             if (day != 0 && month != 0 && year != 0)
@@ -120,10 +129,14 @@ namespace coffeeX.ViewModel
             {
                 receipts.ForEach((it) =>
                 {
-
+                    double discount = 0;
+                    if(it.Voucher!=null)
+                    {
+                        discount = it.Voucher.voucherValue;
+                    }
                     it.ReceiptDetails.ToList().ForEach((dt) =>
                     {
-                        dt.total = dt.quantity * dt.Beverage.beveragePrice;
+                        dt.total = dt.quantity * dt.Beverage.beveragePrice*(1-discount);
                         receiptStatistic.Add(dt);
                     });
                 });
