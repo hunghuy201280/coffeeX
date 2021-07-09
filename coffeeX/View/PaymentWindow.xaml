@@ -9,6 +9,8 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:uc="clr-namespace:coffeeX.Resource.UserControls"
+    WindowStyle="None"
     Name="PaymentWD"
     Title="PaymentWindow"
     Width="1022"
