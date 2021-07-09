@@ -18,12 +18,23 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <uc:ControlBarUC></uc:ControlBarUC>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBox
                 Width="281"
                 Margin="0,0,0,20"
                 VerticalAlignment="Center"
@@ -31,7 +42,7 @@
                 materialDesign:TextFieldAssist.TrailingIcon="None"
                 Style="{StaticResource FloatingHintTextBox}"
                 Text="{Binding changePwdUserName, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox
+                    <TextBox
                 Name="passWord"
                 Width="281"
                 Margin="0,0,0,20"
@@ -41,7 +52,7 @@
                 materialDesign:TextFieldAssist.TrailingIcon="None"
                 Style="{StaticResource FloatingHintTextBox}"
                 Text="{Binding changePwdNewPwd, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox
+                    <TextBox
                 Width="281"
                 Margin="0,0,0,20"
                 VerticalAlignment="Center"
@@ -49,14 +60,14 @@
                 materialDesign:TextFieldAssist.TrailingIcon="None"
                 Style="{StaticResource FloatingHintTextBox}"
                 Text="{Binding changePwdPhone, UpdateSourceTrigger=PropertyChanged}" />
-        </StackPanel>
+                </StackPanel>
 
-        <StackPanel
+                <StackPanel
             Grid.Row="2"
             Margin="0,0,0,35"
             HorizontalAlignment="Center"
             Orientation="Horizontal">
-            <Button
+                    <Button
                 Width="190"
                 Height="43"
                 Margin="0,0,44,0"
@@ -66,11 +77,11 @@
                 Content="Xác nhận"
                 Style="{StaticResource PrimaryButton}"
                 ToolTipService.ShowOnDisabled="True">
-                <Button.ToolTip>
-                    <ToolTip Content="{Binding tooltipOfChangePwd, UpdateSourceTrigger=PropertyChanged}" />
-                </Button.ToolTip>
-            </Button>
-            <Button
+                        <Button.ToolTip>
+                            <ToolTip Content="{Binding tooltipOfChangePwd, UpdateSourceTrigger=PropertyChanged}" />
+                        </Button.ToolTip>
+                    </Button>
+                    <Button
                 Width="190"
                 Height="43"
                 materialDesign:ButtonAssist.CornerRadius="16"
@@ -80,6 +91,8 @@
                 Content="Trở về"
                 Foreground="Black"
                 Style="{StaticResource PrimaryButton}" />
-        </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

@@ -25,28 +25,38 @@
     </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition />
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" />
+
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC></uc:ControlBarUC>
+        </Grid>
+
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="140" />
-                <RowDefinition Height="4" />
+                <RowDefinition Height="auto" />
                 <RowDefinition />
-                <RowDefinition Height="80" />
-                <RowDefinition Height="4" />
-                <RowDefinition Height="80" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <StackPanel Orientation="Horizontal">
-                        <ComboBox
+            <Grid Grid.Row="0" />
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="140" />
+                    <RowDefinition Height="4" />
+                    <RowDefinition />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="4" />
+                    <RowDefinition Height="80" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox
                             Name="cmbDay"
                             Width="230"
                             Height="63"
@@ -63,19 +73,19 @@
                             IsEditable="False"
                             IsTextSearchEnabled="True"
                             Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Rectangle
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Rectangle
                                             Width="16"
                                             Height="16"
                                             Margin="0,2,5,2" />
-                                        <TextBlock Text="{Binding}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <ComboBox
+                                            <TextBlock Text="{Binding}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <ComboBox
                             Name="cmbMonth"
                             Width="230"
                             Height="63"
@@ -92,19 +102,19 @@
                             IsEditable="False"
                             IsTextSearchEnabled="True"
                             Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Rectangle
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Rectangle
                                             Width="16"
                                             Height="16"
                                             Margin="0,2,5,2" />
-                                        <TextBlock Text="{Binding}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <ComboBox
+                                            <TextBlock Text="{Binding}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <ComboBox
                             Name="cmbYear"
                             Width="230"
                             Height="63"
@@ -121,24 +131,24 @@
                             IsEditable="False"
                             IsTextSearchEnabled="True"
                             Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Rectangle
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Rectangle
                                             Width="16"
                                             Height="16"
                                             Margin="0,2,5,2" />
-                                        <TextBlock Text="{Binding}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
+                                            <TextBlock Text="{Binding}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
 
 
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Column="1" Margin="0,0,60,0">
-                    <Button
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="0,0,60,0">
+                        <Button
                         Width="250"
                         Height="60"
                         materialDesign:ButtonAssist.CornerRadius="15"
@@ -151,11 +161,11 @@
                         Foreground="#FFFFFF"
                         Style="{StaticResource PrimaryButton}"
                         ToolTip="Thống kê từng ngày">
-                        XEM THỐNG KÊ
-                    </Button>
-                </Grid>
-                <Grid Grid.Column="2" Margin="0,0,60,0">
-                    <Button
+                            XEM THỐNG KÊ
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Column="2" Margin="0,0,60,0">
+                        <Button
                         Width="250"
                         Height="60"
                         HorizontalAlignment="Left"
@@ -170,25 +180,25 @@
                         Foreground="#000000"
                         Style="{StaticResource PrimaryButton}"
                         ToolTip="Trở về màn hình chính">
-                        TRỞ VỀ
-                    </Button>
+                            TRỞ VỀ
+                        </Button>
+                    </Grid>
                 </Grid>
-            </Grid>
-            <Grid Grid.Row="1" Background="#EA8025" />
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="4" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <DataGrid
+                <Grid Grid.Row="1" Background="#EA8025" />
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="4" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <DataGrid
                         Name="dgRevenue"
                         AutoGenerateColumns="False"
                         GridLinesVisibility="None"
                         ItemsSource="{Binding receiptStatistic}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
                                 Width="130"
                                 Binding="{Binding receiptID}"
                                 FontFamily="Roboto"
@@ -198,13 +208,13 @@
                                 HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True">
 
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn
                                 Width="*"
                                 Binding="{Binding Beverage.beverageName}"
                                 FontFamily="Roboto"
@@ -213,7 +223,7 @@
                                 Header="Tên"
                                 HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True" />
-                            <DataGridTextColumn
+                                <DataGridTextColumn
                                 Width="120"
                                 Binding="{Binding quantity}"
                                 FontFamily="Roboto"
@@ -222,14 +232,14 @@
                                 Header="Số lượng"
                                 HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
 
-                            </DataGridTextColumn>
-                            <DataGridTextColumn
+                                </DataGridTextColumn>
+                                <DataGridTextColumn
                                 Width="250"
                                 Binding="{Binding total, StringFormat={}{0:n0} VNĐ}"
                                 FontFamily="Roboto"
@@ -238,26 +248,26 @@
                                 Header="Giá"
                                 HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
 
-                            </DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
 
-                </Grid>
-                <Grid Grid.Column="1" Background="#EA8025" />
-                <Grid Grid.Column="2">
-                    <DataGrid
+                    </Grid>
+                    <Grid Grid.Column="1" Background="#EA8025" />
+                    <Grid Grid.Column="2">
+                        <DataGrid
                         Name="dgSpending"
                         AutoGenerateColumns="False"
                         ItemsSource="{Binding paymentStatistic}"
                         GridLinesVisibility="None">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
                                 Width="150"
                                 Binding="{Binding paymentID}"
                                 FontFamily="Roboto"
@@ -266,13 +276,13 @@
                                 Header="Mã phiếu chi"
                                 HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn
                                 Width="*"
                                 Binding="{Binding Ingredient.ingredientName}"
                                 FontFamily="Roboto"
@@ -281,7 +291,7 @@
                                 Header="Tên"
                                 HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True" />
-                            <DataGridTextColumn
+                                <DataGridTextColumn
                                 Width="120"
                                 Binding="{Binding ingredientQuantity}"
                                 FontFamily="Roboto"
@@ -290,14 +300,14 @@
                                 Header="Số lượng"
                                 HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
 
-                            <DataGridTextColumn
+                                <DataGridTextColumn
                                 Width="100"
                                 Binding="{Binding Ingredient.Unit.unitName}"
                                 FontFamily="Roboto"
@@ -306,13 +316,13 @@
                                 Header="Đơn vị"
                                 HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn
                                 Width="250"
                                 Binding="{Binding total, StringFormat={}{0:n0} VNĐ}"
                                 FontFamily="Roboto"
@@ -321,31 +331,31 @@
                                 Header="Giá"
                                 HeaderStyle="{StaticResource DataGridHeaderStyleBlack}"
                                 IsReadOnly="True">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
 
+                    </Grid>
                 </Grid>
-            </Grid>
-            <Grid Grid.Row="3"
+                <Grid Grid.Row="3"
                     Background="#F1F1F1"
                   >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="4" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <StackPanel
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="4" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel
                     Grid.Column="0"
                     Height="80"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
-                    <TextBlock
+                        <TextBlock
                         Name="tbRevenue"
                         Margin="0,0,40,0"
                         HorizontalAlignment="Right"
@@ -354,7 +364,7 @@
                         FontSize="32"
                         FontWeight="Bold"
                         Text="Tổng thu : " />
-                    <TextBlock
+                        <TextBlock
                         Margin="0,0,40,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
@@ -362,7 +372,7 @@
                         FontSize="32"
                         FontWeight="Bold"
                         Text="{Binding totalEarn, StringFormat={}{0:n0}}" />
-                    <TextBlock
+                        <TextBlock
                         Margin="0,0,40,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
@@ -371,15 +381,15 @@
                         FontWeight="Bold"
                         Text="VNĐ" />
 
-                </StackPanel>
-                <Grid Grid.Column="1" Background="#EA8025" />
-                <StackPanel
+                    </StackPanel>
+                    <Grid Grid.Column="1" Background="#EA8025" />
+                    <StackPanel
                     Grid.Column="2"
                     Height="80"
                     HorizontalAlignment="Right"
                     Background="#F1F1F1"
                     Orientation="Horizontal">
-                    <TextBlock
+                        <TextBlock
                         Margin="0,0,40,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
@@ -387,7 +397,7 @@
                         FontSize="32"
                         FontWeight="Bold"
                         Text="Tổng chi : " />
-                    <TextBlock
+                        <TextBlock
                         Margin="0,0,40,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
@@ -395,7 +405,7 @@
                         FontSize="32"
                         FontWeight="Bold"
                         Text="{Binding totalPay, StringFormat={}{0:n0}}" />
-                    <TextBlock
+                        <TextBlock
                         Margin="0,0,40,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
@@ -404,29 +414,29 @@
                         FontWeight="Bold"
                         Text="VNĐ" />
 
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Row="4" Background="#EA8025" />
-            <StackPanel
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="4" Background="#EA8025" />
+                <StackPanel
                 Grid.Row="5"
                 HorizontalAlignment="Center"
                 Background="#F1F1F1"
                 Orientation="Horizontal">
-                <TextBlock
+                    <TextBlock
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontFamily="Roboto"
                     FontSize="32"
                     FontWeight="Bold"
                     Text="Doanh thu :   " />
-                <TextBlock
+                    <TextBlock
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontFamily="Roboto"
                     FontSize="32"
                     FontWeight="Bold"
                     Text="{Binding revenue, StringFormat={}{0:n0}}" />
-                <TextBlock
+                    <TextBlock
                     Margin="40,0,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -435,7 +445,8 @@
                     FontWeight="Bold"
                     Text="VNĐ" />
 
-            </StackPanel>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

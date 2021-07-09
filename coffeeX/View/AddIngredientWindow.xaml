@@ -28,24 +28,34 @@
     </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Label
+
+        <Grid Grid.Row="0">
+            <UserControls:ControlBarUC></UserControls:ControlBarUC>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
             Margin="0,20,0,0"
             HorizontalAlignment="Center"
             Content="THÊM NGUYÊN LIỆU"
             FontSize="36"
             FontWeight="Bold" />
 
-        <Grid Grid.Row="1">
+            <Grid Grid.Row="1">
 
-            <StackPanel
+                <StackPanel
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Orientation="Vertical">
-                <TextBox
+                    <TextBox
                     x:Name="ingredientName"
                     Width="330"
                     Margin="0,0,0,30"
@@ -57,7 +67,7 @@
                     Style="{StaticResource RoundedTextBox}"
                     Text="{Binding currentIngredientName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                <controls:AutoCompleteBox
+                    <controls:AutoCompleteBox
                     x:Name="ingredientType"
                     Width="330"
                     Margin="0,0,0,30"
@@ -70,8 +80,8 @@
                     Text="{Binding currentIngredientType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextBoxStyle="{StaticResource RoundedTextBox}" />
 
-                <Grid>
-                    <TextBox
+                    <Grid>
+                        <TextBox
                         x:Name="ingredientPrice"
                         Width="330"
                         Padding="10,10,70,10"
@@ -82,21 +92,21 @@
                         Style="{StaticResource RoundedTextBox}"
                         Text="{Binding currentIngredientPrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBlock
+                        <TextBlock
                         Margin="0,0,10,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         FontSize="24">
                         VND
-                    </TextBlock>
-                </Grid>
-            </StackPanel>
+                        </TextBlock>
+                    </Grid>
+                </StackPanel>
 
 
 
-        </Grid>
+            </Grid>
 
-        <Button
+            <Button
             Name="addButton"
             Grid.Row="2"
             Width="222"
@@ -108,12 +118,14 @@
             Style="{StaticResource PrimaryButton}"
             ToolTipService.InitialShowDelay="0"
             ToolTipService.ShowOnDisabled="True">
-            <Button.ToolTip>
-                <StackPanel>
+                <Button.ToolTip>
+                    <StackPanel>
 
-                    <TextBlock Name="toolTipTextBlock" Foreground="Red" />
-                </StackPanel>
-            </Button.ToolTip>
-        </Button>
+                        <TextBlock Name="toolTipTextBlock" Foreground="Red" />
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
+        </Grid>
+
     </Grid>
 </Window>

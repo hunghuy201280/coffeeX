@@ -29,12 +29,22 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid
+
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC></uc:ControlBarUC>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <DataGrid
          
             Name="DataGrid"
             Grid.Row="3"
@@ -42,60 +52,60 @@
             IsReadOnly="True"
             ItemsSource="{Binding updatedBeverage}"
             SelectionMode="Single">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding chooseBeverage}" CommandParameter="{Binding ElementName=DataGrid, Path=SelectedItem}" />
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding chooseBeverage}" CommandParameter="{Binding ElementName=DataGrid, Path=SelectedItem}" />
 
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <DataGrid.ContextMenu>
-                <ContextMenu Name="contextMenu">
-                    <MenuItem Command="{Binding deleteBeverageCmd}"
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <DataGrid.ContextMenu>
+                    <ContextMenu Name="contextMenu">
+                        <MenuItem Command="{Binding deleteBeverageCmd}"
                               CommandParameter="{Binding Path=PlacementTarget.SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
                               Header="Xoá món ăn" />
-                </ContextMenu>
-            </DataGrid.ContextMenu>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
 
-            <DataGrid.Columns>
+                <DataGrid.Columns>
 
 
-                <DataGridTextColumn
+                    <DataGridTextColumn
                     Width="*"
                     Binding="{Binding beverageName}"
                     Header="Tên"
                     HeaderStyle="{StaticResource DataGridHeaderStyle}" />
-                <DataGridTextColumn
+                    <DataGridTextColumn
                     Width="*"
                     Binding="{Binding BeverageType.typeName}"
                     Header="Loại"
                     HeaderStyle="{StaticResource DataGridHeaderStyle}" />
-                <DataGridTextColumn
+                    <DataGridTextColumn
                     Width="*"
                     Binding="{Binding beveragePrice}"
                     Header="Đơn giá"
                     HeaderStyle="{StaticResource DataGridHeaderStyle}" />
-            </DataGrid.Columns>
+                </DataGrid.Columns>
 
 
-        </DataGrid>
-        <Label
+            </DataGrid>
+            <Label
             Margin="0,20,0,0"
             HorizontalAlignment="Center"
             Content="SỬA THỨC UỐNG"
             FontSize="36"
             FontWeight="Bold" />
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <StackPanel
+                <StackPanel
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Orientation="Vertical">
-                <TextBox
+                    <TextBox
                     x:Name="beverageName"
                     Width="330"
                     Margin="0,0,0,30"
@@ -106,7 +116,7 @@
                     BorderThickness="0"
                     Style="{StaticResource RoundedTextBox}"
                     Text="{Binding currentBeverageName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <controls:AutoCompleteBox
+                    <controls:AutoCompleteBox
                     x:Name="beverageType"
                     Width="330"
                     Margin="0,0,0,30"
@@ -119,8 +129,8 @@
                     Text="{Binding currentBeverageType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextBoxStyle="{StaticResource RoundedTextBox}" />
 
-                <Grid>
-                    <TextBox
+                    <Grid>
+                        <TextBox
                         x:Name="beveragePrice"
                         Width="330"
                         Padding="10,10,70,10"
@@ -131,33 +141,33 @@
                         Style="{StaticResource RoundedTextBox}"
                         Text="{Binding currentBeveragePrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBlock
+                        <TextBlock
                         Margin="0,0,10,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         FontSize="24">
                         VND
-                    </TextBlock>
-                </Grid>
-            </StackPanel>
-            <StackPanel
+                        </TextBlock>
+                    </Grid>
+                </StackPanel>
+                <StackPanel
                 Grid.Column="1"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Orientation="Vertical">
-                <Border
+                    <Border
                     Width="268"
                     Height="268"
                     CornerRadius="10">
-                    <Border.Background>
-                        <ImageBrush
+                        <Border.Background>
+                            <ImageBrush
                             x:Name="beverageImage"
                             ImageSource="{Binding currentBeverageImage, Converter={StaticResource ImageDataConverter}}"
                             Stretch="Fill" />
-                    </Border.Background>
-                </Border>
+                        </Border.Background>
+                    </Border>
 
-                <Button
+                    <Button
                     Grid.Row="2"
                     Width="53"
                     Height="53"
@@ -171,7 +181,7 @@
                     FontWeight="Medium">
 
 
-                    <Image
+                        <Image
                         Width="25"
                         Height="25"
                         HorizontalAlignment="Center"
@@ -179,18 +189,18 @@
                         Source="/Resource/Images/camera.png" />
 
 
-                </Button>
-            </StackPanel>
+                    </Button>
+                </StackPanel>
 
 
-        </Grid>
+            </Grid>
 
-        <StackPanel
+            <StackPanel
             Grid.Row="2"
             Margin="0,0,0,80"
             HorizontalAlignment="Center"
             Orientation="Horizontal">
-            <Button
+                <Button
                 Width="222"
                 Height="63"
                 Margin="0,0,44,0"
@@ -199,6 +209,7 @@
                 Command="{Binding updateBeverageCmd}"
                 CommandParameter="{Binding ElementName=UpdateBeverageWD}"
                 Style="{StaticResource PrimaryButton}" />
-        </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
