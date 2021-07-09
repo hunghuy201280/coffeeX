@@ -18,6 +18,12 @@
     DataContext="{StaticResource UserVM}"
     ResizeMode="NoResize"
     mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding onWindowLoadedCmd}" CommandParameter="{Binding ElementName=RegisterWindow1}" />
+
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>

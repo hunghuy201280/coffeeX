@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -290,9 +291,15 @@ namespace coffeeX.ViewModel
         {
             menuWd = menuWindow;
             currentTable = menuWd._currentTable;
-            
+            menuWindow.phoneTextBox.PreviewTextInput += PhoneTextBox_PreviewTextInput;
             if(!suggestWorker.IsBusy)
             suggestWorker.RunWorkerAsync();
+        }
+
+        private void PhoneTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
         }
 
         private void MenuListBox_SelectionChanged(Beverage beverage)

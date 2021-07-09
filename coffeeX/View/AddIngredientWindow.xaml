@@ -44,10 +44,10 @@
             </Grid.RowDefinitions>
             <Label
                 Name="PaymentVM"
-                DataContext="{StaticResource PaymentViewModel}"
                 Margin="0,20,0,0"
                 HorizontalAlignment="Center"
                 Content="THÊM NGUYÊN LIỆU"
+                DataContext="{StaticResource PaymentViewModel}"
                 FontSize="36"
                 FontWeight="Bold" />
 
@@ -92,7 +92,11 @@
                             Background="#F1F1F1"
                             BorderThickness="0"
                             Style="{StaticResource RoundedTextBox}"
-                            Text="{Binding currentIngredientPrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDoubleConverter}}" />
+                            Text="{Binding currentIngredientPrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged}" >
+                            <Validation.ErrorTemplate>
+                                <ControlTemplate />
+                            </Validation.ErrorTemplate>
+                        </TextBox>
 
                         <TextBlock
                             Margin="0,0,10,0"

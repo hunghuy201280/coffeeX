@@ -24,6 +24,8 @@ namespace coffeeX.ViewModel
         public ICommand registerClickCommand { get; set; }
 
         public ICommand logOutCmd { get; set; }
+        public ICommand onWindowLoadedCmd { get; set; }
+        public ICommand onChangePasswordLoadedCmd { get; set; }
 
         public ICommand cancelChangePwdCmd { get; set; }
         public ICommand acceptChangePwdCmd { get; set; }
@@ -78,6 +80,8 @@ namespace coffeeX.ViewModel
             fullName = phoneNumber = userName = password= "";
             changePwdNewPwd = changePwdPhone = changePwdUserName = "";
             registerCommand = new RelayCommand<Window>((p) => { return validRegis(); }, register);
+            onWindowLoadedCmd = new RelayCommand<RegisterWindow>((p) => p!=null, onWindowLoaded);
+            onChangePasswordLoadedCmd = new RelayCommand<ChangePwdWindow>((p) => p!=null, onChangePasswordWindowLoaded);
             passwordChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { password = p.Text; });
             loginCommand = new RelayCommand<Window>((p) => { return checkEmptyUserIDPassword(); },  login);
             registerClickCommand = new RelayCommand<Object>((p) =>true,  (p)=>new RegisterWindow().Show());
@@ -85,6 +89,28 @@ namespace coffeeX.ViewModel
             cancelChangePwdCmd = new RelayCommand<ChangePwdWindow>((p) => true, (p) => { p.Close(); cleanUpChangePwd(); });
             acceptChangePwdCmd = new RelayCommand<ChangePwdWindow>((p) => { return checkValidateNewPwd(); }, changePassword);
             loginClickCommand = new RelayCommand<RegisterWindow>((p) => p!=null, onLoginClick);
+        }
+
+        private void onChangePasswordWindowLoaded(ChangePwdWindow obj)
+        {
+            obj.phoneTextBox.PreviewTextInput += PhoneTextBox_PreviewTextInput;
+        }
+
+        private void PhoneTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
+        }
+
+        private void onWindowLoaded(RegisterWindow obj)
+        {
+            obj.phoneNumber.PreviewTextInput += PhoneNumber_PreviewTextInput;
+        }
+
+        private void PhoneNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
         }
 
         private void onLoginClick(RegisterWindow obj)

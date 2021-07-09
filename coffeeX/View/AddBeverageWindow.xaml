@@ -95,7 +95,12 @@
                         Background="#F1F1F1"
                         BorderThickness="0"
                         Style="{StaticResource RoundedTextBox}"
-                        Text="{Binding currentBeveragePrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged}" />
+                        Text="{Binding currentBeveragePrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged}"
+                            >
+                            <Validation.ErrorTemplate>
+                                <ControlTemplate />
+                            </Validation.ErrorTemplate>
+                        </TextBox>
 
                         <TextBlock
                         Margin="0,0,10,0"

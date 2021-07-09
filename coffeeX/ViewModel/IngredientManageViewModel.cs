@@ -7,8 +7,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace coffeeX.ViewModel
@@ -87,7 +89,14 @@ namespace coffeeX.ViewModel
             currentIngredientName = currentIngredientUnit = "";
             currentIngredientPrice = 0;
             reLoadIngredient = (obj.PaymentVM.DataContext as PaymentViewModel).loadData;
+            obj.ingredientPrice.PreviewTextInput += IngredientPrice_PreviewTextInput;
             loadUnitSuggestion();
+        }
+
+        private void IngredientPrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
         }
 
         private void onIngredientUpdateClick(UpdateIngredientWindow updateIngredientWindow)
@@ -195,6 +204,7 @@ namespace coffeeX.ViewModel
         {
             currentIngredientName = currentIngredientUnit = "";
             currentIngredientPrice = 0;
+            obj.ingredientPrice.PreviewTextInput += IngredientPrice_PreviewTextInput;
             loadUnitSuggestion();
         }
         private void loadUnitSuggestion()
