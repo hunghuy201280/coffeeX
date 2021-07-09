@@ -49,7 +49,7 @@ namespace coffeeX.ViewModel
             addBeverageCmd = new RelayCommand<Object>((p) => true, (p) => new AddBeverageWindow().ShowDialog());
             modifyBeverageCmd = new RelayCommand<Object>((p) => true, (p) => new UpdateBeverageWindow().ShowDialog());
             addPaymentVoucherCmd = new RelayCommand<Object>((p) => true, (p) => new PaymentWindow().ShowDialog());
-            addIngredientCmd = new RelayCommand<Object>((p) => true, (p) => new AddBeverageWindow().ShowDialog());
+            addIngredientCmd = new RelayCommand<Object>((p) => true, (p) => new AddIngredientWindow().ShowDialog());
             modifyIngredientCmd = new RelayCommand<Object>((p) => true, (p) => new UpdateIngredientWindow().ShowDialog());
             onTableClickCmd = new RelayCommand<Table>((p) => true, (p) => {
 

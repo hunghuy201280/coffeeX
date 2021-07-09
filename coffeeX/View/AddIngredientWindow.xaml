@@ -20,7 +20,7 @@
     mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding onLoaded}" CommandParameter="{Binding ElementName=AddIngredientWD}" />
+            <i:InvokeCommandAction Command="{Binding onAddLoadedCmd}" CommandParameter="{Binding ElementName=AddIngredientWD}" />
 
         </i:EventTrigger>
     </i:Interaction.Triggers>
@@ -56,16 +56,16 @@
                     Text="{Binding currentIngredientName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <controls:AutoCompleteBox
-                    x:Name="ingredientType"
+                    x:Name="ingredientUnit"
                     Width="330"
                     Margin="0,0,0,30"
                     Padding="10"
                     materialDesign:HintAssist.Foreground="#9B9B9B"
-                    materialDesign:HintAssist.Hint="Loại nguyên liệu"
+                    materialDesign:HintAssist.Hint="Đơn vị"
                     Background="#F1F1F1"
                     BorderThickness="0"
-                    ItemsSource="{Binding ingredientTypeSuggest}"
-                    Text="{Binding currentIngredientType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    ItemsSource="{Binding ingredientUnitSuggest}"
+                    Text="{Binding currentIngredientUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextBoxStyle="{StaticResource RoundedTextBox}" />
 
                 <Grid>
@@ -78,14 +78,16 @@
                         Background="#F1F1F1"
                         BorderThickness="0"
                         Style="{StaticResource RoundedTextBox}"
-                        Text="{Binding currentIngredientPrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged}" />
+                        Text="{Binding currentIngredientPrice, 
+                        StringFormat={}{0:n0}, 
+                        UpdateSourceTrigger=PropertyChanged,Converter={StaticResource StringToDoubleConverter}}" />
 
                     <TextBlock
                         Margin="0,0,10,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         FontSize="24">
-                        VND
+                        VNĐ
                     </TextBlock>
                 </Grid>
             </StackPanel>
@@ -100,7 +102,7 @@
             Width="222"
             Height="63"
             Margin="0,0,0,80"
-            Command="{Binding addCommand, UpdateSourceTrigger=PropertyChanged}"
+            Command="{Binding onAddClickCmd, UpdateSourceTrigger=PropertyChanged}"
             CommandParameter="{Binding ElementName=AddIngredientWD}"
             Content="Thêm"
             Style="{StaticResource PrimaryButton}"

@@ -20,6 +20,7 @@
     <viewmodel:StatisticViewModel x:Key="StatisticVM" />
     <utils:ImageDataConverter x:Key="ImageDataConverter" />
     <utils:TableStatusToColorConverter x:Key="TableStatusToColorConverter" />
+    <utils:StringToDoubleConverter x:Key="StringToDoubleConverter" />
     <utils:TableStatusToButtonTextConverter x:Key="TableStatusToButtonTextConverter" />
 
 

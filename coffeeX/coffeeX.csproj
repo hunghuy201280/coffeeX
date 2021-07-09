@@ -180,6 +180,7 @@
     </Compile>
     <Compile Include="Repository\CoffeeXRepo.cs" />
     <Compile Include="Utils\ImageDataConverter.cs" />
+    <Compile Include="Utils\StringToDoubleConverter.cs" />
     <Compile Include="Utils\TableStatusToButtonTextConverter.cs" />
     <Compile Include="Utils\TableStatusToColorConverter.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
