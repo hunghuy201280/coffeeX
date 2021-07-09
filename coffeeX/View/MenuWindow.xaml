@@ -9,6 +9,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:uc="clr-namespace:coffeeX.Resource.UserControls"
     Name="MenuWD"
     Title="MenuWindow"
     Width="2000"
@@ -24,126 +25,136 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="337" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="553" />
-        </Grid.ColumnDefinitions>
-        <ListBox
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC></uc:ControlBarUC>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="337" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="553" />
+            </Grid.ColumnDefinitions>
+            <ListBox
             x:Name="menuListBox"
             Grid.Column="2"
             Margin="30,30,0,30"
             materialDesign:RippleAssist.IsDisabled="True"
             ItemsSource="{Binding beverageType}">
-            <ListBox.ItemContainerStyle>
-                <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
-                    <Style.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
-                    </Style.Resources>
-                </Style>
-            </ListBox.ItemContainerStyle>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="0,0,0,30" Orientation="Vertical">
-                        <TextBlock
+                <ListBox.ItemContainerStyle>
+                    <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
+                        <Style.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                        </Style.Resources>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,0,0,30" Orientation="Vertical">
+                            <TextBlock
                             FontFamily="Roboto"
                             FontSize="40"
                             FontWeight="Bold"
                             Text="{Binding typeName}" />
-                        <Label
+                            <Label
                             Width="180"
                             Height="7"
                             Margin="0,0,0,40"
                             HorizontalAlignment="Left"
                             Background="{StaticResource PrimaryBrush}" />
-                        <ListBox
+                            <ListBox
                             x:Name="beverageListBox"
                             materialDesign:RippleAssist.RippleOnTop="True"
                             ItemsSource="{Binding Beverages}">
-                            <ListBox.ItemContainerStyle>
-                                <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
-                                    <Setter Property="Padding" Value="0" />
-                                    <Setter Property="Margin" Value="0,0,35,10" />
+                                <ListBox.ItemContainerStyle>
+                                    <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
+                                        <Setter Property="Padding" Value="0" />
+                                        <Setter Property="Margin" Value="0,0,35,10" />
 
-                                </Style>
-                            </ListBox.ItemContainerStyle>
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel Orientation="Horizontal" />
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <StackPanel
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <StackPanel
                                             x:Name="beverageItem"
                                             Width="240"
                                             Background="{StaticResource SeashellBrush}"
                                             Orientation="Vertical">
 
-                                            <Image
+                                                <Image
                                                 Width="240"
                                                 Height="240"
                                                 Source="{Binding beverageImage}" />
-                                            <StackPanel Grid.Row="1" VerticalAlignment="Center">
-                                                <TextBlock
+                                                <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                                                    <TextBlock
                                                     HorizontalAlignment="Center"
                                                     FontFamily="Roboto"
                                                     FontSize="20"
                                                     FontWeight="Medium"
                                                     Foreground="Black"
                                                     Text="{Binding beverageName}" />
-                                                <TextBlock
+                                                    <TextBlock
                                                     HorizontalAlignment="Center"
                                                     FontFamily="Roboto"
                                                     FontSize="24"
                                                     FontWeight="Medium"
                                                     Foreground="{StaticResource PrimaryBrush}"
                                                     Text="{Binding beveragePrice,StringFormat={}{0:n0} VNĐ}" />
+                                                </StackPanel>
                                             </StackPanel>
-                                        </StackPanel>
-                                        <Grid Background="Transparent" Cursor="Hand">
-                                            <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="MouseDown">
-                                                    <i:InvokeCommandAction Command="{Binding itemSelectedCmd, Source={StaticResource MenuVM}}" CommandParameter="{Binding}" />
+                                            <Grid Background="Transparent" Cursor="Hand">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseDown">
+                                                        <i:InvokeCommandAction Command="{Binding itemSelectedCmd, Source={StaticResource MenuVM}}" CommandParameter="{Binding}" />
 
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Grid>
                                         </Grid>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
 
-                    </StackPanel>
+                        </StackPanel>
 
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
 
 
-        </ListBox>
 
-        <GridSplitter
+            </ListBox>
+
+            <GridSplitter
             Grid.Column="1"
             Width="3"
             VerticalAlignment="Stretch"
             Background="{StaticResource DustyGrayBrush}"
             IsEnabled="False" />
-        <GridSplitter
+            <GridSplitter
             Grid.Column="3"
             Width="2"
             VerticalAlignment="Stretch"
             Background="{StaticResource DustyGrayBrush}"
             IsEnabled="False" />
-        <ListBox
+            <ListBox
             Name="categoryListBox"
             Margin="30,50,30,0"
             HorizontalAlignment="Stretch"
@@ -152,21 +163,21 @@
             SelectedIndex="0"
             SelectionMode="Single"
             Style="{StaticResource MaterialDesignListBox}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding categoryListBoxSelectionChangedCmd}" CommandParameter="{Binding ElementName=categoryListBox}" />
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding categoryListBoxSelectionChangedCmd}" CommandParameter="{Binding ElementName=categoryListBox}" />
 
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <ListBox.ItemContainerStyle>
-                <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
-                    <Setter Property="Cursor" Value="Hand" />
-                </Style>
-            </ListBox.ItemContainerStyle>
-            <ListBox.ItemTemplate>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListBox.ItemContainerStyle>
+                    <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
+                        <Setter Property="Cursor" Value="Hand" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
 
-                <DataTemplate>
-                    <TextBlock
+                    <DataTemplate>
+                        <TextBlock
                         x:Name="beverageNameTextBlock"
                         Cursor="Hand"
                         FontFamily="Roboto"
@@ -174,19 +185,19 @@
                         FontWeight="Bold"
                         Foreground="Black"
                         Text="{Binding typeName}" />
-                    <DataTemplate.Triggers>
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" Value="True">
-                            <Setter TargetName="beverageNameTextBlock" Property="Foreground" Value="{StaticResource PrimaryBrush}" />
-                        </DataTrigger>
-                    </DataTemplate.Triggers>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" Value="True">
+                                <Setter TargetName="beverageNameTextBlock" Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
 
 
 
-        </ListBox>
-        <StackPanel Margin="20,0,0,10" VerticalAlignment="Bottom">
-            <TextBlock
+            </ListBox>
+            <StackPanel Margin="20,0,0,10" VerticalAlignment="Bottom">
+                <TextBlock
                 x:Name="staffTextBox"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
@@ -203,8 +214,8 @@
                     FontSize="24"
                     FontWeight="Normal"
                     Text="{Binding currentUser.fullName}" />
-            </TextBlock>
-            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom">
                 <Run
                     FontFamily="Roboto"
                     FontSize="24"
@@ -217,10 +228,10 @@
                     FontSize="24"
                     FontWeight="Normal"
                     Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='{}{0:dd-MM-yyyy}', Mode=OneWay}" />
-            </TextBlock>
-        </StackPanel>
-        <DockPanel Grid.Column="4">
-            <TextBlock
+                </TextBlock>
+            </StackPanel>
+            <DockPanel Grid.Column="4">
+                <TextBlock
                 Height="auto"
                 Margin="0,44,0,44"
                 HorizontalAlignment="Center"
@@ -230,17 +241,17 @@
                 FontSize="36"
                 FontWeight="Bold">
                 THỦ TỤC THANH TOÁN
-            </TextBlock>
-            <Grid Background="{StaticResource SeashellBrush}" DockPanel.Dock="Bottom">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="74" />
-                    <RowDefinition Height="74" />
-                    <RowDefinition Height="74" />
-                    <RowDefinition Height="74" />
-                    <RowDefinition Height="74" />
-                    <RowDefinition Height="130" />
-                </Grid.RowDefinitions>
-                <TextBlock
+                </TextBlock>
+                <Grid Background="{StaticResource SeashellBrush}" DockPanel.Dock="Bottom">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="74" />
+                        <RowDefinition Height="74" />
+                        <RowDefinition Height="74" />
+                        <RowDefinition Height="74" />
+                        <RowDefinition Height="74" />
+                        <RowDefinition Height="130" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
                     Grid.Row="0"
                     Margin="30,0,0,0"
                     HorizontalAlignment="Left"
@@ -250,8 +261,8 @@
                     FontWeight="Medium"
                     Foreground="{StaticResource BoulderBrush}">
                     Số điện thoại
-                </TextBlock>
-                <controls:AutoCompleteBox
+                    </TextBlock>
+                    <controls:AutoCompleteBox
                     x:Name="phoneTextBox"
                     Width="200"
                     Height="40"
@@ -263,14 +274,14 @@
                     SelectedItem="{Binding currentTable.currentCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextBoxStyle="{StaticResource RoundedWhiteTextBox}"
                     ValueMemberPath="phone">
-                    <controls:AutoCompleteBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding phone}" />
-                        </DataTemplate>
-                    </controls:AutoCompleteBox.ItemTemplate>
+                        <controls:AutoCompleteBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding phone}" />
+                            </DataTemplate>
+                        </controls:AutoCompleteBox.ItemTemplate>
 
-                </controls:AutoCompleteBox>
-                <TextBlock
+                    </controls:AutoCompleteBox>
+                    <TextBlock
                     Grid.Row="1"
                     Margin="30,0,0,0"
                     HorizontalAlignment="Left"
@@ -280,8 +291,8 @@
                     FontWeight="Medium"
                     Foreground="{StaticResource BoulderBrush}">
                     Tên khách hàng
-                </TextBlock>
-                <TextBox
+                    </TextBlock>
+                    <TextBox
                     x:Name="customerNameTextBox"
                     Grid.Row="1"
                     Width="200"
@@ -292,7 +303,7 @@
                     BorderBrush="{StaticResource PrimaryBrush}"
                     Style="{StaticResource RoundedWhiteTextBox}"
                     Text="{Binding currentTable.currentCustomer.customerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock
+                    <TextBlock
                     Grid.Row="2"
                     Margin="30,0,0,0"
                     HorizontalAlignment="Left"
@@ -302,8 +313,8 @@
                     FontWeight="Medium"
                     Foreground="{StaticResource BoulderBrush}">
                     Mã giảm giá
-                </TextBlock>
-                <controls:AutoCompleteBox
+                    </TextBlock>
+                    <controls:AutoCompleteBox
                     x:Name="voucherTextBox"
                     Grid.Row="2"
                     Width="200"
@@ -316,13 +327,13 @@
                     SelectedItem="{Binding currentTable.currentVoucher, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextBoxStyle="{StaticResource RoundedWhiteTextBox}"
                     ValueMemberPath="voucherID">
-                    <controls:AutoCompleteBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding voucherID}" />
-                        </DataTemplate>
-                    </controls:AutoCompleteBox.ItemTemplate>
-                </controls:AutoCompleteBox>
-                <TextBlock
+                        <controls:AutoCompleteBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding voucherID}" />
+                            </DataTemplate>
+                        </controls:AutoCompleteBox.ItemTemplate>
+                    </controls:AutoCompleteBox>
+                    <TextBlock
                     Grid.Row="3"
                     Margin="30,0,0,0"
                     HorizontalAlignment="Left"
@@ -332,29 +343,29 @@
                     FontWeight="Medium"
                     Foreground="{StaticResource BoulderBrush}">
                     Giảm giá
-                </TextBlock>
-                <StackPanel
+                    </TextBlock>
+                    <StackPanel
                     Grid.Row="3"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
-                    <TextBlock
+                        <TextBlock
                         Margin="0,0,20,0"
                         FontFamily="Roboto"
                         FontSize="24"
                         FontWeight="Medium"
                         Foreground="{StaticResource BoulderBrush}"
                         Text="{Binding currentTable.discount, StringFormat={}{0:n0}}" />
-                    <TextBlock
+                        <TextBlock
                         Margin="0,0,20,0"
                         FontFamily="Roboto"
                         FontSize="24"
                         FontWeight="Medium"
                         Foreground="{StaticResource BoulderBrush}"
                         Text=" VNĐ" />
-                </StackPanel>
+                    </StackPanel>
 
-                <TextBlock
+                    <TextBlock
                     Grid.Row="4"
                     Margin="30,0,0,0"
                     HorizontalAlignment="Left"
@@ -364,41 +375,41 @@
                     FontWeight="Medium"
                     Foreground="{StaticResource BoulderBrush}">
                     Tổng
-                </TextBlock>
-                <StackPanel
+                    </TextBlock>
+                    <StackPanel
                     Grid.Row="4"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
-                    <TextBlock
+                        <TextBlock
                         Margin="0,0,20,0"
                         FontFamily="Roboto"
                         FontSize="24"
                         FontWeight="Medium"
                         Foreground="{StaticResource BoulderBrush}"
                         Text="{Binding currentTable.total, StringFormat={}{0:n0}}" />
-                    <TextBlock
+                        <TextBlock
                         Margin="0,0,20,0"
                         FontFamily="Roboto"
                         FontSize="24"
                         FontWeight="Medium"
                         Foreground="{StaticResource BoulderBrush}"
                         Text=" VNĐ" />
-                </StackPanel>
+                    </StackPanel>
 
-                <Grid Grid.Row="5" Background="White">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button
+                    <Grid Grid.Row="5" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button
                         Width="200"
                         Height="63"
                         Command="{Binding confirmClickCmd}"
                         CommandParameter="{Binding ElementName=MenuWD}"
                         Content="{Binding currentTable.status, Converter={StaticResource TableStatusToButtonTextConverter}}"
                         Style="{StaticResource PrimaryButton}" />
-                    <Button
+                        <Button
                         Grid.Column="1"
                         Width="200"
                         Height="63"
@@ -408,30 +419,30 @@
                         CommandParameter="{Binding ElementName=MenuWD}"
                         Foreground="Black"
                         Style="{StaticResource PrimaryButton}">
-                        HỦY BỎ
-                    </Button>
+                            HỦY BỎ
+                        </Button>
+                    </Grid>
+
+
                 </Grid>
 
 
-            </Grid>
-
-
-            <DataGrid
+                <DataGrid
                 x:Name="receiptDataGrid"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
                 ItemsSource="{Binding currentTable.receiptItems}"
                 SelectionMode="Single">
 
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn
                         Width="*"
                         Header="Tên"
                         HeaderStyle="{StaticResource DataGridHeaderStyle}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button
                                         Width="35"
                                         Height="35"
                                         Padding="0"
@@ -440,35 +451,35 @@
                                         Command="{Binding deleteReceiptItemCmd, Source={StaticResource MenuVM}}"
                                         CommandParameter="{Binding ElementName=receiptDataGrid}">
 
-                                        <materialDesign:PackIcon
+                                            <materialDesign:PackIcon
                                             Width="35"
                                             Height="35"
                                             Foreground="{StaticResource BoulderBrush}"
                                             Kind="DeleteForever" />
-                                    </Button>
-                                    <TextBlock
+                                        </Button>
+                                        <TextBlock
                                         VerticalAlignment="Center"
                                         FontFamily="Roboto"
                                         FontSize="20"
                                         FontWeight="Medium"
                                         Foreground="{StaticResource BoulderBrush}"
                                         Text="{Binding Beverage.beverageName}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn
+                        <DataGridTemplateColumn
                         Width="*"
                         Header="Số lượng"
                         HeaderStyle="{StaticResource DataGridHeaderStyle}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Orientation="Horizontal">
-                                    <Button
+                                        <Button
                                         Width="35"
                                         Height="35"
                                         Padding="0"
@@ -476,13 +487,13 @@
                                         BorderThickness="0"
                                         Command="{Binding decreaseQuantity, Source={StaticResource MenuVM}}"
                                         CommandParameter="{Binding ElementName=receiptDataGrid}">
-                                        <materialDesign:PackIcon
+                                            <materialDesign:PackIcon
                                             Width="35"
                                             Height="35"
                                             Foreground="{StaticResource PrimaryBrush}"
                                             Kind="MinusCircle" />
-                                    </Button>
-                                    <TextBlock
+                                        </Button>
+                                        <TextBlock
                                         Margin="10,0,10,0"
                                         VerticalAlignment="Center"
                                         FontFamily="Roboto"
@@ -490,7 +501,7 @@
                                         FontWeight="Medium"
                                         Foreground="{StaticResource BoulderBrush}"
                                         Text="{Binding quantity}" />
-                                    <Button
+                                        <Button
                                         Width="35"
                                         Height="35"
                                         Padding="0"
@@ -498,47 +509,48 @@
                                         BorderThickness="0"
                                         Command="{Binding increaseQuantity, Source={StaticResource MenuVM}}"
                                         CommandParameter="{Binding ElementName=receiptDataGrid}">
-                                        <materialDesign:PackIcon
+                                            <materialDesign:PackIcon
                                             Width="35"
                                             Height="35"
                                             Foreground="{StaticResource PrimaryBrush}"
                                             Kind="PlusCircle" />
-                                    </Button>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn
+                        <DataGridTemplateColumn
                         Width="*"
                         Header="Giá"
                         HeaderStyle="{StaticResource DataGridHeaderStyle}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Orientation="Horizontal">
-                                    <TextBlock
+                                        <TextBlock
                                         FontFamily="Roboto"
                                         FontSize="20"
                                         FontWeight="Medium"
                                         Foreground="{StaticResource BoulderBrush}"
                                         Text="{Binding total, StringFormat={}{0:n0}}" />
-                                    <TextBlock
+                                        <TextBlock
                                         FontFamily="Roboto"
                                         FontSize="20"
                                         FontWeight="Medium"
                                         Foreground="{StaticResource BoulderBrush}"
                                         Text="  VNĐ" />
 
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-        </DockPanel>
+            </DockPanel>
+        </Grid>
     </Grid>
 </Window>

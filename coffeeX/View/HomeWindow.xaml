@@ -8,13 +8,14 @@
     xmlns:local="clr-namespace:coffeeX.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="clr-namespace:coffeeX.Resource.UserControls"
+    WindowStyle="None"
     Name="HomeWD"
     Title="HomeWindow"
     Width="1600"
     Height="900"
     DataContext="{StaticResource HomeVM}"
     WindowState="Maximized"
-    WindowStyle="None"
     mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -23,35 +24,44 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
 
-        <Grid Background="#323E3E">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="120" />
-                <RowDefinition Height="75" />
-                <RowDefinition Height="75" />
-                <RowDefinition Height="75" />
-                <RowDefinition Height="75" />
-                <RowDefinition Height="75" />
-                <RowDefinition Height="75" />
-                <RowDefinition Height="75" />
-                <RowDefinition Height="100" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC></uc:ControlBarUC>
+        </Grid>
 
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
-                <Image
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Background="#323E3E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image
                     DataContext="{StaticResource MenuVM}"
                     Name="menuViewModel"
                     Width="190"
                     Margin="40,0,0,0"
                     Source="/Resource/Images/app_logo.png" />
-            </StackPanel>
+                </StackPanel>
 
-            <Button
+                <Button
                 Grid.Row="1"
                 Height="75"
                 HorizontalAlignment="Stretch"
@@ -62,27 +72,27 @@
                 BorderThickness="0"
                 Command="{Binding addPaymentVoucherCmd}">
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Image
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image
                         Width="48"
                         Height="48"
                         Source="/Resource/Images/icon_buy.png" />
-                    <TextBlock
+                        <TextBlock
                         Grid.Column="1"
                         VerticalAlignment="Center"
                         FontFamily="/Resource/Fonts/#SVN-Avo"
                         FontSize="24"
                         Foreground="White"
                         Text="Lập phiếu chi" />
-                </Grid>
+                    </Grid>
 
-            </Button>
+                </Button>
 
-            <Button
+                <Button
                 Grid.Row="2"
                 Height="75"
                 HorizontalAlignment="Stretch"
@@ -93,27 +103,27 @@
                 BorderThickness="0"
                 Command="{Binding onStatisticClickCmd}">
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Image
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image
                         Width="48"
                         Height="48"
                         Source="/Resource/Images/icon_history.png" />
-                    <TextBlock
+                        <TextBlock
                         Grid.Column="1"
                         VerticalAlignment="Center"
                         FontFamily="/Resource/Fonts/#SVN-Avo"
                         FontSize="24"
                         Foreground="White"
                         Text="Thống kê" />
-                </Grid>
+                    </Grid>
 
-            </Button>
+                </Button>
 
-            <Button
+                <Button
                 Grid.Row="3"
                 Height="75"
                 HorizontalAlignment="Stretch"
@@ -124,27 +134,27 @@
                 BorderThickness="0"
                 Command="{Binding modifyBeverageCmd}">
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Image
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image
                         Width="48"
                         Height="48"
                         Source="/Resource/Images/icon_edit_beverage.png" />
-                    <TextBlock
+                        <TextBlock
                         Grid.Column="1"
                         VerticalAlignment="Center"
                         FontFamily="/Resource/Fonts/#SVN-Avo"
                         FontSize="24"
                         Foreground="White"
                         Text="Chỉnh sửa thức uống" />
-                </Grid>
+                    </Grid>
 
-            </Button>
+                </Button>
 
-            <Button
+                <Button
                 Grid.Row="4"
                 Height="75"
                 HorizontalAlignment="Stretch"
@@ -155,27 +165,27 @@
                 BorderThickness="0"
                 Command="{Binding addBeverageCmd}">
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Image
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image
                         Width="48"
                         Height="48"
                         Source="/Resource/Images/icon_add_beverage.png" />
-                    <TextBlock
+                        <TextBlock
                         Grid.Column="1"
                         VerticalAlignment="Center"
                         FontFamily="/Resource/Fonts/#SVN-Avo"
                         FontSize="24"
                         Foreground="White"
                         Text="Thêm thức uống" />
-                </Grid>
+                    </Grid>
 
-            </Button>
+                </Button>
 
-            <Button
+                <Button
                 Grid.Row="5"
                 Height="75"
                 HorizontalAlignment="Stretch"
@@ -186,28 +196,28 @@
                 BorderThickness="0"
                 Command="{Binding modifyIngredientCmd}">
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Image
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image
                         DataContext="{StaticResource IngredientManageVM}"
                         Width="48"
                         Height="48"
                         Source="/Resource/Images/icon_edit_ingredient.png" />
-                    <TextBlock
+                        <TextBlock
                         Grid.Column="1"
                         VerticalAlignment="Center"
                         FontFamily="/Resource/Fonts/#SVN-Avo"
                         FontSize="24"
                         Foreground="White"
                         Text="Chỉnh sửa nguyên liệu" />
-                </Grid>
+                    </Grid>
 
-            </Button>
+                </Button>
 
-            <Button
+                <Button
                 Grid.Row="6"
                 Height="75"
                 HorizontalAlignment="Stretch"
@@ -218,28 +228,28 @@
                 BorderThickness="0"
                 Command="{Binding addIngredientCmd}">
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Image
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image
                         DataContext="{StaticResource IngredientManageVM}"
                         Width="48"
                         Height="48"
                         Source="/Resource/Images/icon_add_ingredient.png" />
-                    <TextBlock
+                        <TextBlock
                         Grid.Column="1"
                         VerticalAlignment="Center"
                         FontFamily="/Resource/Fonts/#SVN-Avo"
                         FontSize="24"
                         Foreground="White"
                         Text="Thêm nguyên liệu" />
-                </Grid>
+                    </Grid>
 
-            </Button>
+                </Button>
 
-            <Button
+                <Button
                 Grid.Row="7"
                 Height="75"
                 HorizontalAlignment="Stretch"
@@ -250,43 +260,43 @@
                 BorderThickness="0"
                 Command="{Binding changePwdCmd}">
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Image
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image
                         DataContext="{StaticResource BeverageManageVM}"
                         Width="48"
                         Height="48"
                         Source="/Resource/Images/icon_user.png" />
-                    <TextBlock
+                        <TextBlock
                         Grid.Column="1"
                         VerticalAlignment="Center"
                         FontFamily="/Resource/Fonts/#SVN-Avo"
                         FontSize="24"
                         Foreground="White"
                         Text="Tài khoản" />
-                </Grid>
+                    </Grid>
 
-            </Button>
+                </Button>
 
-            <Grid Grid.Row="9">
-                <Label
+                <Grid Grid.Row="9">
+                    <Label
                     Margin="0,0,0,10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom">
-                    <TextBlock
+                        <TextBlock
                         DataContext="{StaticResource UserVM}"
                         FontFamily="Roboto"
                         FontSize="24"
                         Foreground="White"
                         Text="{Binding currentUser.fullName}" />
-                </Label>
-            </Grid>
+                    </Label>
+                </Grid>
 
-            <Grid Grid.Row="10">
-                <Button
+                <Grid Grid.Row="10">
+                    <Button
                     Width="260"
                     Height="50"
                     Command="{Binding logOutCmd}"
@@ -294,27 +304,27 @@
                     Content="ĐĂNG XUẤT"
                     DataContext="{StaticResource UserVM}"
                     Style="{StaticResource PrimaryButton}" />
+                </Grid>
             </Grid>
-        </Grid>
-        <Grid Grid.Column="1">
-            <ListBox
+            <Grid Grid.Column="1">
+                <ListBox
                 x:Name="tableNumberListBox"
                 Margin="20,30,20,30"
                 ItemsSource="{Binding table}">
-                <ListBox.ItemContainerStyle>
-                    <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
-                        <Setter Property="Padding" Value="0" />
-                        <Setter Property="Margin" Value="20,20,20,20" />
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Button
+                    <ListBox.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="ListBoxItem">
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="Margin" Value="20,20,20,20" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Button
                             Width="80"
                             Height="80"
                             materialDesign:ButtonAssist.CornerRadius="12"
@@ -322,15 +332,17 @@
                             BorderBrush="Transparent"
                             Command="{Binding Source={StaticResource HomeVM}, Path=onTableClickCmd}"
                             CommandParameter="{Binding}">
-                            <TextBlock
+                                <TextBlock
                                 FontFamily="Roboto"
                                 FontSize="32"
                                 Foreground="#333333"
                                 Text="{Binding number}" />
-                        </Button>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                            </Button>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
         </Grid>
     </Grid>
 </Window>

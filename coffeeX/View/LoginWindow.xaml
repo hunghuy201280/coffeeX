@@ -6,6 +6,8 @@
     xmlns:local="clr-namespace:coffeeX.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="clr-namespace:coffeeX.Resource.UserControls"
+    WindowStyle="None"
     DataContext="{StaticResource UserVM}"
     Title="Login"
     Name="LoginWindow1"
@@ -15,32 +17,49 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
 
-        <Image HorizontalAlignment="Left" Source="/Resource/Images/login_left_image.png" />
-        <Image
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC>
+            </uc:ControlBarUC>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Image HorizontalAlignment="Left" Source="/Resource/Images/login_left_image.png" />
+                <Image
             Height="50"
             Margin="10,0,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Source="/Resource/Images/app_logo.png" />
-        <StackPanel
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <StackPanel
+            Grid.Row="1"
             Grid.Column="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Orientation="Vertical">
-            <TextBlock
+                    <TextBlock
                 Margin="0,0,0,40"
                 HorizontalAlignment="Center"
                 FontSize="44"
                 FontWeight="Medium"
                 >
                 Welcome!
-            </TextBlock>
-            <TextBox
+                    </TextBlock>
+                    <TextBox
                 Name="userName"
                 Width="281"
                 Margin="0,0,0,30"
@@ -51,7 +70,7 @@
                 Text="{Binding userName ,UpdateSourceTrigger=PropertyChanged}"
                
                 />
-            <TextBox
+                    <TextBox
                 Name="passWord"
                 Width="281"
                 VerticalAlignment="Center"
@@ -62,7 +81,7 @@
                 materialDesign:HintAssist.FontFamily="Roboto"
               
                  />
-            <TextBlock
+                    <TextBlock
                 HorizontalAlignment="Center"
                 Margin="0,16,0,0"
                 FontSize="16">
@@ -72,17 +91,22 @@
                            >Đăng ký
                             
                 </Hyperlink>
-            </TextBlock>
-            <Button Height="51"
+                    </TextBlock>
+                    <Button Height="51"
                     Margin="0,18,0,0"
                     Style="{StaticResource PrimaryButton}"
                     Command="{Binding loginCommand, UpdateSourceTrigger=PropertyChanged}"
                     CommandParameter="{Binding ElementName=LoginWindow1}"
                     >
-                ĐĂNG NHẬP
-            </Button>
+                        ĐĂNG NHẬP
+                    </Button>
 
-        </StackPanel>
+                </StackPanel>
+            </Grid>
+            
+        </Grid>
+        
+        
 
     </Grid>
 </Window>

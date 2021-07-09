@@ -9,6 +9,8 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:uc="clr-namespace:coffeeX.Resource.UserControls"
+    WindowStyle="None"
     Name="PaymentWD"
     Title="PaymentWindow"
     Width="1022"
@@ -25,13 +27,23 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="460" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" MinWidth="460" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
 
-        </Grid.ColumnDefinitions>
-        <TextBlock
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC></uc:ControlBarUC>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="460" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" MinWidth="460" />
+
+            </Grid.ColumnDefinitions>
+            <TextBlock
             Margin="0,44,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
@@ -39,12 +51,12 @@
             FontSize="36"
             FontWeight="Bold">
             NHẬP NGUYÊN LIỆU
-        </TextBlock>
-        <StackPanel
+            </TextBlock>
+            <StackPanel
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Orientation="Vertical">
-            <ComboBox
+                <ComboBox
                 Name="ingredientComboBox"
                 Width="330"
                 Height="63"
@@ -64,7 +76,7 @@
                 ItemsSource="{Binding ingredients}"
                 SelectedItem="{Binding currentDetail.Ingredient}"
                 Style="{StaticResource MaterialDesignOutlinedComboBox}" />
-            <TextBox
+                <TextBox
                 x:Name="quantityTextBox"
                 Height="63"
                 Margin="0,40,0,0"
@@ -73,7 +85,7 @@
                 BorderThickness="0"
                 Style="{StaticResource RoundedTextBox}"
                 Text="{Binding currentDetail.ingredientQuantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <controls:AutoCompleteBox
+                <controls:AutoCompleteBox
                 x:Name="unitNameTextBox"
                 Height="63"
                 Margin="0,40,0,0"
@@ -86,14 +98,14 @@
                 SelectedItem="{Binding currentDetail.Ingredient.Unit, Mode=TwoWay}"
                 TextBoxStyle="{StaticResource RoundedTextBox}"
                 ValueMemberPath="unitName">
-                <controls:AutoCompleteBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding unitName}" />
-                    </DataTemplate>
-                </controls:AutoCompleteBox.ItemTemplate>
-            </controls:AutoCompleteBox>
-            <Grid>
-                <TextBox
+                    <controls:AutoCompleteBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding unitName}" />
+                        </DataTemplate>
+                    </controls:AutoCompleteBox.ItemTemplate>
+                </controls:AutoCompleteBox>
+                <Grid>
+                    <TextBox
                     x:Name="priceTextBox"
                     Height="63"
                     Margin="0,40,0,0"
@@ -106,7 +118,7 @@
                     Style="{StaticResource RoundedTextBox}"
                     Text="{Binding currentDetail.Ingredient.ingredientPrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
-                <TextBlock
+                    <TextBlock
                     Height="63"
                     Margin="0,40,0,0"
                     Padding="20,14,0,0"
@@ -114,9 +126,9 @@
                     VerticalAlignment="Center"
                     FontSize="24">
                     VND
-                </TextBlock>
-            </Grid>
-            <Button
+                    </TextBlock>
+                </Grid>
+                <Button
                 Width="222"
                 Height="63"
                 Margin="0,60,0,0"
@@ -124,13 +136,13 @@
                 CommandParameter="{Binding ElementName=PaymentWD}"
                 Content="THÊM"
                 Style="{StaticResource PrimaryButton}" />
-        </StackPanel>
-        <StackPanel
+            </StackPanel>
+            <StackPanel
             Margin="0,0,0,30"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Orientation="Vertical">
-            <TextBlock
+                <TextBlock
                 x:Name="staffTextBlock"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
@@ -147,8 +159,8 @@
                     FontSize="24"
                     FontWeight="Normal"
                     Text="{Binding currentUser.fullName}" />
-            </TextBlock>
-            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom">
                 <Run
                     FontFamily="Roboto"
                     FontSize="24"
@@ -161,14 +173,14 @@
                     FontSize="24"
                     FontWeight="Normal"
                     Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='{}{0:dd-MM-yyyy}', Mode=OneWay}" />
-            </TextBlock>
-        </StackPanel>
-        <GridSplitter
+                </TextBlock>
+            </StackPanel>
+            <GridSplitter
             Grid.Column="1"
             Width="2"
             VerticalAlignment="Stretch" />
-        <DockPanel Grid.Column="2">
-            <TextBlock
+            <DockPanel Grid.Column="2">
+                <TextBlock
                 Height="auto"
                 Margin="0,44,0,0"
                 HorizontalAlignment="Center"
@@ -178,14 +190,14 @@
                 FontSize="36"
                 FontWeight="Bold">
                 CHI TIẾT PHIẾU CHI
-            </TextBlock>
-            <Grid Background="{StaticResource SeashellBrush}" DockPanel.Dock="Bottom">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="74" />
-                    <RowDefinition Height="130" />
-                </Grid.RowDefinitions>
+                </TextBlock>
+                <Grid Background="{StaticResource SeashellBrush}" DockPanel.Dock="Bottom">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="74" />
+                        <RowDefinition Height="130" />
+                    </Grid.RowDefinitions>
 
-                <TextBlock
+                    <TextBlock
                     Margin="30,0,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
@@ -194,9 +206,9 @@
                     FontWeight="Medium"
                     Foreground="{StaticResource BoulderBrush}">
                     Tổng
-                </TextBlock>
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <TextBlock
+                    </TextBlock>
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <TextBlock
                         Margin="0,0,20,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
@@ -205,7 +217,7 @@
                         FontWeight="Medium"
                         Foreground="{StaticResource BoulderBrush}"
                         Text="{Binding paymentValue, StringFormat={}{0:n0}}" />
-                    <TextBlock
+                        <TextBlock
                         Margin="0,0,20,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
@@ -214,20 +226,20 @@
                         FontWeight="Medium"
                         Foreground="{StaticResource BoulderBrush}"
                         Text=" VNĐ" />
-                </StackPanel>
-                <Grid Grid.Row="1" Background="White">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button
+                    </StackPanel>
+                    <Grid Grid.Row="1" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button
                         Width="200"
                         Height="63"
                         Command="{Binding confirmCmd}"
                         Style="{StaticResource PrimaryButton}">
-                        XÁC NHẬN
-                    </Button>
-                    <Button
+                            XÁC NHẬN
+                        </Button>
+                        <Button
                         Grid.Column="1"
                         Width="200"
                         Height="63"
@@ -238,27 +250,27 @@
                         Foreground="Black"
                         
                         Style="{StaticResource PrimaryButton}">
-                        HỦY BỎ
-                    </Button>
+                            HỦY BỎ
+                        </Button>
+                    </Grid>
+
+
                 </Grid>
 
-
-            </Grid>
-
-            <DataGrid
+                <DataGrid
                 x:Name="paymentDataGrid"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
                 ItemsSource="{Binding paymentDetails}">
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn
                         Width="*"
                         Header="Tên"
                         HeaderStyle="{StaticResource DataGridHeaderStyle}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button
                                         Width="35"
                                         Height="35"
                                         Padding="0"
@@ -266,13 +278,13 @@
                                         BorderThickness="0"
                                         Command="{Binding deletePaymentItemCmd, Source={StaticResource PaymentViewModel}}"
                                         CommandParameter="{Binding ElementName=paymentDataGrid}">
-                                        <materialDesign:PackIcon
+                                            <materialDesign:PackIcon
                                             Width="35"
                                             Height="35"
                                             Foreground="{StaticResource BoulderBrush}"
                                             Kind="DeleteForever" />
-                                    </Button>
-                                    <TextBlock
+                                        </Button>
+                                        <TextBlock
                                         VerticalAlignment="Center"
                                         FontFamily="Roboto"
                                         FontSize="20"
@@ -281,22 +293,22 @@
                                         Text="{Binding Ingredient.ingredientName}" />
 
 
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn
+                        <DataGridTemplateColumn
                         Width="*"
                         Header="Số lượng"
                         HeaderStyle="{StaticResource DataGridHeaderStyle}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Orientation="Horizontal">
-                                    <Button
+                                        <Button
                                         Width="35"
                                         Height="35"
                                         Padding="0"
@@ -304,13 +316,13 @@
                                         BorderThickness="0"
                                         Command="{Binding decreaseQuantity, Source={StaticResource PaymentViewModel}}"
                                         CommandParameter="{Binding ElementName=paymentDataGrid}">
-                                        <materialDesign:PackIcon
+                                            <materialDesign:PackIcon
                                             Width="35"
                                             Height="35"
                                             Foreground="{StaticResource PrimaryBrush}"
                                             Kind="MinusCircle" />
-                                    </Button>
-                                    <TextBlock
+                                        </Button>
+                                        <TextBlock
                                         Margin="10,0,10,0"
                                         VerticalAlignment="Center"
                                         FontFamily="Roboto"
@@ -318,7 +330,7 @@
                                         FontWeight="Medium"
                                         Foreground="{StaticResource BoulderBrush}"
                                         Text="{Binding ingredientQuantity}" />
-                                    <Button
+                                        <Button
                                         Width="35"
                                         Height="35"
                                         Padding="0"
@@ -326,50 +338,50 @@
                                         BorderThickness="0"
                                         Command="{Binding increaseQuantity, Source={StaticResource PaymentViewModel}}"
                                         CommandParameter="{Binding ElementName=paymentDataGrid}">
-                                        <materialDesign:PackIcon
+                                            <materialDesign:PackIcon
                                             Width="35"
                                             Height="35"
                                             Foreground="{StaticResource PrimaryBrush}"
                                             Kind="PlusCircle" />
-                                    </Button>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn
                         Width="*"
                         Header="Giá"
                         HeaderStyle="{StaticResource DataGridHeaderStyle}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Orientation="Horizontal">
-                                    <TextBlock
+                                        <TextBlock
                                         FontFamily="Roboto"
                                         FontSize="20"
                                         FontWeight="Medium"
                                         Foreground="{StaticResource BoulderBrush}"
                                         Text="{Binding total, StringFormat={}{0:n0}}" />
-                                    <TextBlock
+                                        <TextBlock
                                         FontFamily="Roboto"
                                         FontSize="20"
                                         FontWeight="Medium"
                                         Foreground="{StaticResource BoulderBrush}"
                                         Text="  VNĐ" />
 
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-        </DockPanel>
+            </DockPanel>
 
 
-
+        </Grid>
     </Grid>
 
 </Window>
