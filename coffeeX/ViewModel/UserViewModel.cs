@@ -19,6 +19,7 @@ namespace coffeeX.ViewModel
     {
         public ICommand registerCommand { get; set; }
         public ICommand passwordChangedCommand { get; set; }
+        public ICommand loginClickCommand { get; set; }
         public ICommand loginCommand { get; set; }
         public ICommand registerClickCommand { get; set; }
 
@@ -83,8 +84,13 @@ namespace coffeeX.ViewModel
             logOutCmd= new RelayCommand<Window>((p) => p!=null, onLogOutCleanup);
             cancelChangePwdCmd = new RelayCommand<ChangePwdWindow>((p) => true, (p) => { p.Close(); cleanUpChangePwd(); });
             acceptChangePwdCmd = new RelayCommand<ChangePwdWindow>((p) => { return checkValidateNewPwd(); }, changePassword);
+            loginClickCommand = new RelayCommand<RegisterWindow>((p) => p!=null, onLoginClick);
         }
 
+        private void onLoginClick(RegisterWindow obj)
+        {
+            obj.Close();
+        }
 
         private void onLogOutCleanup(Window p)
         {

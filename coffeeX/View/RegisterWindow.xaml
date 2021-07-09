@@ -99,7 +99,11 @@
                 HorizontalAlignment="Center"
                 FontSize="16">
                 <Span Foreground="{StaticResource DustyGrayBrush}">Bạn đã có tài khoản?</Span>
-                <Hyperlink Foreground="{StaticResource PrimaryBrush}">Đăng nhập</Hyperlink>
+                <Hyperlink Foreground="{StaticResource PrimaryBrush}"
+                           
+                            Command="{Binding loginClickCommand}"
+                           CommandParameter="{Binding ElementName=RegisterWindow1}"
+                           >Đăng nhập</Hyperlink>
                 </TextBlock>
                 <Button
                 Height="51"
