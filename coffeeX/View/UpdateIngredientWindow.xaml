@@ -9,7 +9,6 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uc="clr-namespace:coffeeX.Resource.UserControls"
-    WindowStyle="None"
     Name="UpdateIngredientWD"
     Title="UpdateIngredient"
     Width="845"
@@ -18,23 +17,23 @@
     MinHeight="650"
     DataContext="{StaticResource IngredientManageVM}"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d"
-    >
+    WindowStyle="None"
+    mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding onUpdateIngredientWindowLoaded}" CommandParameter="{Binding ElementName=UpdateIngredientWD}" />
+            <i:InvokeCommandAction Command="{Binding onUpdateIngredientWindowLoadedCmd}" CommandParameter="{Binding ElementName=UpdateIngredientWD}" />
 
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <uc:ControlBarUC></uc:ControlBarUC>
+            <uc:ControlBarUC />
         </Grid>
 
         <Grid Grid.Row="1">
@@ -45,24 +44,24 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <DataGrid
-         
-            Name="DataGrid"
-            Grid.Row="3"
-            AutoGenerateColumns="False"
-            IsReadOnly="True"
-            ItemsSource="{Binding updatedIngredient}"
-            SelectionMode="Single">
+                Name="DataGrid"
+                Grid.Row="3"
+                AutoGenerateColumns="False"
+                IsReadOnly="True"
+                ItemsSource="{Binding ingredients}"
+                SelectionMode="Single">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding chooseIngredient}" CommandParameter="{Binding ElementName=DataGrid, Path=SelectedItem}" />
+                        <i:InvokeCommandAction Command="{Binding ingredientSelectedChanged}" CommandParameter="{Binding ElementName=DataGrid, Path=SelectedItem}" />
 
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <DataGrid.ContextMenu>
                     <ContextMenu Name="contextMenu">
-                        <MenuItem Command="{Binding deleteIngredientCmd}"
-                              CommandParameter="{Binding Path=PlacementTarget.SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
-                              Header="Xoá nguyên liệu" />
+                        <MenuItem
+                            Command="{Binding deleteIngredientCmd}"
+                            CommandParameter="{Binding Path=PlacementTarget.SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"
+                            Header="Xoá nguyên liệu" />
                     </ContextMenu>
                 </DataGrid.ContextMenu>
 
@@ -70,30 +69,30 @@
 
 
                     <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding ingredientName}"
-                    Header="Tên"
-                    HeaderStyle="{StaticResource DataGridHeaderStyle}" />
+                        Width="*"
+                        Binding="{Binding ingredientName}"
+                        Header="Tên"
+                        HeaderStyle="{StaticResource DataGridHeaderStyle}" />
                     <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Unit.unitName}"
-                    Header="Đơn vị"
-                    HeaderStyle="{StaticResource DataGridHeaderStyle}" />
+                        Width="*"
+                        Binding="{Binding Unit.unitName}"
+                        Header="Đơn vị"
+                        HeaderStyle="{StaticResource DataGridHeaderStyle}" />
                     <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding ingredientPrice}"
-                    Header="Đơn giá"
-                    HeaderStyle="{StaticResource DataGridHeaderStyle}" />
+                        Width="*"
+                        Binding="{Binding ingredientPrice}"
+                        Header="Đơn giá"
+                        HeaderStyle="{StaticResource DataGridHeaderStyle}" />
                 </DataGrid.Columns>
 
 
             </DataGrid>
             <Label
-            Margin="0,20,0,0"
-            HorizontalAlignment="Center"
-            Content="SỬA NGUYÊN LIỆU"
-            FontSize="36"
-            FontWeight="Bold" />
+                Margin="0,20,0,0"
+                HorizontalAlignment="Center"
+                Content="SỬA NGUYÊN LIỆU"
+                FontSize="36"
+                FontWeight="Bold" />
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -101,51 +100,53 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Orientation="Vertical">
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Vertical">
                     <TextBox
-                    x:Name="ingredientName"
-                    Width="330"
-                    Margin="0,0,0,30"
-                    Padding="10"
-                    materialDesign:HintAssist.Hint="Tên nguyên liệu"
-                    AcceptsReturn="False"
-                    Background="#F1F1F1"
-                    BorderThickness="0"
-                    Style="{StaticResource RoundedTextBox}"
-                    Text="{Binding currentIngredientName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <controls:AutoCompleteBox
-                    x:Name="ingredientType"
-                    Width="330"
-                    Margin="0,0,0,30"
-                    Padding="10"
-                    materialDesign:HintAssist.Foreground="#9B9B9B"
-                    materialDesign:HintAssist.Hint="Loại nguyên liệu"
-                    Background="#F1F1F1"
-                    BorderThickness="0"
-                    ItemsSource="{Binding ingredientTypeSuggest}"
-                    Text="{Binding currentIngredientUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    TextBoxStyle="{StaticResource RoundedTextBox}" />
-
-                    <Grid>
-                        <TextBox
-                        x:Name="ingredientPrice"
+                        x:Name="ingredientName"
                         Width="330"
-                        Padding="10,10,70,10"
-                        materialDesign:HintAssist.Hint="Đơn Giá"
+                        Margin="0,0,0,30"
+                        Padding="10"
+                        materialDesign:HintAssist.Hint="Tên nguyên liệu"
                         AcceptsReturn="False"
                         Background="#F1F1F1"
                         BorderThickness="0"
                         Style="{StaticResource RoundedTextBox}"
-                        Text="{Binding currentIngredientPrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged}" />
+                        Text="{Binding currentIngredientName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <controls:AutoCompleteBox
+                        x:Name="ingredientType"
+                        Width="330"
+                        Margin="0,0,0,30"
+                        Padding="10"
+                        materialDesign:HintAssist.Foreground="#9B9B9B"
+                        materialDesign:HintAssist.Hint="Đơn vị"
+                        Background="#F1F1F1"
+                        BorderThickness="0"
+                        ItemsSource="{Binding ingredientUnitSuggest}"
+                        Text="{Binding currentIngredientUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextBoxStyle="{StaticResource RoundedTextBox}" />
+
+                    <Grid>
+                        <TextBox
+                            x:Name="ingredientPrice"
+                            Width="330"
+                            Padding="10,10,70,10"
+                            materialDesign:HintAssist.Hint="Đơn Giá"
+                            AcceptsReturn="False"
+                            Background="#F1F1F1"
+                            BorderThickness="0"
+                            Style="{StaticResource RoundedTextBox}"
+                            Text="{Binding currentIngredientPrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged}" />
 
                         <TextBlock
-                        Margin="0,0,10,0"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        FontSize="24">
-                        VND
+                            Name="PaymentVM"
+                            Margin="0,0,10,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            DataContext="{StaticResource PaymentViewModel}"
+                            FontSize="24">
+                            VNĐ
                         </TextBlock>
                     </Grid>
                 </StackPanel>
@@ -153,19 +154,19 @@
             </Grid>
 
             <StackPanel
-            Grid.Row="2"
-            Margin="0,0,0,80"
-            HorizontalAlignment="Center"
-            Orientation="Horizontal">
+                Grid.Row="2"
+                Margin="0,0,0,80"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
                 <Button
-                Width="222"
-                Height="63"
-                Margin="0,0,44,0"
-                materialDesign:ButtonAssist.CornerRadius="16"
-                Content="Chỉnh sửa"
-                Command="{Binding updateIngredientCmd}"
-                CommandParameter="{Binding ElementName=UpdateIngredientWD}"
-                Style="{StaticResource PrimaryButton}" />
+                    Width="222"
+                    Height="63"
+                    Margin="0,0,0,0"
+                    materialDesign:ButtonAssist.CornerRadius="16"
+                    Command="{Binding updateIngredientCmd}"
+                    CommandParameter="{Binding ElementName=UpdateIngredientWD}"
+                    Content="Chỉnh sửa"
+                    Style="{StaticResource PrimaryButton}" />
             </StackPanel>
         </Grid>
     </Grid>

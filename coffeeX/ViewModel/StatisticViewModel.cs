@@ -13,6 +13,7 @@ namespace coffeeX.ViewModel
 {
     public class StatisticViewModel : BaseViewModel
     {
+        CoffeeXEntities db = new CoffeeXEntities();
         public ICommand onLoadedCmd { get; set; }
         public ICommand onBackCmd { get; set; }
         public ICommand calcStatisticCmd { get; set; }
@@ -90,6 +91,8 @@ namespace coffeeX.ViewModel
 
         private void calcStatistic(StatisticWindow statisticWD)
         {
+            db.Dispose();
+            db = new CoffeeXEntities();
             receiptStatistic.Clear();
             paymentStatistic.Clear();
             int day = 0, month = 0, year = 0;
@@ -112,18 +115,18 @@ namespace coffeeX.ViewModel
             List<PaymentVoucher> paymentVouchers = null;
             if (day != 0 && month != 0 && year != 0)
             {
-                receipts = CoffeeXRepo.Ins.DB.Receipts.Where((r) => r.dateCreated.Day == day && r.dateCreated.Month == month && r.dateCreated.Year == year).ToList();
-                paymentVouchers = CoffeeXRepo.Ins.DB.PaymentVouchers.Where((r) => r.dateCreated.Day == day && r.dateCreated.Month == month && r.dateCreated.Year == year).ToList();
+                receipts = db.Receipts.Where((r) => r.dateCreated.Day == day && r.dateCreated.Month == month && r.dateCreated.Year == year).ToList();
+                paymentVouchers = db.PaymentVouchers.Where((r) => r.dateCreated.Day == day && r.dateCreated.Month == month && r.dateCreated.Year == year).ToList();
             }
             else if (month != 0 && year != 0)
             {
-                receipts = CoffeeXRepo.Ins.DB.Receipts.Where((r) => r.dateCreated.Month == month && r.dateCreated.Year == year).ToList();
-                paymentVouchers = CoffeeXRepo.Ins.DB.PaymentVouchers.Where((r) => r.dateCreated.Month == month && r.dateCreated.Year == year).ToList();
+                receipts = db.Receipts.Where((r) => r.dateCreated.Month == month && r.dateCreated.Year == year).ToList();
+                paymentVouchers = db.PaymentVouchers.Where((r) => r.dateCreated.Month == month && r.dateCreated.Year == year).ToList();
             }
             else if (year != 0)
             {
-                receipts = CoffeeXRepo.Ins.DB.Receipts.Where((r) => r.dateCreated.Year == year).ToList();
-                paymentVouchers = CoffeeXRepo.Ins.DB.PaymentVouchers.Where((r) => r.dateCreated.Year == year).ToList();
+                receipts = db.Receipts.Where((r) => r.dateCreated.Year == year).ToList();
+                paymentVouchers = db.PaymentVouchers.Where((r) => r.dateCreated.Year == year).ToList();
             }
             if (receipts != null && paymentVouchers != null)
             {

@@ -71,7 +71,6 @@
                 Background="Transparent"
                 BorderThickness="0"
                 Command="{Binding addPaymentVoucherCmd}">
-
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80" />
@@ -234,7 +233,6 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Image
-                        DataContext="{StaticResource IngredientManageVM}"
                         Width="48"
                         Height="48"
                         Source="/Resource/Images/icon_add_ingredient.png" />

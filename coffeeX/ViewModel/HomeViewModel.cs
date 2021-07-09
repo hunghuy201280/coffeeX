@@ -38,7 +38,7 @@ namespace coffeeX.ViewModel
         {
             initTable();
             initCmd();
-         
+            
 
         }
 

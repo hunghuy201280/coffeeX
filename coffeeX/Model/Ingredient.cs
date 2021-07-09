@@ -9,23 +9,49 @@
 
 namespace coffeeX.Model
 {
+    using coffeeX.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class Ingredient
+
+    public partial class Ingredient : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ingredient()
         {
             this.PaymentDetails = new HashSet<PaymentDetail>();
         }
-    
+
         public int ingredientID { get; set; }
-        public string ingredientName { get; set; }
-        public double ingredientPrice { get; set; }
+        private string _ingredientName;
+        public string ingredientName
+        {
+            get => _ingredientName; set
+            {
+                _ingredientName = value;
+                OnPropertyChanged();
+            }
+        }
+        private double _ingredientPrice;
+        public double ingredientPrice
+        {
+            get => _ingredientPrice; set
+            {
+                _ingredientPrice = value;
+                OnPropertyChanged();
+            }
+        }
         public int unitID { get; set; }
-    
+
         public virtual Unit Unit { get; set; }
+      /*  public Unit _Unit;
+        public Unit Unit
+        {
+            get => _Unit; set
+            {
+                _Unit = value;
+                OnPropertyChanged();
+            }
+        }*/
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaymentDetail> PaymentDetails { get; set; }
     }

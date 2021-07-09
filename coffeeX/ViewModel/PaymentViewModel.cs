@@ -21,8 +21,8 @@ namespace coffeeX.ViewModel
 {
     class PaymentViewModel : BaseViewModel
     {
-  
 
+        CoffeeXEntities db = new CoffeeXEntities();
 
         private ObservableCollection<PaymentDetail> _paymentDetails;
         public ObservableCollection<PaymentDetail> paymentDetails
@@ -67,8 +67,8 @@ namespace coffeeX.ViewModel
 
         private void initCmd()
         {
-            
-            confirmCmd = new RelayCommand<Object>((p) => paymentDetails!=null && paymentDetails.Count>0, onConfirmClick);
+
+            confirmCmd = new RelayCommand<Object>((p) => paymentDetails != null && paymentDetails.Count > 0, onConfirmClick);
             onLoaded = new RelayCommand<PaymentWindow>((p) => p != null, onWindowLoaded);
             cancelCmd = new RelayCommand<PaymentWindow>((p) => p != null, resetData);
             increaseQuantity = new RelayCommand<DataGrid>((p) => true, (p) =>
@@ -103,26 +103,26 @@ namespace coffeeX.ViewModel
 
         private void onConfirmClick(object obj)
         {
-          
-          
+
+
 
 
             List<PaymentDetail> details = new List<PaymentDetail>();
             for (int i = 0; i < _paymentDetails.Count; i++)
             {
                 var tempDetail = _paymentDetails[i];
-                var tempIngredient = _ingredients.Where(ing => ing.ingredientName ==tempDetail.Ingredient.ingredientName).ToList();
+                var tempIngredient = _ingredients.Where(ing => ing.ingredientName == tempDetail.Ingredient.ingredientName).ToList();
                 int ingredientId = -1;
-                if(tempIngredient.Count>0)
+                if (tempIngredient.Count > 0)
                 {
                     ingredientId = tempIngredient.First().ingredientID;
                     details.Add(new PaymentDetail()
                     {
-                        ingredientID=ingredientId,
-                        ingredientQuantity= tempDetail.ingredientQuantity
+                        ingredientID = ingredientId,
+                        ingredientQuantity = tempDetail.ingredientQuantity
                     });
                 }
-               
+
             }
             int currentUserID = (wd.staffTextBlock.DataContext as UserViewModel).currentUser.userID;
 
@@ -148,12 +148,12 @@ namespace coffeeX.ViewModel
             _currentDetail = new PaymentDetail();
             _currentDetail.Ingredient = new Ingredient();
             paymentWD.Close();
-            
+
         }
 
         private void addToPaymentVoucher(PaymentWindow p)
         {
-            if (String.IsNullOrEmpty(p.priceTextBox.Text)||
+            if (String.IsNullOrEmpty(p.priceTextBox.Text) ||
                 String.IsNullOrEmpty(p.ingredientComboBox.Text)
                 || String.IsNullOrEmpty(p.unitNameTextBox.Text)
                 || String.IsNullOrEmpty(p.quantityTextBox.Text)
@@ -162,7 +162,7 @@ namespace coffeeX.ViewModel
                 new NotifyPwdWindow("Vui lòng nhập đầy đủ thông tin!").ShowDialog();
                 return;
             }
-            if(int.Parse(p.quantityTextBox.Text)<=0)
+            if (int.Parse(p.quantityTextBox.Text) <= 0)
             {
                 new NotifyPwdWindow("Vui lòng nhập số lượng !").ShowDialog();
                 return;
@@ -183,36 +183,7 @@ namespace coffeeX.ViewModel
                     });
                 }
             }
-          /*  else
-            {
 
-                int quantity = int.Parse(p.quantityTextBox.Text);
-                Unit unit = new Unit()
-                {
-                    unitName = p.unitNameTextBox.Text
-                };
-                Ingredient ingredient = new Ingredient()
-                {
-                    Unit = unit,
-                    ingredientName = p.ingredientComboBox.Text,
-                    ingredientPrice = Double.Parse(p.priceTextBox.Text),
-             
-                };
-                if (paymentDetails.Any(it => it.Ingredient.ingredientName == ingredient.ingredientName))
-                {
-
-                    paymentDetails.Where(it => it.Ingredient.ingredientName == ingredient.ingredientName).ToList()[0].ingredientQuantity += quantity;
-                }
-                else
-                {
-                    paymentDetails.Add(new PaymentDetail()
-                    {
-                        Ingredient = ingredient,
-                        ingredientQuantity = quantity
-                    });
-                }
-           
-            }*/
             paymentValue = paymentDetails.Sum(it => it.total);
 
 
@@ -225,9 +196,11 @@ namespace coffeeX.ViewModel
         }
 
 
-      
+
         public void loadData()
         {
+            db.Dispose();
+            db = new CoffeeXEntities();
             loadIngredientWorker.RunWorkerAsync();
             loadUnitWorker.RunWorkerAsync();
         }
@@ -242,6 +215,7 @@ namespace coffeeX.ViewModel
 
         private void LoadUnitWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            units.Clear();
             (e.Result as List<Unit>).ForEach(units.Add);
 
         }
@@ -249,9 +223,9 @@ namespace coffeeX.ViewModel
         private void LoadUnitWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             List<Unit> result;
-            using (CoffeeXEntities db=new CoffeeXEntities())
+            using (CoffeeXEntities db = new CoffeeXEntities())
             {
-                 result = db.Units.ToList();
+                result = db.Units.ToList();
             }
             e.Result = result;
 
@@ -260,16 +234,16 @@ namespace coffeeX.ViewModel
 
         private void LoadIngredientWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            ingredients.Clear();
             (e.Result as List<Ingredient>).ForEach(ingredients.Add);
         }
 
         private void LoadIngredientWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            List<Ingredient> ingredients;
-           
-                 ingredients = CoffeeXRepo.Ins.DB.Ingredients.ToList();
-            
-            e.Result = ingredients;
+            List<Ingredient> tempIngredients;
+            tempIngredients = db.Ingredients.ToList();
+
+            e.Result = tempIngredients;
         }
 
         private void onWindowLoaded(PaymentWindow obj)
@@ -285,22 +259,22 @@ namespace coffeeX.ViewModel
 
         private void IngredientComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-          /*  ComboBox comboBox = sender as ComboBox;
-            if (comboBox.SelectedItem != null)
-            {
-                Ingredient temp = comboBox.SelectedItem as Ingredient;
-                if (temp.ingredientName != null)
-                {
-                    wd.unitNameTextBox.IsEnabled = false;
-                    wd.priceTextBox.IsEnabled = false;
-                }
-            }
-            else
-            {
-                currentDetail.Ingredient = new Ingredient();
-                wd.unitNameTextBox.IsEnabled = true;
-                wd.priceTextBox.IsEnabled = true;
-            }*/
+            /*  ComboBox comboBox = sender as ComboBox;
+              if (comboBox.SelectedItem != null)
+              {
+                  Ingredient temp = comboBox.SelectedItem as Ingredient;
+                  if (temp.ingredientName != null)
+                  {
+                      wd.unitNameTextBox.IsEnabled = false;
+                      wd.priceTextBox.IsEnabled = false;
+                  }
+              }
+              else
+              {
+                  currentDetail.Ingredient = new Ingredient();
+                  wd.unitNameTextBox.IsEnabled = true;
+                  wd.priceTextBox.IsEnabled = true;
+              }*/
         }
 
         private void numberOnlyPreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -327,7 +301,7 @@ namespace coffeeX.ViewModel
                 _ingredients = value;
                 OnPropertyChanged();
             }
-        } 
+        }
         private ObservableCollection<Unit> _units;
         public ObservableCollection<Unit> units
         {
