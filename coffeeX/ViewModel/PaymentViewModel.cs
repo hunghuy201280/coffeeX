@@ -226,7 +226,7 @@ namespace coffeeX.ViewModel
 
 
       
-        private void loadData()
+        public void loadData()
         {
             loadIngredientWorker.RunWorkerAsync();
             loadUnitWorker.RunWorkerAsync();

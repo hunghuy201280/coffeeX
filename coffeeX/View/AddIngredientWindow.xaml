@@ -10,7 +10,6 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uc="clr-namespace:coffeeX.Resource.UserControls"
-    WindowStyle="None"
     Name="AddIngredientWD"
     Title="AddIngredient"
     Width="600"
@@ -19,6 +18,7 @@
     MinHeight="550"
     DataContext="{StaticResource IngredientManageVM}"
     WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
     mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -28,12 +28,12 @@
     </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <UserControls:ControlBarUC></UserControls:ControlBarUC>
+            <UserControls:ControlBarUC />
         </Grid>
 
         <Grid Grid.Row="1">
@@ -43,83 +43,83 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Label
-            Margin="0,20,0,0"
-            HorizontalAlignment="Center"
-            Content="THÊM NGUYÊN LIỆU"
-            FontSize="36"
-            FontWeight="Bold" />
+                Name="PaymentVM"
+                DataContext="{StaticResource PaymentViewModel}"
+                Margin="0,20,0,0"
+                HorizontalAlignment="Center"
+                Content="THÊM NGUYÊN LIỆU"
+                FontSize="36"
+                FontWeight="Bold" />
 
             <Grid Grid.Row="1">
 
                 <StackPanel
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Orientation="Vertical">
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Vertical">
                     <TextBox
-                    x:Name="ingredientName"
-                    Width="330"
-                    Margin="0,0,0,30"
-                    Padding="10"
-                    materialDesign:HintAssist.Hint="Tên nguyên liệu"
-                    AcceptsReturn="False"
-                    Background="#F1F1F1"
-                    BorderThickness="0"
-                    Style="{StaticResource RoundedTextBox}"
-                    Text="{Binding currentIngredientName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                <controls:AutoCompleteBox
-                    x:Name="ingredientUnit"
-                    Width="330"
-                    Margin="0,0,0,30"
-                    Padding="10"
-                    materialDesign:HintAssist.Foreground="#9B9B9B"
-                    materialDesign:HintAssist.Hint="Đơn vị"
-                    Background="#F1F1F1"
-                    BorderThickness="0"
-                    ItemsSource="{Binding ingredientUnitSuggest}"
-                    Text="{Binding currentIngredientUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    TextBoxStyle="{StaticResource RoundedTextBox}" />
-
-                    <Grid>
-                        <TextBox
-                        x:Name="ingredientPrice"
+                        x:Name="ingredientName"
                         Width="330"
-                        Padding="10,10,70,10"
-                        materialDesign:HintAssist.Hint="Đơn Giá"
+                        Margin="0,0,0,30"
+                        Padding="10"
+                        materialDesign:HintAssist.Hint="Tên nguyên liệu"
                         AcceptsReturn="False"
                         Background="#F1F1F1"
                         BorderThickness="0"
                         Style="{StaticResource RoundedTextBox}"
-                        Text="{Binding currentIngredientPrice, 
-                        StringFormat={}{0:n0}, 
-                        UpdateSourceTrigger=PropertyChanged,Converter={StaticResource StringToDoubleConverter}}" />
+                        Text="{Binding currentIngredientName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <controls:AutoCompleteBox
+                        x:Name="ingredientUnit"
+                        Width="330"
+                        Margin="0,0,0,30"
+                        Padding="10"
+                        materialDesign:HintAssist.Foreground="#9B9B9B"
+                        materialDesign:HintAssist.Hint="Đơn vị"
+                        Background="#F1F1F1"
+                        BorderThickness="0"
+                        ItemsSource="{Binding ingredientUnitSuggest}"
+                        Text="{Binding currentIngredientUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextBoxStyle="{StaticResource RoundedTextBox}" />
+
+                    <Grid>
+                        <TextBox
+                            x:Name="ingredientPrice"
+                            Width="330"
+                            Padding="10,10,70,10"
+                            materialDesign:HintAssist.Hint="Đơn Giá"
+                            AcceptsReturn="False"
+                            Background="#F1F1F1"
+                            BorderThickness="0"
+                            Style="{StaticResource RoundedTextBox}"
+                            Text="{Binding currentIngredientPrice, StringFormat={}{0:n0}, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDoubleConverter}}" />
 
                         <TextBlock
-                        Margin="0,0,10,0"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        FontSize="24">
-                        VNĐ
-                    </TextBlock>
-                </Grid>
-            </StackPanel>
+                            Margin="0,0,10,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontSize="24">
+                            VNĐ
+                        </TextBlock>
+                    </Grid>
+                </StackPanel>
 
 
 
             </Grid>
 
             <Button
-            Name="addButton"
-            Grid.Row="2"
-            Width="222"
-            Height="63"
-            Margin="0,0,0,80"
-            Command="{Binding onAddClickCmd, UpdateSourceTrigger=PropertyChanged}"
-            CommandParameter="{Binding ElementName=AddIngredientWD}"
-            Content="Thêm"
-            Style="{StaticResource PrimaryButton}"
-            ToolTipService.InitialShowDelay="0"
-            ToolTipService.ShowOnDisabled="True">
+                Name="addButton"
+                Grid.Row="2"
+                Width="222"
+                Height="63"
+                Margin="0,0,0,80"
+                Command="{Binding onAddClickCmd, UpdateSourceTrigger=PropertyChanged}"
+                CommandParameter="{Binding ElementName=AddIngredientWD}"
+                Content="Thêm"
+                Style="{StaticResource PrimaryButton}"
+                ToolTipService.InitialShowDelay="0"
+                ToolTipService.ShowOnDisabled="True">
                 <Button.ToolTip>
                     <StackPanel>
 

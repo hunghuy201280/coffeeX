@@ -1,4 +1,5 @@
-﻿using coffeeX.Repository;
+﻿using coffeeX.Model;
+using coffeeX.Repository;
 using coffeeX.View;
 using System;
 using System.Collections.Generic;
@@ -48,18 +49,48 @@ namespace coffeeX.ViewModel
         private void initCmd()
         {
             onAddLoadedCmd = new RelayCommand<AddIngredientWindow>((p) => p != null, onAddIngredientWindowLoaded);
-            onAddClickCmd = new RelayCommand<Object>((p) => true, onAddIngredientClick);
+            onAddClickCmd = new RelayCommand<AddIngredientWindow>((p) => p!=null, onAddIngredientClick);
         }
 
-        private void onAddIngredientClick(object obj)
+        private void onAddIngredientClick(AddIngredientWindow addIngredientWindow)
         {
-            MessageBox.Show("Name: " + _currentIngredientName+"\nPrice "+_currentIngredientPrice+"\nUnit"+_currentIngredientUnit);
+            if(String.IsNullOrEmpty(_currentIngredientName)|| String.IsNullOrEmpty(_currentIngredientUnit) || _currentIngredientPrice==0)
+            {
+                new NotifyPwdWindow("Vui lòng nhập đầy đủ thông tin !").ShowDialog();
+                return;
+            }
+            if(CoffeeXRepo.Ins.DB.Ingredients.Any(it=>it.ingredientName.ToLower().Equals(_currentIngredientName.ToLower().Trim())))
+            {
+                new NotifyPwdWindow("Nguyên liệu đã tồn tại !").ShowDialog();
+                return;
+            }
+            Unit ingredientUnit = CoffeeXRepo.Ins.DB.Units.SingleOrDefault(it => it.unitName.ToLower().Equals(_currentIngredientUnit.ToLower()));
+            if(ingredientUnit==null)
+            {
+                ingredientUnit = new Unit()
+                {
+                    unitName = _currentIngredientUnit.Trim(),
+                };
+            }
+            Ingredient newIngredient = new Ingredient()
+            {
+                ingredientName=_currentIngredientName.Trim(),
+                ingredientPrice=_currentIngredientPrice,
+                Unit=ingredientUnit,
+            };
+            CoffeeXRepo.Ins.DB.Ingredients.Add(newIngredient);
+            CoffeeXRepo.Ins.DB.SaveChanges();
+
+            onAddIngredientWindowLoaded(null);
+            new NotifyPwdWindow("Thêm nguyên liệu thành công!").ShowDialog();
+            (addIngredientWindow.PaymentVM.DataContext as PaymentViewModel).loadData();
         }
 
         private void onAddIngredientWindowLoaded(AddIngredientWindow obj)
         {
-            _currentIngredientName = _currentIngredientUnit = "";
-            _currentIngredientPrice = 0;
+            currentIngredientName = currentIngredientUnit = "";
+            currentIngredientPrice = 0;
+            loadUnitSuggestion();
             
         }
         private void loadUnitSuggestion()
