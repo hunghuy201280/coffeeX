@@ -105,11 +105,16 @@ namespace coffeeX.ViewModel
 
         private void onUpdateWindowLoaded(UpdateBeverageWindow updateBeverage)
         {
-
+            currentBeverageName = currentBeverageType = "";
+            currentBeveragePrice = 0;
+            currentBeverageImage = null;
         }
 
         private void onWindowLoaded(AddBeverageWindow addBeverage)
         {
+            currentBeverageName = currentBeverageType = "";
+            currentBeveragePrice = 0;
+            currentBeverageImage = null;
             addBeverage.beveragePrice.PreviewTextInput += BeveragePrice_PreviewTextInput;
 
         }
@@ -161,7 +166,9 @@ namespace coffeeX.ViewModel
                 CoffeeXRepo.Ins.DB.SaveChanges();
                 if (CoffeeXRepo.Ins.DB.Beverages.Any(b => b.beverageName == currentBeverageName))
                 {
-                    MessageBox.Show("Thức uống này đã tồn tại");
+                    new NotifyPwdWindow("Thức uống này đã tồn tại").ShowDialog();
+                
+                
                     return;
                 }
                 Beverage newBeverage = new Beverage();
@@ -177,7 +184,9 @@ namespace coffeeX.ViewModel
                 type = types.First();
                 if (CoffeeXRepo.Ins.DB.Beverages.Any(b => b.beverageName == currentBeverageName))
                 {
-                    MessageBox.Show("Thức uống này đã tồn tại");
+                    new NotifyPwdWindow("Thức uống này đã tồn tại").ShowDialog();
+
+
                     return;
                 }
                 Beverage newBeverage = new Beverage();
@@ -193,7 +202,8 @@ namespace coffeeX.ViewModel
             currentBeverageImage = null;
             (addBeverageWindow.menuViewModel.DataContext as MenuViewModel).loadMenu();
             loadbeverage();
-            MessageBox.Show("Thêm món thành công!");
+            NotifyPwdWindow notifyWindow = new NotifyPwdWindow("Thêm món thành công");
+            notifyWindow.ShowDialog();
 
 
         }
@@ -295,7 +305,7 @@ namespace coffeeX.ViewModel
             }
             else
             {
-                /*MessageBox.Show(beverageId.ToString());*/
+          
                 var temp = CoffeeXRepo.Ins.DB.BeverageTypes.Where(x => x.typeName == currentBeverageType).FirstOrDefault();
 
                 var result = CoffeeXRepo.Ins.DB.Beverages.SingleOrDefault(b => b.beverageID == beverageId);

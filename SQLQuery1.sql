@@ -86,4 +86,14 @@ create table PaymentDetail(
 )
 
 select * from BeverageType
-select * from Receipt
+select * from Receipt where customerID=29
+
+select * from Ingredient
+select * from Unit
+
+select * from UserInfo
+
+select * from Customer
+
+delete from Customer where customerID=29
+
