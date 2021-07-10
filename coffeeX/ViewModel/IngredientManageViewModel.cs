@@ -202,6 +202,8 @@ namespace coffeeX.ViewModel
 
         private void onAddIngredientWindowLoaded(AddIngredientWindow obj)
         {
+            if (obj == null)
+                return;
             currentIngredientName = currentIngredientUnit = "";
             currentIngredientPrice = 0;
             obj.ingredientPrice.PreviewTextInput += IngredientPrice_PreviewTextInput;
